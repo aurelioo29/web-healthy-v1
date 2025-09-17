@@ -1,5 +1,116 @@
 {
+  "nav": {
+    "about": "About Us",
+    "products": "Products & Services",
+    "insight": "Insight",
+    "investor": "Investor Relations",
+    "locations": "Locations",
+    "testTypes": "Test Types",
+    "services": "Services",
+    "consult": "Doctor Consultation",
+    "clinic": "Clinic Services",
+    "corporate": "Corporate Health Service",
+    "ecatalog": "E-Catalog",
+    "labTest": "Laboratory Tests",
+    "genomic": "Genomics",
+    "homecare": "Homecare Service",
+    "panel": "Test Panels"
+  },
   "home": {
     "title": "Welcome"
+  },
+  "produkLayanan": {
+    "title": "Our Products & Services",
+    "description": "Comprehensive diagnostic services with advanced technology and accurate results, supporting informed health decisions.",
+    "card": {
+      "card1": {
+        "title": "Clinical Laboratory",
+        "desc": "Fast, accurate results with modern technology.",
+        "img": "/images/home-pages/produk-layanan-1.webp",
+        "altImg": "Clinical Laboratory",
+        "href": "/tes-laboratorium/"
+      },
+      "card2": {
+        "title": "Genomics Laboratory",
+        "desc": "Accurate DNA analysis with modern genomics technology.",
+        "img": "/images/home-pages/produk-layanan-2.webp",
+        "altImg": "Genomics Laboratory",
+        "href": "/genomik/"
+      },
+      "card3": {
+        "title": "Homecare Service",
+        "desc": "In-home healthcare with professional care.",
+        "img": "/images/home-pages/produk-layanan-3.webp",
+        "altImg": "Homecare Service",
+        "href": "/homecare-service"
+      },
+      "card4": {
+        "title": "Test Panels",
+        "desc": "Comprehensive panels for early detection and optimal health.",
+        "img": "/images/home-pages/produk-layanan-4.webp",
+        "altImg": "Test Panels",
+        "href": "/panel-pemeriksaan"
+      }
+    }
+  },
+  "footer": {
+    "headquarters": {
+      "title": "Headquarters",
+      "name": "Graham Anam Building",
+      "address": "Jl. Teuku Cik Ditiro No. 11 AC Gondangdia\nMenteng – Central Jakarta 10350"
+    },
+    "menu": {
+      "title": "Menu",
+      "about": "About Us",
+      "ecatalogue": "E-Catalogue"
+    },
+    "callcenter": {
+      "title": "Call Center",
+      "alt": "Diagnos Call Center 1500-358"
+    },
+    "download": {
+      "title": "Download the DNAandMe App at"
+    },
+    "social": {
+      "title": "Stay Connected"
+    },
+    "copyright": "PT Diagnos Laboratorium Utama, Tbk"
+  },
+  "eventPromo": {
+    "title": "Latest Events & Promos for You",
+    "subtitle": "Join the fun and grab the deals today",
+    "basePath": "/images/home-pages",
+    "defaultAlt": "Event promo {index}",
+    "slides": [
+      {
+        "img": "/images/home-pages/asset-1.jpeg",
+        "alt": "NutriDNA + Telekonsultasi – Diskon 48%",
+        "href": "/promo/nutridna"
+      },
+      {
+        "img": "/images/home-pages/asset-2.jpeg",
+        "alt": "Diskon tes laboratorium"
+      },
+      {
+        "img": "/images/home-pages/asset-3.jpeg",
+        "alt": "Promo pemeriksaan genomik"
+      },
+      {
+        "img": "/images/home-pages/asset-4.jpeg",
+        "alt": "Harga spesial layanan homecare"
+      },
+      {
+        "img": "/images/home-pages/asset-5.jpeg",
+        "alt": "Bundel panel pemeriksaan hemat"
+      },
+      {
+        "img": "/images/home-pages/asset-6.jpeg",
+        "alt": "Paket kesehatan penawaran terbatas"
+      },
+      {
+        "img": "/images/home-pages/asset-7.jpeg",
+        "alt": "Kampanye acara musiman"
+      }
+    ]
   }
 }
