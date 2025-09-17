@@ -3,8 +3,8 @@ import createMiddleware from "next-intl/middleware";
 export default createMiddleware({
   locales: ["en", "id"],
   defaultLocale: "id",
-  localeDetection: false,
-  localePrefix: "as-needed",
+  localePrefix: "never", // <— kunci
+  localeDetection: true, // baca dari cookie / header
 });
 
 export const config = {
