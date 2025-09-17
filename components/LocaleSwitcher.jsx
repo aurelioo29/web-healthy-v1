@@ -26,7 +26,7 @@ export default function LocaleSwitcher({ className = "" }) {
   return (
     <div
       className={
-        "inline-flex items-center gap-2 rounded bg-[#0F6A66] px-2 py-1 " +
+        "inline-flex items-center gap-2 px-2 py-1 " +
         className
       }
       aria-label="Language switcher"
