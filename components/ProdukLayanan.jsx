@@ -33,15 +33,25 @@ export default function ProdukLayanan() {
       {/* MOBILE: swiper */}
       <div className="mt-8 md:hidden">
         <Swiper
-          modules={[Navigation, Pagination, A11y]}
-          spaceBetween={100}
+          modules={[Pagination, A11y]}
           slidesPerView={1}
+          centeredSlides={false}
+          spaceBetween={16}
           pagination={{ clickable: true }}
           navigation={false}
           a11y={{ enabled: true }}
+          className="produk-swiper !pb-10"
+          style={{
+            "--swiper-pagination-bottom": "0px",
+            "--swiper-pagination-bullet-size": "8px",
+            "--swiper-pagination-bullet-horizontal-gap": "6px",
+            "--swiper-pagination-color": "#4698E3",
+            "--swiper-pagination-bullet-inactive-color": "#cbd5e1",
+            "--swiper-pagination-bullet-inactive-opacity": "1",
+          }}
           breakpoints={{
-            480: { slidesPerView: 1.4 },
-            640: { slidesPerView: 1.6 },
+            480: { slidesPerView: 1 },
+            640: { slidesPerView: 1 },
           }}
         >
           {cards.map((c, i) => (
@@ -80,7 +90,7 @@ function Card({ title, desc, img, alt, href }) {
         <p className="mt-1 text-sm leading-relaxed text-[#667289]">{desc}</p>
         <Link
           href={href}
-          className="mt-5 text-white bg-[#4698E3] w-full mx-auto rounded-xl px-4 py-2 text-sm font-medium text-center transition hover:bg-[#63D1BB] inline-block"
+          className="mt-5 text-white bg-[#4698E3] w-full mx-auto rounded-xl px-4 py-2 text-sm font-medium text-center transition inline-block"
         >
           Lihat Selengkapnya
         </Link>
