@@ -27,7 +27,7 @@ export default function EventPromo() {
     : fallback;
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10 md:py-14">
+    <section className="mx-auto max-w-7xl px-4 py-10 md:py-6">
       <div className="mb-5 text-center">
         <h2 className="text-2xl md:text-3xl font-semibold">{t("title")}</h2>
         <p className="mt-1 md:text-lg">{t("subtitle")}</p>
@@ -41,17 +41,18 @@ export default function EventPromo() {
         keyboard={{ enabled: true }}
         autoplay={{ delay: 10000, disableOnInteraction: false }}
         pagination={{ clickable: true, dynamicBullets: true }}
-        className="overflow-hidden rounded-3xl shadow ring-1 ring-black/5"
+        className="overflow-hidden md:rounded-3xl shadow ring-1 ring-black/5"
       >
         {slides.map((s, idx) => {
           const content = (
-            <div className="relative w-full aspect-[16/7] md:aspect-[7/4]">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] md:aspect-[7/4]">
               <Image
                 src={encodeURI(s.img)}
                 alt={s.alt || t("defaultAlt", { index: idx + 1 })}
                 fill
                 sizes="(max-width: 768px) 100vw, 1200px"
-                className="object-cover"
+                // Mobile: tampilkan utuh (no crop) + background putih; ≥sm: cover seperti biasa
+                className="bg-white object-contain sm:object-cover object-[60%_40%] sm:object-center"
                 priority={idx === 0}
               />
             </div>
