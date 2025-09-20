@@ -4,7 +4,12 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev"],
+  // output: "export",
+  images: {
+    unoptimized: true,
+  },
+  // allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev"],
+  trailingSlash: true,
 };
 
 export default withNextIntl(nextConfig);
