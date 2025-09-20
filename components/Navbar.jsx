@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useId } from "react";
 import { Search, Menu, X, ChevronDown } from "lucide-react";
 import { Link, usePathname } from "@/lib/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import LocaleSwitcher from "./LocaleSwitcher";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 export default function Navbar() {
   const t = useTranslations("nav");
@@ -20,22 +21,26 @@ export default function Navbar() {
     function handleClickOutside(e) {
       if (!navRef.current?.contains(e.target)) setOpenIdx(null);
     }
-
     function onEsc(e) {
       if (e.key === "Escape") {
         setOpenIdx(null);
         setMobileOpen(false);
       }
     }
-
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", onEsc);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", onEsc);
     };
   }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (mobileOpen) root.classList.add("overflow-hidden");
+    else root.classList.remove("overflow-hidden");
+    return () => root.classList.remove("overflow-hidden");
+  }, [mobileOpen]);
 
   const NAV = [
     { label: t("about"), href: "/tentang-kami" },
@@ -70,10 +75,51 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[#4698E3] text-white rounded-2xl mx-auto max-w-7xl mt-3">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+    <header className="sticky top-0 z-50 bg-[#4698E3] text-white rounded-none md:rounded-2xl mx-auto max-w-7xl md:mt-3">
+      {/* BAR: Mobile (Menu — Logo — Search) */}
+      <div className="mx-auto max-w-7xl px-4 py-3 md:hidden">
+        <div className="grid grid-cols-3 items-center">
+          {/* Left: Menu */}
+          <div className="flex">
+            <button
+              className="rounded p-2 hover:bg-white/10 cursor-pointer"
+              aria-label="Open menu"
+              onClick={() => setMobileOpen(true)}
+            >
+              <Menu className="h-6 w-6" />
+            </button>
+          </div>
+
+          {/* Middle: Logo (centered) */}
+          <div className="flex justify-center">
+            <Link href={"/"} aria-label="Home">
+              <Image
+                src="/images/home-pages/logo.webp"
+                width={120}
+                height={40}
+                alt="logo"
+                priority={false}
+              />
+            </Link>
+          </div>
+
+          {/* Right: Search */}
+          <div className="flex justify-end">
+            <button
+              aria-label="Search"
+              className="rounded p-2 hover:bg-white/10 cursor-pointer"
+              onClick={() => alert("Hook your search modal here.")}
+            >
+              <Search className="h-6 w-6" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* BAR: Desktop (Logo — Nav — Actions) */}
+      <div className="mx-auto hidden max-w-7xl items-center justify-between px-6 py-3 md:flex">
         {/* Logo */}
-        <Link href={"/"} arial-label="Home">
+        <Link href={"/"} aria-label="Home">
           <Image
             src="/images/home-pages/logo.webp"
             width={150}
@@ -116,23 +162,22 @@ export default function Navbar() {
 
                 {/* Mega dropdown */}
                 {hasDrop && openIdx === i && (
-                  <div className="absolute left-0 top-full mt-2 w-[680px] rounded-2xl bg-white p-6 text-[#0F6A66] shadow-2xl ring-1 ring-black/5">
+                  <div className="absolute left-0 top-full mt-2 w-[680px] rounded-2xl bg-white p-6 text-[#4698E3] shadow-2xl ring-1 ring-black/5">
                     <div className="grid grid-cols-2 gap-8">
                       {item.dropdown.columns.map((col, cIdx) => (
                         <div key={cIdx}>
                           <div className="mb-3 flex items-center justify-between">
-                            <span className="text-sm font-semibold uppercase tracking-wide text-teal-900/80">
+                            <span className="text-sm font-semibold uppercase tracking-wide text-[#4698E3]">
                               {col.title}
                             </span>
-                            {/* subtle caret to mimic “›” */}
-                            <span className="text-teal-900/40">›</span>
+                            <span className="text-[#4698E3]">›</span>
                           </div>
                           <ul className="space-y-2">
                             {col.items.map((link) => (
                               <li key={link.href}>
                                 <Link
                                   href={link.href}
-                                  className="block rounded px-2 py-1.5 text-[15px] hover:bg-teal-50 hover:text-teal-900"
+                                  className="block rounded px-2 py-1.5 text-[15px] hover:bg-[#4698E3] hover:text-white"
                                 >
                                   {link.label}
                                 </Link>
@@ -160,110 +205,173 @@ export default function Navbar() {
           </button>
           <LocaleSwitcher />
         </div>
-
-        {/* Mobile toggles */}
-        <button
-          className="rounded p-2 hover:bg-white/10 md:hidden"
-          aria-label="Open menu"
-          onClick={() => setMobileOpen(true)}
-        >
-          <Menu className="h-6 w-6" />
-        </button>
       </div>
 
-      {/* Mobile drawer */}
-      {mobileOpen && (
-        <div className="md:hidden">
-          <div
-            className="fixed inset-0 bg-black/40"
-            onClick={() => setMobileOpen(false)}
-          />
-          <aside className="fixed inset-y-0 right-0 w-[320px] overflow-y-auto bg-white p-4 text-teal-900 shadow-xl">
-            <div className="mb-4 flex items-center justify-between">
-              <span className="text-lg font-semibold">Menu</span>
-              <button
-                className="rounded p-2 hover:bg-teal-50"
-                onClick={() => setMobileOpen(false)}
-                aria-label="Close menu"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+      {/* Mobile drawer: FULL, dari KIRI */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              key="overlay"
+              className="fixed inset-0 z-50 bg-black/40 md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              onClick={() => setMobileOpen(false)}
+            />
 
-            <ul className="space-y-1">
-              {NAV.map((item, i) => (
-                <li key={i}>
-                  {!item.dropdown ? (
-                    <Link
-                      href={item.href}
-                      className="block rounded px-2 py-2 text-[15px] hover:bg-teal-50"
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  ) : (
-                    <MobileAccordion
-                      item={item}
-                      onNavigate={() => setMobileOpen(false)}
-                    />
-                  )}
-                </li>
-              ))}
-            </ul>
+            {/* Drawer */}
+            <motion.aside
+              key="drawer"
+              className="fixed inset-0 z-[60] h-full w-full bg-white p-4 text-[#4698E3] md:hidden"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile menu"
+            >
+              <div className="mb-4 flex items-center justify-between">
+                <span className="text-sm tracking-wider font-semibold text-[#4698E3]">
+                  MAIN MENU
+                </span>
+                <button
+                  className="rounded p-2 hover:bg-[#4698E3]/10 cursor-pointer"
+                  onClick={() => setMobileOpen(false)}
+                  aria-label="Close menu"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
 
-            <div className="mt-6 flex items-center justify-between rounded-lg border border-teal-100 p-3">
-              <button
-                className="rounded p-2 text-teal-700 hover:bg-teal-50"
-                onClick={() => alert("Hook your search modal here.")}
-              >
-                <Search className="h-5 w-5" />
-              </button>
-            </div>
-          </aside>
-        </div>
-      )}
+              <ul className="space-y-1">
+                {NAV.map((item, i) => (
+                  <li key={i}>
+                    {!item.dropdown ? (
+                      <Link
+                        href={item.href}
+                        className="block rounded px-2 py-2 text-[15px] hover:bg-[#4698E3] hover:text-white"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <MobileAccordion
+                        item={item}
+                        onNavigate={() => setMobileOpen(false)}
+                      />
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
 
 function MobileAccordion({ item, onNavigate }) {
   const [open, setOpen] = useState(false);
+  const panelId = useId();
+  const reduce = useReducedMotion();
+
+  const panelVariants = {
+    collapsed: {
+      height: 0,
+      opacity: 0,
+      transition: { duration: reduce ? 0 : 0.18, ease: [0.4, 0, 0.2, 1] },
+    },
+    expanded: {
+      height: "auto",
+      opacity: 1,
+      transition: { duration: reduce ? 0 : 0.24, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+
+  const listVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: reduce ? 0 : 0.035,
+        delayChildren: reduce ? 0 : 0.03,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 4 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: reduce ? 0 : 0.18, ease: [0.2, 0, 0, 1] },
+    },
+  };
+
   return (
     <div>
       <button
-        className="flex w-full items-center justify-between rounded px-2 py-2 text-left text-[15px] hover:bg-teal-50"
+        className="flex w-full items-center justify-between rounded px-2 py-2 text-left text-[15px] hover:bg-[#4698E3] hover:text-white cursor-pointer"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
+        aria-controls={panelId}
       >
         <span>{item.label}</span>
-        <ChevronDown
-          className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
-        />
+
+        <motion.span
+          initial={false}
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: reduce ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] }}
+          className="inline-flex"
+        >
+          <ChevronDown className="h-4 w-4" />
+        </motion.span>
       </button>
-      {open && (
-        <div className="pl-2">
-          {item.dropdown.columns.map((col, i) => (
-            <div key={i} className="mb-2">
-              <div className="px-2 pb-1 pt-2 text-xs font-semibold uppercase tracking-wide text-teal-600">
-                {col.title}
-              </div>
-              <ul className="mb-1 space-y-1">
-                {col.items.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="block rounded px-3 py-2 text-sm hover:bg-teal-50"
-                      onClick={onNavigate}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            id={panelId}
+            key="panel"
+            role="region"
+            aria-label={`${item.label} submenu`}
+            initial="collapsed"
+            animate="expanded"
+            exit="collapsed"
+            variants={panelVariants}
+            style={{ overflow: "hidden" }}
+            className="pl-2"
+          >
+            <motion.div variants={listVariants} initial="hidden" animate="show">
+              {item.dropdown.columns.map((col, i) => (
+                <motion.div key={i} className="mb-2" variants={itemVariants}>
+                  <div className="px-2 pb-1 pt-2 text-xs font-semibold uppercase tracking-wide text-[#4698E3]">
+                    {col.title}
+                  </div>
+                  <ul className="mb-1 space-y-1">
+                    {col.items.map((link) => (
+                      <motion.li key={link.href} variants={itemVariants}>
+                        <Link
+                          href={link.href}
+                          className="block rounded px-3 py-2 text-sm hover:bg-[#4698E3]/50"
+                          onClick={onNavigate}
+                        >
+                          {link.label}
+                        </Link>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
