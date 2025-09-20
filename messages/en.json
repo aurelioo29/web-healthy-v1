@@ -112,5 +112,55 @@
         "alt": "Kampanye acara musiman"
       }
     ]
+  },
+  "stats": {
+    "cards": {
+      "partners": {
+        "value": "35+",
+        "label": "Partners &\nNetwork",
+        "icon": "/icons/home-pages/asset 26.svg"
+      },
+      "exams": {
+        "value": "2400+",
+        "label": "Examination Types",
+        "icon": "/icons/home-pages/asset 27.svg"
+      },
+      "customers": {
+        "value": "70,000+",
+        "label": "Customers/month",
+        "icon": "/icons/home-pages/asset 28.svg"
+      },
+      "company": {
+        "value": "2,000+",
+        "label": "Companies/Partners",
+        "icon": "/icons/home-pages/asset 29.svg"
+      }
+    },
+    "cta": {
+      "partners": {
+        "title": "Branches & Outlets",
+        "desc": "We have more than 30 service points across Indonesia.",
+        "cta": "Learn more",
+        "href": "/lokasi-klinik"
+      },
+      "exams": {
+        "title": "Examination Services",
+        "desc": "Over 2,000 examination types and panels, covering both clinical pathology and genomics.",
+        "cta": "Learn more",
+        "href": "/panel-pemeriksaan"
+      },
+      "customers": {
+        "title": "Customer Growth",
+        "desc": "Customer satisfaction exceeds 95% based on nationwide internal surveys.",
+        "cta": "Learn more",
+        "href": "/tentang-kami"
+      },
+      "company": {
+        "title": "Partnership Collaboration",
+        "desc": "Collaborating with more than 2,000 healthcare partners across various platforms nationwide.",
+        "cta": "Learn more",
+        "href": "/corporate-health-service"
+      }
+    }
   }
 }

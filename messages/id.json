@@ -72,7 +72,7 @@
       "title": "Download aplikasi DNAandMe di"
     },
     "social": {
-      "title": "Stay Connected"
+      "title": "Tetap Terhubung"
     },
     "copyright": "PT Diagnos Laboratorium Utama, Tbk"
   },
@@ -112,5 +112,55 @@
         "alt": "Kampanye acara musiman"
       }
     ]
+  },
+  "stats": {
+    "cards": {
+      "partners": {
+        "value": "35+",
+        "label": "Mitra dan\nJaringan",
+        "icon": "/icons/home-pages/asset 26.svg"
+      },
+      "exams": {
+        "value": "2400+",
+        "label": "Tipe Pemeriksaan",
+        "icon": "/icons/home-pages/asset 27.svg"
+      },
+      "customers": {
+        "value": "70.000+",
+        "label": "Pelanggan/bulan",
+        "icon": "/icons/home-pages/asset 28.svg"
+      },
+      "company": {
+        "value": "2.000+",
+        "label": "Perusahaan/Rekanan",
+        "icon": "/icons/home-pages/asset 29.svg"
+      }
+    },
+    "cta": {
+      "partners": {
+        "title": "Cabang & Outlet",
+        "desc": "Kami memiliki lebih dari 30 titik layanan yang tersebar di seluruh Indonesia",
+        "cta": "Selengkapnya",
+        "href": "/lokasi-klinik"
+      },
+      "exams": {
+        "title": "Layanan Pemeriksaan",
+        "desc": "Terdapat lebih dari 2000 jenis layanan pemeriksaan dan panel pemeriksaan baik itu patologi klinik dan genomik",
+        "cta": "Selengkapnya",
+        "href": "/panel-pemeriksaan"
+      },
+      "customers": {
+        "title": "Customer Growth",
+        "desc": "Kepuasan layanan pelanggan lebih dari 95% berdasarkan survey internal di secara nasional",
+        "cta": "Selengkapnya",
+        "href": "/tentang-kami"
+      },
+      "company": {
+        "title": "Kerjasama Kemitraan",
+        "desc": "Menjalin kerjasama lebih dari 2000 parner kesehatan yang tersedia di berbagai platform secara nasional",
+        "cta": "Selengkapnya",
+        "href": "/corporate-health-service"
+      }
+    }
   }
 }
