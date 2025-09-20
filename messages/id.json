@@ -162,5 +162,56 @@
         "href": "/corporate-health-service"
       }
     }
+  },
+  "layanan": {
+    "title": "Layanan Diagnos yang Paling dicari",
+    "description": "Layanan Diagnos paling dicari, memberikan solusi kesehatan cepat, akurat, dan terpercaya.",
+    "card": {
+      "card1": {
+        "title": "Paket Kesehatan Ibu",
+        "desc": "Paket pemeriksaan kesehatan secara khusus wanita meliputi pemeriksaan untuk mengetahui kalsium dan vitamin D dalam darah. Selain itu juga untuk skrining kanker serviks melalu pemeriksaan HPV DNA Urin.",
+        "img": "/images/home-pages/layanan-3.jpg",
+        "altImg": "Paket Kesehatan Ibu",
+        "href": "/produk/paket-kesehatan-ibu",
+        "price": "Rp1.324.000",
+        "disc": "Rp1.499.000"
+      },
+      "card2": {
+        "title": "Pemeriksaan Kesehatan Jantung",
+        "desc": "Paket pemeriksaan untuk screening faktor risiko Penyakit Jantung Koroner. Paket pemeriksaan ini dapat memberikan informasi gambaran glukosa darah, dislipidemia, fungsi hati, fungsi ginjal dan prediktor penyakit jantung koroner.",
+        "img": "/images/home-pages/layanan-1.jpg",
+        "altImg": "Pemeriksaan Kesehatan Jantung",
+        "href": "/produk/pemeriksaan-kesehatan-jantung",
+        "price": "Rp1.324.000",
+        "disc": "Rp1.499.000"
+      },
+      "card3": {
+        "title": "Paket Pemeriksaan Lansia Sehat",
+        "desc": "Paket pemeriksaan Lansia Sehat diperuntukan bagi yang memasuki usia lanjut agar mengetahui kondisi kesehatan secara lengkap untuk mengetahui risiko terjadinya penyakit seperti gangguan fungsi hati, ginjal, jantung.",
+        "img": "/images/home-pages/layanan-2.jpg",
+        "altImg": "Pemeriksaan Lansia Sehat",
+        "href": "/produk/pemeriksaan-lansia-sehat",
+        "price": "Rp1.324.000",
+        "disc": "Rp1.499.000"
+      },
+      "card4": {
+        "title": "Pemeriksaan Kesehatan Ginjal",
+        "desc": "Paket pemeriksaan yang berfokus untuk memeriksa kesehatan dan menilai kinerja fungsi ginjal anda melalui pemeriksaan laboratorium. Pemeriksaan fungsi ginjal ini menunjukkan kemampuan ginjal untuk menyaring darah dan urine. Selain itu dapat mendeteksi masalah kelebihan asam urat.",
+        "img": "/images/home-pages/layanan-5.jpg",
+        "altImg": "Pemeriksaan Kesehatan Ginjal",
+        "href": "/produk/pemeriksaan-kesehatan-ginjal",
+        "price": "Rp1.324.000",
+        "disc": "Rp1.499.000"
+      },
+      "card5": {
+        "title": "Pemeriksaan Alergi untuk anak",
+        "desc": "Pemeriksaan alergi melalui tes laboratorium untuk mendeteksi alergi melalui sampel berupa darah. Pemeriksaan ini dapat mendeteksi alergi terhadap alergen spesifik seperti bahan makanan, tungau, jamur, komponen susu, dan bulu hewan yang menyebabkan peradangan. Tes ini dapat menghasilkan sampai dengan 27 informasi alergen yang berbeda dengan sekali pengerjaan.",
+        "img": "/images/home-pages/layanan-4.jpg",
+        "altImg": "Pemeriksaan Alergi untuk anak",
+        "href": "/produk/pemeriksaan-alergi-untuk-anak",
+        "price": "Rp1.324.000",
+        "disc": "Rp1.499.000"
+      }
+    }
   }
 }

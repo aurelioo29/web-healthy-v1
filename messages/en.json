@@ -162,5 +162,56 @@
         "href": "/corporate-health-service"
       }
     }
+  },
+  "layanan": {
+    "title": "Diagnos’ Most Popular Services",
+    "description": "Diagnos’ most sought-after services, delivering fast, accurate, and reliable healthcare solutions.",
+    "card": {
+      "card1": {
+        "title": "Women’s Health Package",
+        "desc": "A dedicated health check package for women, including tests to determine calcium and vitamin D levels in the blood. It also screens for cervical cancer via urine HPV DNA testing.",
+        "img": "/images/home-pages/layanan-3.jpg",
+        "altImg": "Women’s Health Package",
+        "href": "/produk/paket-kesehatan-ibu",
+        "price": "Rp1.324.000",
+        "disc": "Rp1.499.000"
+      },
+      "card2": {
+        "title": "Heart Health Screening",
+        "desc": "A screening package for risk factors of coronary heart disease. Provides insight into blood glucose, dyslipidemia, liver function, kidney function, and predictors of coronary heart disease.",
+        "img": "/images/home-pages/layanan-1.jpg",
+        "altImg": "Heart Health Screening",
+        "href": "/produk/pemeriksaan-kesehatan-jantung",
+        "price": "Rp1.324.000",
+        "disc": "Rp1.499.000"
+      },
+      "card3": {
+        "title": "Healthy Senior Checkup Package",
+        "desc": "Designed for older adults to obtain a comprehensive picture of their health and identify risks such as liver, kidney, and heart disorders.",
+        "img": "/images/home-pages/layanan-2.jpg",
+        "altImg": "Healthy Senior Checkup Package",
+        "href": "/produk/pemeriksaan-lansia-sehat",
+        "price": "Rp1.324.000",
+        "disc": "Rp1.499.000"
+      },
+      "card4": {
+        "title": "Kidney Health Screening",
+        "desc": "A package focused on evaluating kidney health and function through laboratory tests. Assesses how well the kidneys filter blood and produce urine, and can detect issues such as elevated uric acid.",
+        "img": "/images/home-pages/layanan-5.jpg",
+        "altImg": "Kidney Health Screening",
+        "href": "/produk/pemeriksaan-kesehatan-ginjal",
+        "price": "Rp1.324.000",
+        "disc": "Rp1.499.000"
+      },
+      "card5": {
+        "title": "Allergy Test for Children",
+        "desc": "An allergy test using a blood sample to detect specific allergens such as foods, mites, fungi, dairy components, and animal dander. Delivers up to 27 allergen insights in a single run.",
+        "img": "/images/home-pages/layanan-4.jpg",
+        "altImg": "Allergy Test for Children",
+        "href": "/produk/pemeriksaan-alergi-untuk-anak",
+        "price": "Rp1.324.000",
+        "disc": "Rp1.499.000"
+      }
+    }
   }
 }
