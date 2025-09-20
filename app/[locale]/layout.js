@@ -4,6 +4,13 @@ import { NextIntlClientProvider } from "next-intl";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+export const dynamicParams = false;
+const SUPPORTED_LOCALES = ["id", "en"];
+
+export function generateStaticParams() {
+  return SUPPORTED_LOCALES.map((locale) => ({ locale }));
+}
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -15,11 +22,9 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params }) {
-  const { locale } = await params;
-
-  const messages =
-    (await import(`../../messages/${locale}.json`).catch(() => null))
-      ?.default ?? (await import(`../../messages/id.json`)).default;
+  const { locale } = params;
+  // pastikan file messages untuk setiap locale ADA
+  const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
     <html lang={locale}>
