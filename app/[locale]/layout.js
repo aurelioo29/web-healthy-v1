@@ -22,7 +22,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params }) {
-  const { locale } = params;
+  const { locale } = await params;
   // pastikan file messages untuk setiap locale ADA
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
