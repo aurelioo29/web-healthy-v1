@@ -9,7 +9,7 @@ export default function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="mx-auto max-w-7xl px-4 pb-8">
+    <footer className="mx-auto max-w-7xl px-4 pb-4">
       <div className="overflow-hidden rounded-3xl shadow-sm ring-1 ring-black/5">
         {/* TOP: info area (white) */}
         <div className="bg-white px-6 py-8 md:px-10 md:py-10">
@@ -21,12 +21,10 @@ export default function Footer() {
                 aria-label="Diagnos Home"
                 className="inline-flex items-center gap-3"
               >
-                <Image
+                <img
                   src="/images/home-pages/logo.webp"
-                  alt="Diagnos"
-                  width={150}
-                  height={50}
-                  priority={false}
+                  alt="logo-website-healthy"
+                  className="h-16 w-auto"
                 />
               </Link>
             </div>
@@ -63,11 +61,9 @@ export default function Footer() {
                 {t("callcenter.title")}
               </h3>
               <div className="mt-3">
-                <Image
+                <img
                   src="/images/home-pages/call-center.webp"
                   alt={t("callcenter.alt")}
-                  width={180}
-                  height={56}
                   className="h-14 w-auto"
                 />
               </div>
@@ -83,20 +79,16 @@ export default function Footer() {
               <p className="text-base font-semibold">{t("download.title")}</p>
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <a href="#" aria-label="Google Play">
-                  <Image
+                  <img
                     src="/images/home-pages/badge-playstore.webp"
                     alt="Get it on Google Play"
-                    width={160}
-                    height={48}
                     className="h-12 w-auto"
                   />
                 </a>
                 <a href="#" aria-label="App Store">
-                  <Image
+                  <img
                     src="/images/home-pages/badge-appstore.webp"
                     alt="Download on the App Store"
-                    width={160}
-                    height={48}
                     className="h-12 w-auto"
                   />
                 </a>

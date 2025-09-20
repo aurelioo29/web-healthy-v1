@@ -93,13 +93,7 @@ export default function Navbar() {
           {/* Middle: Logo (centered) */}
           <div className="flex justify-center">
             <Link href={"/"} aria-label="Home">
-              <Image
-                src="/images/home-pages/logo.webp"
-                width={120}
-                height={40}
-                alt="logo"
-                priority={false}
-              />
+              <img src="/images/home-pages/logo.webp" alt="logo" />
             </Link>
           </div>
 
@@ -120,12 +114,10 @@ export default function Navbar() {
       <div className="mx-auto hidden max-w-7xl items-center justify-between px-6 py-3 md:flex">
         {/* Logo */}
         <Link href={"/"} aria-label="Home">
-          <Image
+          <img
             src="/images/home-pages/logo.webp"
-            width={150}
-            height={50}
-            priority={false}
             alt="logo"
+            className="h-10 w-auto"
           />
         </Link>
 
