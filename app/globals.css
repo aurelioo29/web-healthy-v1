@@ -125,3 +125,27 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Hanya mobile */
+@media (max-width: 767px) {
+  /* turunin posisi pagination */
+  .dna-swiper .swiper-pagination {
+    bottom: -10px; /* makin kecil = makin ke bawah */
+    z-index: 10;
+  }
+
+  /* kecilin bullet */
+  .dna-swiper .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    margin: 0 3px !important; /* jarak antar bullet */
+    background: #4698e3;
+    opacity: 1;
+  }
+
+  /* bullet aktif */
+  .dna-swiper .swiper-pagination-bullet-active {
+    background: #fff;
+    transform: scale(1.15);
+  }
+}

@@ -361,5 +361,80 @@
     "ctaHref": "#selengkapnya",
     "imageAlt": "Gedung Diagnos",
     "imageSrc": "/images/lokasi-pages/hero.webp"
+  },
+  "appPromo": {
+    "title": "Unlock Potensi Kesehatanmu dengan <strong>DNAandMe!</strong>",
+    "body": "Unduh aplikasi DNAandMe sekarang dan dapatkan analisis genetik yang personal untuk membuat keputusan kesehatan yang lebih cerdas dan tepat. Semakin mudah, semakin dekat dengan kesehatan optimal!",
+    "playUrl": "https://play.google.com/store",
+    "appUrl": "https://apps.apple.com/",
+    "playAlt": "Unduh di Google Play",
+    "appAlt": "Unduh di App Store",
+    "imageAlt": "Ilustrasi aplikasi DNAandMe"
+  },
+  "consultHero": {
+    "title": "Konsultasi Dokter",
+    "body": "Layanan aplikasi yang dibuat oleh Diagnos untuk memberikan pengalaman yang lebih baik bagi Dokter dalam menunjang layanan kesehatan kepada pasien.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Dokter siap melayani konsultasi",
+    "imageSrc": "/images/konsultasi-pages/Hero-Banner.webp"
+  },
+  "dnaandme": {
+    "title": "DNAandMe",
+    "body": "Diagnos – Powered by Asa Ren merupakan aplikasi Lifestyle dan Health yang menyediakan fasilitas tes genetik untuk masyarakat Indonesia.",
+    "imageAlt": "Ilustrasi aplikasi DNAandMe pada ponsel",
+    "playAlt": "Unduh di Google Play",
+    "appAlt": "Unduh di App Store",
+    "playUrl": "https://play.google.com/store",
+    "appUrl": "https://www.apple.com/app-store/"
+  },
+  "dnaFeatures": {
+    "heading": "Kini Semakin Mudah Hanya dalam Satu Genggaman",
+    "subheading": "Kini, layanan kesehatan dan tes diagnostik semakin mudah diakses hanya dalam satu genggaman tangan, memberikan kenyamanan dan kemudahan bagi Anda.",
+    "items": {
+      "report": {
+        "title": "Report DNA",
+        "body": "Kami menawarkan 21 kategori yang mencakup nutrisi, olahraga, kesehatan, mental, dan penyakit. Hasil DNA kami bertujuan untuk memberikan langkah pertama menuju gaya hidup yang lebih baik."
+      },
+      "library": {
+        "title": "Konten Library",
+        "body": "Dengar dan tonton konten untuk menemani hari-harimu."
+      },
+      "article": {
+        "title": "Artikel",
+        "body": "Baca berita dan artikel terbaru dengan berbagai topik kesehatan seperti kebugaran, diet, dan kesehatan mental."
+      },
+      "consult": {
+        "title": "Konsultasi",
+        "body": "Pesan sesi konsultasi dengan konselor Kami untuk mengetahui lebih dalam hasil DNAmu!"
+      }
+    }
+  },
+  "benefit": {
+    "heading": "Untungnya Kamu Menggunakan DNAandMe",
+    "subheading": "Dengan DNAandMe, kamu mendapatkan pemahaman lebih dalam tentang kesehatan dan potensi genetikmu, membantu membuat keputusan medis yang lebih personal dan tepat.",
+    "imageAlt": "Ilustrasi manfaat DNAandMe",
+    "items": {
+      "0": {
+        "title": "Pemahaman Genetik yang Mendalam",
+        "body": "DNAandMe memberikan analisis genetik yang mendalam, membantu Anda memahami potensi kesehatan, risiko penyakit, dan faktor-faktor genetik yang dapat mempengaruhi kehidupan Anda. Ini membuka wawasan untuk langkah pencegahan lebih dini."
+      },
+      "1": {
+        "title": "Rekomendasi Kesehatan Personal",
+        "body": "Dengan hasil tes genetik, DNAandMe menyediakan rekomendasi kesehatan yang lebih personal dan spesifik, sehingga Anda bisa mengelola gaya hidup, diet, dan perawatan medis sesuai dengan kebutuhan unik tubuh Anda."
+      },
+      "2": {
+        "title": "Deteksi Risiko Penyakit Genetik",
+        "body": "Melalui analisis DNA, Anda dapat mengetahui potensi risiko penyakit genetik tertentu, memungkinkan Anda untuk mengambil tindakan pencegahan atau memulai pengobatan lebih awal guna mengurangi kemungkinan dampak kesehatan di masa depan."
+      },
+      "3": {
+        "title": "Penyuluhan Kesehatan yang Lebih Terarah",
+        "body": "DNAandMe memberikan informasi yang lebih terarah untuk konsultasi medis, mempermudah Anda dalam berdiskusi dengan dokter atau ahli kesehatan mengenai langkah-langkah pengelolaan kesehatan berbasis genetik."
+      },
+      "4": {
+        "title": "Mengoptimalkan Keputusan Medis dan Kesehatan",
+        "body": "Dengan memahami faktor-faktor genetik, DNAandMe membantu Anda membuat keputusan yang lebih cerdas dan efektif dalam merencanakan perawatan medis, pengelolaan kesehatan jangka panjang, dan memilih langkah terbaik untuk tubuh Anda."
+      }
+    }
   }
 }

@@ -361,5 +361,80 @@
     "ctaHref": "#selengkapnya",
     "imageAlt": "Diagnos Building",
     "imageSrc": "/images/lokasi-pages/hero.webp"
+  },
+  "appPromo": {
+    "title": "Unlock Your Health Potential with <strong>DNAandMe!</strong>",
+    "body": "Download the DNAandMe app now and get personalized genetic insights to make smarter, more accurate health decisions. Easier than ever—bringing you closer to optimal health!",
+    "playUrl": "https://play.google.com/store",
+    "appUrl": "https://apps.apple.com/",
+    "playAlt": "Download on Google Play",
+    "appAlt": "Download on the App Store",
+    "imageAlt": "DNAandMe app illustration"
+  },
+  "consultHero": {
+    "title": "Doctor Consultation",
+    "body": "An application service built by Diagnos to provide a better experience for doctors in supporting health services for patients.",
+    "cta": "Learn More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Doctor ready to serve consultations",
+    "imageSrc": "/images/konsultasi-pages/Hero-Banner.webp"
+  },
+  "dnaandme": {
+    "title": "DNAandMe",
+    "body": "Diagnos—powered by Asa Ren—is a lifestyle and health app that provides genetic testing services for people in Indonesia.",
+    "imageAlt": "DNAandMe app illustration on phones",
+    "playAlt": "Download on Google Play",
+    "appAlt": "Download on the App Store",
+    "playUrl": "https://play.google.com/store",
+    "appUrl": "https://www.apple.com/app-store/"
+  },
+  "dnaFeatures": {
+    "heading": "Now It’s Easier—All in the Palm of Your Hand",
+    "subheading": "Health services and diagnostic tests are now easier to access from a single place—bringing you comfort and convenience.",
+    "items": {
+      "report": {
+        "title": "DNA Report",
+        "body": "We offer 21 categories covering nutrition, fitness, health, mental wellness, and diseases. Our DNA results aim to provide your first step toward a better lifestyle."
+      },
+      "library": {
+        "title": "Content Library",
+        "body": "Listen to and watch content to accompany your day."
+      },
+      "article": {
+        "title": "Articles",
+        "body": "Read the latest news and articles on a wide range of health topics such as fitness, diet, and mental health."
+      },
+      "consult": {
+        "title": "Consultation",
+        "body": "Book a consultation session with our counselors to learn more about your DNA results!"
+      }
+    }
+  },
+  "benefit": {
+    "heading": "Benefits of Using DNAandMe",
+    "subheading": "With DNAandMe, you gain deeper insights into your health and genetic potential, helping you make more personal and precise medical decisions.",
+    "imageAlt": "Illustration of DNAandMe benefits",
+    "items": {
+      "0": {
+        "title": "Deeper Genetic Understanding",
+        "body": "DNAandMe provides in-depth genetic analysis to help you understand health potential, disease risks, and genetic factors that may influence your life—opening the door to earlier prevention."
+      },
+      "1": {
+        "title": "Personalized Health Recommendations",
+        "body": "Based on your genetic test results, DNAandMe offers more personalized and specific recommendations so you can manage lifestyle, diet, and medical care according to your body’s unique needs."
+      },
+      "2": {
+        "title": "Genetic Disease Risk Detection",
+        "body": "Through DNA analysis, you can learn your potential risk for certain genetic conditions, enabling preventive action or earlier treatment to reduce future health impacts."
+      },
+      "3": {
+        "title": "More Targeted Health Guidance",
+        "body": "DNAandMe equips you with more targeted information for medical consultations, making it easier to discuss genetics-based health management steps with your doctor or health professionals."
+      },
+      "4": {
+        "title": "Optimize Medical and Health Decisions",
+        "body": "By understanding genetic factors, DNAandMe helps you make smarter, more effective decisions when planning medical care, long-term health management, and choosing what’s best for your body."
+      }
+    }
   }
 }
