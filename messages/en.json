@@ -491,5 +491,54 @@
     "cta": "Contact us for more information",
     "ctaHref": "/kontak",
     "imageAlt": "Non-Laboratory Tests"
+  },
+  "corporateHero": {
+    "title": "Corporate Health Service",
+    "body": "Our Corporate Health Service provides comprehensive health solutions for companies, with tailored medical services to improve employee well-being and support productivity in the workplace.",
+    "cta": "See More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Corporate Health Service",
+    "imageSrc": "/images/corporate-pages/Hero-Banner.webp"
+  },
+  "layananKorporasi": {
+    "title": "Corporate Services",
+    "body": "Integrated health services designed to enhance employee productivity and health through preventive, data-driven approaches. Scope of services:",
+    "items": {
+      "0": "Health Risk Assessment – Comprehensive evaluation of employees’ health risks.",
+      "1": "Employee Medical Check Up – Routine health screening for early detection.",
+      "2": "Smart Report MCU – Integrated digital reports for health monitoring.",
+      "3": "Corporate Managed Care – Effective management of employee healthcare services.",
+      "4": "Genomic Test for Productivity – Genetic analysis to optimize work potential.",
+      "5": "Nutrigenomic & Healthy Food – Nutrition recommendations based on genetic profiles.",
+      "6": "In-house Clinic – On-site company clinic for direct healthcare services."
+    },
+    "cta": "Contact us",
+    "ctaHref": "/kontak",
+    "imageAlt": "Corporate Services"
+  },
+  "manajemenLayanan": {
+    "title": "Corporate Health Service Management",
+    "body": "Employee health management tailored to company needs, as a follow-up to health screening or MCU results. This service includes:",
+    "items": {
+      "0": "Clinic Services: Doctor consultations, vitamin & vaccine administration, nutrition counseling, and psychologist consultations.",
+      "1": "Wellness Programs: Exercise classes (aerobics/yoga/zumba), body composition monitoring, health education sessions (health talks), and health coaching via WhatsApp groups."
+    },
+    "cta": "Contact us",
+    "ctaHref": "/kontak",
+    "imageAlt": "Corporate Health Service Management"
+  },
+  "medicalCheck": {
+    "title": "Employee Medical Check Up",
+    "body": "An integrated employee health examination service that includes clinic and laboratory services tailored to corporate needs. We provide laboratory tests, digital health reports (individual and company), doctor consultations, and vitamin and vaccine administration as part of a comprehensive health solution for employees.",
+    "cta": "Contact us",
+    "ctaHref": "/kontak",
+    "imageAlt": "Employee Medical Check Up"
+  },
+  "klinikPerusahaan": {
+    "title": "On-site Company Clinic / In-house Clinic",
+    "body": "Development of an internal company clinic customized to corporate needs to support employee productivity and foster a healthy work environment. Facilities include professional medical staff (doctors/nurses), complete clinic management (equipment & logistics), an integrated clinic system with electronic medical records, lab ordering, individual health risk score reports, consultations, and customer service support.",
+    "cta": "Contact us",
+    "ctaHref": "/kontak",
+    "imageAlt": "On-site Company Clinic / In-house Clinic"
   }
 }

@@ -492,5 +492,54 @@
     "cta": "Hubungi kami untuk informasi lebih lanjut",
     "ctaHref": "/kontak",
     "imageAlt": "Tes Non Laboratorium"
+  },
+  "corporateHero": {
+    "title": "Corporate Health Service",
+    "body": "Corporate Health Service kami menyediakan solusi kesehatan komprehensif bagi perusahaan, dengan layanan medis yang disesuaikan untuk meningkatkan kesejahteraan karyawan dan mendukung produktivitas di tempat kerja.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Corporate Health Service",
+    "imageSrc": "/images/corporate-pages/Hero-Banner.webp"
+  },
+  "layananKorporasi": {
+    "title": "Layanan Korporasi",
+    "body": "Layanan kesehatan terpadu yang bertujuan meningkatkan produktivitas dan kesehatan karyawan melalui pendekatan preventif dan berbasiskan data. Ruang lingkup layanan:",
+    "items": {
+      "0": "Health Risk Assessment – Evaluasi risiko kesehatan karyawan secara menyeluruh.",
+      "1": "Medical Check Up Karyawan – Pemeriksaan kesehatan rutin untuk deteksi dini.",
+      "2": "Smart Report MCU – Laporan digital terintegrasi untuk pemantauan kesehatan.",
+      "3": "Corporate Managed Care – Pengelolaan layanan kesehatan karyawan secara efektif.",
+      "4": "Genomic Test for Productivity – Analisis genetik untuk optimalisasi potensi kerja.",
+      "5": "Nutrigenomic & Healthy Food – Rekomendasi nutrisi berdasarkan profil genetik.",
+      "6": "Inhouse Clinic – Klinik internal perusahaan untuk layanan kesehatan langsung"
+    },
+    "cta": "Hubungi kami",
+    "ctaHref": "/kontak",
+    "imageAlt": "Layanan Korporasi"
+  },
+  "manajemenLayanan": {
+    "title": "Manajemen Layanan Kesehatan Perusahaan",
+    "body": "Layanan pengelolaan kesehatan karyawan yang disesuaikan dengan kebutuhan perusahaan, sebagai tindak lanjut dari hasil pemeriksaan kesehatan atau MCU. Layanan ini mencakup:",
+    "items": {
+      "0": "Layanan Klinik: Konsultasi dokter, pemberian vitamin & vaksin, konsultasi gizi, dan konsultasi psikolog.",
+      "1": "Program Wellness: Kelas olahraga (aerobik/yoga/zumba), pemantauan komposisi tubuh, sesi edukasi kesehatan (health talk), serta pendampingan kesehatan melalui grup WhatsApp."
+    },
+    "cta": "Hubungi kami",
+    "ctaHref": "/kontak",
+    "imageAlt": "Manajemen Layanan Kesehatan Perusahaan"
+  },
+  "medicalCheck": {
+    "title": "Medical Check Up Karyawan",
+    "body": "Layanan pemeriksaan kesehatan karyawan yang terintegrasi, mencakup layanan klinik dan laboratorium yang dirancang khusus untuk kebutuhan korporasi. Kami menyediakan pemeriksaan laboratorium, laporan kesehatan digital (individu dan perusahaan), konsultasi dokter, serta pemberian vitamin dan vaksin sebagai bagian dari solusi kesehatan menyeluruh bagi karyawan.",
+    "cta": "Hubungi kami",
+    "ctaHref": "/kontak",
+    "imageAlt": "Medical Check Up Karyawan"
+  },
+  "klinikPerusahaan": {
+    "title": "Klinik di dalam Perusahaan / Inhouse Clinic",
+    "body": "Layanan pengembangan klinik internal perusahaan yang disesuaikan dengan kebutuhan korporasi untuk mendukung produktivitas karyawan dan menciptakan lingkungan kerja yang sehat. Fasilitas ini mencakup tenaga medis profesional (dokter/perawat), manajemen klinik lengkap (peralatan & logistik), sistem klinik terintegrasi dengan rekam medis elektronik, pemesanan laboratorium, laporan skor risiko kesehatan individu, konsultasi, serta dukungan layanan pelanggan.",
+    "cta": "Hubungi kami",
+    "ctaHref": "/kontak",
+    "imageAlt": "Klinik di dalam Perusahaan / Inhouse Clinic"
   }
 }
