@@ -541,5 +541,80 @@
     "cta": "Hubungi kami",
     "ctaHref": "/kontak",
     "imageAlt": "Klinik di dalam Perusahaan / Inhouse Clinic"
+  },
+  "manajemenHero": {
+    "title": "Manajemen Laboratorium Klinik",
+    "body": "Laboratorium Diagnos hadir untuk memenuhi kebutuhan masyarakat dengan visi dan misi yang jelas untuk mewujudkan Indonesia yang lebih sehat",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Manajemen Laboratorium Klinik",
+    "imageSrc": "/images/manajemen-pages/Hero-Banner.webp"
+  },
+  "labTypes": {
+    "title": "Jenis Layanan yang ada di Laboratorium Klinik Diagnos",
+    "imageAlt": "Tenaga laboratorium sedang mengoperasikan alat",
+    "body": "Kami menyediakan pilihan pemeriksaan yang komprehensif, didukung dengan fasilitas dan sumber daya manusia yang berkualitas untuk hasil pemeriksaan yang dapat diandalkan. Jenis pemeriksaan kami meliputi <strong>Hematologi, Kimia, Imunoserologi, Urin – Feses – Cairan Tubuh, Mikrobiologi, Patologi Anatomi, Genomic, Layanan Klinik dan Lain-Lain, Paket Pemeriksaan, Molekuler, Bank Darah, Hemostasis, Toksikologi, Monitoring Obat</strong>."
+  },
+  "labServices": {
+    "heading": "Layanan Laboratorium Klinik Diagnos",
+    "subheading": "Layanan Manajemen Laboratorium Klinik Diagnos menawarkan solusi terintegrasi untuk pengelolaan, pemeliharaan, dan peningkatan kualitas layanan laboratorium yang efisien dan akurat.",
+    "items": {
+      "0": {
+        "title": "Hematologi",
+        "body": "Pemeriksaan laboratorium untuk menilai kondisi sel darah beserta komponennya, serta mendeteksi adanya kelainan pada proses produksi, struktur, dan fungsi sel darah"
+      },
+      "1": {
+        "title": "Hemostasis",
+        "body": "Pemeriksaan laboratorium untuk mendeteksi kelainan pada fungsi pembekuan darah dan kecenderungan terjadinya perdarahan"
+      },
+      "2": {
+        "title": "Kimia",
+        "body": "Pemeriksaan laboratorium untuk mengukur kadar dari berbagai jenis zat terlarut yang dapat menggambarkan fungsi organ dalam tubuh"
+      },
+      "3": {
+        "title": "Urin–Feses–Cairan Tubuh",
+        "body": "Penilaian parameter makroskopis, dan kimia pada sampel cairan tubuh untuk mengetahui kondisi kesehatan, mendeteksi infeksi, gangguan pencernaan, fungsi ginjal dan saluran kemih."
+      },
+      "4": {
+        "title": "Molekuler",
+        "body": "Pemeriksaan dengan teknologi terkini untuk analisis dan deteksi penanda biologis terkait gen, sel, dan agen penyebab infeksi"
+      },
+      "5": {
+        "title": "Imunoserologi",
+        "body": "Pemeriksaan fungsi kekebalan tubuh yang bertujuan untuk mendeteksi adanya kanker, infeksi, peradangan, dan kelainan organ dalam tubuh"
+      },
+      "6": {
+        "title": "Mikrobiologi",
+        "body": "Identifikasi dan karakterisasi mikroorganisme melalui proses pembiakan, pengecatan, profil kepekaan antibiotik dan analisis gambaran mikroskopis"
+      },
+      "7": {
+        "title": "Patologi Anatomi",
+        "body": "Analisis dari sampel jaringan dan sel dalam tubuh yang bertujuan untuk mendeteksi dan membuktikan adanya kelainan atau penyakit"
+      },
+      "8": {
+        "title": "Genomik",
+        "body": "Pemeriksaan genomik membantu mengetahui kondisi genetik dan kemungkinan dari seorang individu mewarisi kelainan genetik"
+      },
+      "9": {
+        "title": "Toksikologi",
+        "body": "Pemeriksaan toksikologi dilakukan untuk mendeteksi adanya paparan zat beracun, obat-obatan terlarang, atau bahan kimia dalam tubuh."
+      },
+      "10": {
+        "title": "Monitoring Obat",
+        "body": "Pemeriksaan monitoring obat bertujuan mengukur kadar obat tertentu dalam darah guna memastikan dosis yang tepat, efektivitas terapi, dan mencegah efek samping"
+      },
+      "11": {
+        "title": "Paket Pemeriksaan",
+        "body": "Paket pemeriksaan mencakup rangkaian tes lengkap untuk menilai kondisi kesehatan secara menyeluruh sesuai kebutuhan spesifik (pria/wanita, usia, kondisi tertentu"
+      },
+      "12": {
+        "title": "Bank Darah",
+        "body": "Unit pelayanan di rumah sakit yang bertanggung jawab atas ketersediaan darah untuk transfusi yang aman, berkualitas, dan dalam jumlah yang cukup"
+      },
+      "13": {
+        "title": "Layanan Klinik dan Lain-Lain",
+        "body": "Layanan penunjang kesehatan seperti vaksinasi, infus/injeksi vitamin, konsultasi dokter, serta tindakan non laboratorium seperti radiologi, echocardiography (EKG), USG, treadmill, spirometri, dan audiometri"
+      }
+    }
   }
 }

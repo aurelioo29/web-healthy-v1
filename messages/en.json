@@ -540,5 +540,80 @@
     "cta": "Contact us",
     "ctaHref": "/kontak",
     "imageAlt": "On-site Company Clinic / In-house Clinic"
+  },
+  "manajemenHero": {
+    "title": "Clinical Laboratory Management",
+    "body": "Diagnos Laboratory is here to meet public needs with a clear vision and mission to realize a healthier Indonesia.",
+    "cta": "Learn More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Clinical Laboratory Management",
+    "imageSrc": "/images/manajemen-pages/Hero-Banner.webp"
+  },
+  "labTypes": {
+    "title": "Types of Services at Diagnos Clinical Laboratory",
+    "imageAlt": "Laboratory staff operating equipment",
+    "body": "We provide a comprehensive range of examinations, supported by quality facilities and human resources for reliable results. Our test types include <strong>Hematology, Chemistry, Immunoserology, Urine – Stool – Body Fluids, Microbiology, Anatomical Pathology, Genomics, Clinic Services & Miscellaneous, Test Packages, Molecular, Blood Bank, Hemostasis, Toxicology, Therapeutic Drug Monitoring</strong>."
+  },
+  "labServices": {
+    "heading": "Diagnos Clinical Laboratory Services",
+    "subheading": "Diagnos Clinical Laboratory Management offers integrated solutions for managing, maintaining, and improving the quality of laboratory services efficiently and accurately.",
+    "items": {
+      "0": {
+        "title": "Hematology",
+        "body": "Laboratory tests to evaluate blood cells and their components, and to detect abnormalities in the production, structure, and function of blood cells."
+      },
+      "1": {
+        "title": "Hemostasis",
+        "body": "Laboratory tests to detect disorders in blood coagulation function and a tendency for bleeding."
+      },
+      "2": {
+        "title": "Chemistry",
+        "body": "Laboratory tests to measure levels of various analytes that reflect organ function in the body."
+      },
+      "3": {
+        "title": "Urine–Stool–Body Fluids",
+        "body": "Assessment of macroscopic (and chemical) parameters in body-fluid samples to determine health status, detect infections, digestive disorders, and the function of the kidneys and urinary tract."
+      },
+      "4": {
+        "title": "Molecular",
+        "body": "Examinations using advanced technology to analyze and detect biological markers related to genes, cells, and infectious agents."
+      },
+      "5": {
+        "title": "Immunoserology",
+        "body": "Assessment of immune function to detect cancer, infections, inflammation, and organ disorders."
+      },
+      "6": {
+        "title": "Microbiology",
+        "body": "Identification and characterization of microorganisms through culturing, staining, antibiotic susceptibility profiling, and microscopic analysis."
+      },
+      "7": {
+        "title": "Anatomical Pathology",
+        "body": "Analysis of tissue and cell samples to detect and confirm abnormalities or disease."
+      },
+      "8": {
+        "title": "Genomics",
+        "body": "Genomic testing to understand an individual’s genetic condition and the likelihood of inheriting genetic disorders."
+      },
+      "9": {
+        "title": "Toxicology",
+        "body": "Toxicology testing to detect exposure to toxic substances, illicit drugs, or chemicals in the body."
+      },
+      "10": {
+        "title": "Therapeutic Drug Monitoring",
+        "body": "Tests to measure specific drug levels in the blood to ensure proper dosing, therapeutic effectiveness, and to prevent side effects."
+      },
+      "11": {
+        "title": "Test Packages",
+        "body": "Bundles of comprehensive tests to assess overall health according to specific needs (male/female, age group, special conditions)."
+      },
+      "12": {
+        "title": "Blood Bank",
+        "body": "A hospital service unit responsible for ensuring a safe, high-quality, and adequate blood supply for transfusions."
+      },
+      "13": {
+        "title": "Clinic Services & Miscellaneous",
+        "body": "Supporting health services such as vaccinations, vitamin infusions/injections, doctor consultations, as well as non-laboratory procedures including radiology, echocardiography (ECG), ultrasound, treadmill tests, spirometry, and audiometry."
+      }
+    }
   }
 }

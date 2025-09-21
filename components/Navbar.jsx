@@ -72,11 +72,11 @@ export default function Navbar() {
       label: t("insight"),
       href: "/insight",
       dropdownItems: [
-        { label: t("csr"), href: "/insight/csr" },
-        { label: t("artikel"), href: "/insight/artikel" },
+        { label: t("csr"), href: "/keberlanjutan" },
+        { label: t("artikel"), href: "/artikel-kesehatan" },
         {
           label: t("manajemen"),
-          href: "/insight/manajemen-laboratorium",
+          href: "/manajemen-laboratorium",
         },
       ],
     },
