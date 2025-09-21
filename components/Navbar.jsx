@@ -50,9 +50,9 @@ export default function Navbar() {
           {
             title: t("testTypes"),
             items: [
-              { label: t("consult"), href: "/produk/konsultasi-dokter" },
-              { label: t("clinic"), href: "/produk/layanan-klinik" },
-              { label: t("corporate"), href: "/produk/corporate-health" },
+              { label: t("consult"), href: "/konsultasi-dokter" },
+              { label: t("clinic"), href: "/layanan-klinik" },
+              { label: t("corporate"), href: "/corporate-health-service" },
               { label: t("ecatalog"), href: "/produk/e-catalog" },
             ],
           },
@@ -438,12 +438,12 @@ function ProductsMega({ t, locale }) {
         { label: t("panel"), href: "/produk/panel-pemeriksaan" },
       ],
     },
-    { key: "consult", label: t("consult"), href: "/produk/konsultasi-dokter" },
-    { key: "clinic", label: t("clinic"), href: "/produk/layanan-klinik" },
+    { key: "consult", label: t("consult"), href: "/konsultasi-dokter" },
+    { key: "clinic", label: t("clinic"), href: "/layanan-klinik" },
     {
       key: "corporate",
       label: t("corporate"),
-      href: "/produk/corporate-health",
+      href: "/corporate-health-service",
     },
     { key: "ecatalog", label: t("ecatalog"), href: "/produk/e-catalog" },
   ];
