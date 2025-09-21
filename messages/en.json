@@ -213,5 +213,111 @@
         "disc": "Rp1.499.000"
       }
     }
+  },
+  "about": {
+    "title": "About Diagnos",
+    "body": "Diagnos Laboratory is part of BMHS (Bundamedik Healthcare System). We exist to meet public needs with a clear vision and mission. We provide high-quality, reliable, and consistent laboratory services for all Diagnos partners and customers. Our Commitment",
+    "quote": "“Diagnos Laboratory was born out of the expectation for a laboratory that is compliant, comprehensive, and patient-oriented.”",
+    "imageAlt": "Diagnos laboratory staff"
+  },
+  "visiMisi": {
+    "imageAlt": "Vision and Mission",
+    "visi": {
+      "title": "Our Vision",
+      "body": "To become an integrated, high-quality laboratory that meets international standards and serves as a national diagnostic referral center."
+    },
+    "misi": {
+      "title": "Our Mission",
+      "body": {
+        "point1": "Provide laboratory services that prioritize accuracy, precision, and speed to strengthen diagnosis.",
+        "point2": "Develop a variety of clinical laboratory tests and panels to meet customer needs.",
+        "point3": "Develop outstanding human resources in knowledge, skills, and behavior."
+      }
+    }
+  },
+  "value": {
+    "title": "Bundamedik Healthcare System Values",
+    "description": "Bundamedik Healthcare System brings modern innovation and integrated services that excel in meeting the comprehensive health needs of families.",
+    "cards": {
+      "card1": {
+        "title": "Compassion",
+        "desc": "Honest and trustworthy in every action, loyal to professional ethics and business ethics aligned with the organization’s values.",
+        "img": "/images/about-pages/BMHS-Core-1.webp",
+        "imageAlt": "Compassion"
+      },
+      "card2": {
+        "title": "Competence",
+        "desc": "Able to set an example, lead oneself and others, and develop future leaders.",
+        "img": "/images/about-pages/BMHS-Core-2.webp",
+        "imageAlt": "Competence"
+      },
+      "card3": {
+        "title": "Change Agility",
+        "desc": "Smart and agile in facing every challenge and change.",
+        "img": "/images/about-pages/BMHS-Core-3.webp",
+        "imageAlt": "Change Agility"
+      },
+      "card4": {
+        "title": "Collaboration",
+        "desc": "Think openly, behave politely, and communicate ideas effectively to build commitment and good relationships.",
+        "img": "/images/about-pages/BMHS-Core-4.webp",
+        "imageAlt": "Collaboration"
+      },
+      "card5": {
+        "title": "Create Innovation",
+        "desc": "Proactively carry out continuous improvement and confidently present new ideas that are creative and innovative.",
+        "img": "/images/about-pages/BMHS-Core-5.webp",
+        "imageAlt": "Create Innovation"
+      }
+    }
+  },
+  "profile": {
+    "title": "President Director’s Foreword",
+    "description": "As part of our commitment to delivering the best services, Diagnos consistently upholds quality standards through an integrated management system that includes management responsibility, human resource management, infrastructure and work environment, and periodic equipment testing to ensure the accuracy and reliability of results. Various strategic and innovative initiatives are also continuously pursued to deliver added value—bringing us closer, more convenient, and more affordable for you.",
+    "imageAlt": "President Director"
+  },
+  "sertifikat": {
+    "title": "Certifications",
+    "description": "Official accreditations as proof of our commitment to service quality and trust in healthcare.",
+    "cards": {
+      "card1": {
+        "title": "Diagnos Padang Accreditation Certificate",
+        "img": "/images/about-pages/sertifikat-1.webp",
+        "imageAlt": "Diagnos Padang Accreditation Certificate"
+      },
+      "card2": {
+        "title": "Diagnos Denpasar Accreditation Certificate",
+        "img": "/images/about-pages/sertifikat-2.webp",
+        "imageAlt": "Diagnos Denpasar Accreditation Certificate"
+      },
+      "card3": {
+        "title": "Diagnos Ciputat Accreditation Certificate",
+        "img": "/images/about-pages/sertifikat-3.webp",
+        "imageAlt": "Diagnos Ciputat Accreditation Certificate"
+      },
+      "card4": {
+        "title": "Diagnos Ciputat Accreditation Certificate",
+        "img": "/images/about-pages/sertifikat-3.webp",
+        "imageAlt": "Diagnos Ciputat Accreditation Certificate"
+      }
+    }
+  },
+  "aboutHero": {
+    "title": "About Us",
+    "body": "Diagnos Laboratory serves public needs with a clear vision and mission to help build a healthier Indonesia.",
+    "cta": "Learn More"
+  },
+  "komitmen": {
+    "title": "Proof of Our Commitment to Quality",
+    "description": "Our accreditations are a guarantee of healthcare service quality that meets national and international standards.",
+    "gallery": {
+      "item1": { "src": "/images/about-pages/1.webp", "alt": "Activity 1" },
+      "item2": { "src": "/images/about-pages/2.webp", "alt": "Activity 2" },
+      "item3": { "src": "/images/about-pages/3.webp", "alt": "Activity 3" },
+      "item4": { "src": "/images/about-pages/4.webp", "alt": "Activity 4" },
+      "item5": { "src": "/images/about-pages/5.webp", "alt": "Activity 5" },
+      "item6": { "src": "/images/about-pages/6.webp", "alt": "Activity 6" },
+      "item7": { "src": "/images/about-pages/7.webp", "alt": "Activity 7" }
+    }
   }
 }

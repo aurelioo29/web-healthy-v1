@@ -27,7 +27,7 @@ export default async function RootLayout({ children, params }) {
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className="scroll-smooth">
       <body className={`${inter.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar />

@@ -213,5 +213,111 @@
         "disc": "Rp1.499.000"
       }
     }
+  },
+  "about": {
+    "title": "Tentang Diagnos",
+    "body": "Laboratorium Diagnos merupakan bagian dari BMHS (Bundamedik Healthcare System). Hadir sebagai kebutuhan masyarakat, yang berdiri dengan visi dan misi yang jelas. Kami menyediakan kualitas tinggi, handal, dan layanan laboratorium yang konsisten untuk semua mitra dan pelanggan Diagnos. Komitmen Kami",
+    "quote": "“Laboratorium Diagnos lahir dari ekspektasi laboratorium yang memenuhi syarat, lengkap dan berorientasi pasien”",
+    "imageAlt": "Petugas laboratorium Diagnos"
+  },
+  "visiMisi": {
+    "imageAlt": "Visi dan Misi",
+    "visi": {
+      "title": "Visi Kami",
+      "body": "Menjadi laboratorium yang terintegrasi, berkualitas, dan berstandar internasional serta menjadi rujukan diagnostik nasional."
+    },
+    "misi": {
+      "title": "Misi Kami",
+      "body": {
+        "point1": "Memberikan layanan Laboratorium yang mengutamakan akurasi ketelitian, dan kecepatan untuk memperkuat diagnosis.",
+        "point2": "Mengembangkan jenis dan panel pemeriksaan Laboratorium Klinik dalam memenuhi kebutuhan pelanggan.",
+        "point3": "Mengembangkan sumber daya manusia yang unggul dalam pengetahuan, keterampilan dan perilaku"
+      }
+    }
+  },
+  "value": {
+    "title": "Value Bundamedik Healthcare System",
+    "description": "Bundamedik Healthcare System hadir dengan inovasi modern dan pelayanan terintegrasi yang unggul bagi kebutuhan kesehatan menyeluruh keluarga.”",
+    "cards": {
+      "card1": {
+        "title": "Compassion",
+        "desc": "Jujur dan dapat dipercaya dalam setiap tindakan, setia pada etika profesi dan etika bisnis yang sejalan dengan nilai nilai organisasi.",
+        "img": "/images/about-pages/BMHS-Core-1.webp",
+        "imageAlt": "Compassion"
+      },
+      "card2": {
+        "title": "Competence",
+        "desc": "Mampu menjadi teladan mempimpin diri sendiri dan orang lain, serta menciptakan kader.",
+        "img": "/images/about-pages/BMHS-Core-2.webp",
+        "imageAlt": "Competence"
+      },
+      "card3": {
+        "title": "Change Agility",
+        "desc": "Cerdas dan tangkas dalam menghadapi setiap tantangan dan perubahan.",
+        "img": "/images/about-pages/BMHS-Core-3.webp",
+        "imageAlt": "Change Agility"
+      },
+      "card4": {
+        "title": "Collaboration",
+        "desc": "Berpikir terbuka, bersikap sopan, menyampaikan ide dan gagasan secara efektif untuk membangun komitmen dan hubungan baik.",
+        "img": "/images/about-pages/BMHS-Core-4.webp",
+        "imageAlt": "Collaboration"
+      },
+      "card5": {
+        "title": "Create Innovation",
+        "desc": "Proaktif melakukan perbaikan berkelanjutan, berani menyampaikan ide ide baru yang kreatif dan inovatif.",
+        "img": "/images/about-pages/BMHS-Core-5.webp",
+        "imageAlt": "Create Innovation"
+      }
+    }
+  },
+  "profile": {
+    "title": "Sekapur Sirih President Director",
+    "description": "Sebagai bagian dari komitmen untuk memberikan layanan terbaik, Diagnos senantiasa mengedepankan standar mutu melalui penerapan sistem manajemen terpadu yang mencakup tanggung jawab manajemen, pengelolaan sumber daya manusia, infrastruktur dan lingkungan kerja, serta pengujian alat secara berkala untuk memastikan akurasi dan keandalan hasil. Berbagai inisiatif strategis dan inovatif juga terus dilakukan untuk memberikan nilai tambah bagi demi lebih dekat, nyaman, dan terjangkau bagi Anda.",
+    "imageAlt": "President Director"
+  },
+  "sertifikat": {
+    "title": "Sertifikasi",
+    "description": "Raihan akreditasi resmi sebagai bukti komitmen kami terhadap kualitas dan kepercayaan layanan kesehatan.",
+    "cards": {
+      "card1": {
+        "title": "Sertifikat Akreditasi Diagnos Padang",
+        "img": "/images/about-pages/sertifikat-1.webp",
+        "imageAlt": "Sertifikat Akreditasi Diagnos Padang"
+      },
+      "card2": {
+        "title": "Sertifikat Akreditasi Diagnos Denpasar",
+        "img": "/images/about-pages/sertifikat-2.webp",
+        "imageAlt": "Sertifikat Akreditasi Diagnos Denpasar"
+      },
+      "card3": {
+        "title": "Sertifikat Akreditasi Diagnos Ciputat",
+        "img": "/images/about-pages/sertifikat-3.webp",
+        "imageAlt": "Sertifikat Akreditasi Diagnos Ciputat"
+      },
+      "card4": {
+        "title": "Sertifikat Akreditasi Diagnos Ciputat",
+        "img": "/images/about-pages/sertifikat-3.webp",
+        "imageAlt": "Sertifikat Akreditasi Diagnos Ciputat"
+      }
+    }
+  },
+  "aboutHero": {
+    "title": "Tentang Kami",
+    "body": "Laboratorium Diagnos hadir untuk memenuhi kebutuhan masyarakat dengan visi dan misi yang jelas untuk mewujudkan Indonesia yang lebih sehat.",
+    "cta": "Lihat Selengkapnya"
+  },
+  "komitmen": {
+    "title": "Bukti Komitmen Terhadap Kualitas",
+    "description": "Akreditasi kami sebagai jaminan atas kualitas layanan kesehatan yang memenuhi standar nasional dan internasional.",
+    "gallery": {
+      "item1": { "src": "/images/about-pages/1.webp", "alt": "Kegiatan 1" },
+      "item2": { "src": "/images/about-pages/2.webp", "alt": "Kegiatan 2" },
+      "item3": { "src": "/images/about-pages/3.webp", "alt": "Kegiatan 3" },
+      "item4": { "src": "/images/about-pages/4.webp", "alt": "Kegiatan 4" },
+      "item5": { "src": "/images/about-pages/5.webp", "alt": "Kegiatan 5" },
+      "item6": { "src": "/images/about-pages/6.webp", "alt": "Kegiatan 6" },
+      "item7": { "src": "/images/about-pages/7.webp", "alt": "Kegiatan 7" }
+    }
   }
 }
