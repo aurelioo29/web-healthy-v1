@@ -686,5 +686,44 @@
         "title": "Petugas home care akan datang sesuai dengan jadwal yang telah disepakati"
       }
     }
+  },
+  "genomikHero": {
+    "title": "Diagnos Genomics - DNAnswer",
+    "body": "DNAnswer adalah layanan dari Diagnos Genomics yang dirancang untuk mendeteksi perubahan gen dan kromosom dalam tubuh Anda. Dengan teknologi terkini dan standar kualitas tinggi, kami berkomitmen memberikan hasil pemeriksaan genetik yang akurat, terpercaya, dan dapat membantu Anda dalam mengambil keputusan kesehatan secara lebih personal dan tepat sasaran.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Diagnos Genomics - DNAnswer",
+    "imageSrc": "/images/genomik-pages/Hero-Banner.webp"
+  },
+  "genomikQna": {
+    "title": "Mengapa memilih DNAnswer?",
+    "items": {
+      "0": "Membantu Anda dalam memahami kondisi kesehatan Anda dan keluarga",
+      "1": "Memberikan gambaran resiko kesehatan pribadi Anda",
+      "2": "Mendukung dokter Anda untuk memberikan saran medis personal sesuai kondisi kesehatan Anda",
+      "3": "Didukung teknologi canggih seperti NGS, Microarray, dan PCR untuk hasil yang akurat dan terpercaya."
+    },
+    "imageAlt": "Ilustrasi Genomik"
+  },
+  "tesLaboratoriumHero": {
+    "title": "Tes Laboratorium",
+    "body": "Pemeriksaan kesehatan dengan menggunakan sampel darah, urine atau cairan tubuh lainnya yang dapat dimanfaatkan, antara lain untuk tujuan skrining, membantu diagnosis penyakit, memantau perjalanan penyakit dan menentukan prognosis.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Tes Laboratorium",
+    "imageSrc": "/images/tes-lab-pages/Hero-Banner.webp"
+  },
+  "pemeriksaanHero": {
+    "title": "Paket Pemeriksaan",
+    "body": "Paket pemeriksaan kami memberikan berbagai tes kesehatan yang lengkap dan terintegrasi, memudahkan Anda untuk mendapatkan gambaran menyeluruh tentang kondisi tubuh dan deteksi dini berbagai penyakit.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Paket Pemeriksaan",
+    "imageSrc": "/images/pemeriksaan-pages/Hero.webp"
+  },
+  "pemeriksaanPaket": {
+    "title": "Paket Pemeriksaan dan Panel Tematik",
+    "body": "Laboratorium Diagnos menawarkan Paket Pemeriksaan dan Panel Tematik yang mencakup rangkaian tes lengkap untuk menilai kondisi kesehatan secara menyeluruh. Dirancang sesuai kebutuhan spesifik seperti Paket Pemeriksaan Pranikah, Paket Pemeriksaan Kehamilan, Skrining Kanker, Fungsi Organ, Medical Check Up, hingga deteksi risiko penyakit. Paket ini memudahkan Anda mendapatkan hasil yang akurat dan terpadu dalam satu tes. Ideal untuk pemantauan rutin maupun deteksi dini masalah kesehatan.",
+    "imageAlt": "Paket Pemeriksaan dan Panel Tematik"
   }
 }

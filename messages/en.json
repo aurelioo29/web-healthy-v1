@@ -685,5 +685,44 @@
         "title": "Our home care team arrives according to the agreed schedule"
       }
     }
+  },
+  "genomikHero": {
+    "title": "Diagnos Genomics — DNAnswer",
+    "body": "DNAnswer is a service from Diagnos Genomics designed to detect changes in your genes and chromosomes. With cutting-edge technology and high quality standards, we are committed to delivering genetic test results that are accurate, reliable, and help you make more personal, well-targeted health decisions.",
+    "cta": "Learn More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Diagnos Genomics — DNAnswer",
+    "imageSrc": "/images/genomik-pages/Hero-Banner.webp"
+  },
+  "genomikQna": {
+    "title": "Why choose DNAnswer?",
+    "items": {
+      "0": "Helps you understand your health condition and your family’s",
+      "1": "Provides an overview of your personal health risks",
+      "2": "Enables your doctor to give personalized medical advice based on your health profile",
+      "3": "Powered by advanced technologies such as NGS, Microarray, and PCR for accurate, trustworthy results"
+    },
+    "imageAlt": "Genomics Illustration"
+  },
+  "tesLaboratoriumHero": {
+    "title": "Laboratory Tests",
+    "body": "Health assessments using blood, urine, or other body fluids that can be used for screening, aiding disease diagnosis, monitoring disease progression, and determining prognosis.",
+    "cta": "Learn More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Laboratory Tests",
+    "imageSrc": "/images/tes-lab-pages/Hero-Banner.webp"
+  },
+  "pemeriksaanHero": {
+    "title": "Health Check Packages",
+    "body": "Our checkup packages offer comprehensive and integrated health tests, making it easier for you to get a complete picture of your body and detect various conditions early.",
+    "cta": "Learn More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Health Check Packages",
+    "imageSrc": "/images/pemeriksaan-pages/Hero.webp"
+  },
+  "pemeriksaanPaket": {
+    "title": "Checkup Packages & Thematic Panels",
+    "body": "Diagnos Laboratories offers Checkup Packages and Thematic Panels that include a complete set of tests to assess overall health. Tailored to specific needs such as Premarital Screening, Pregnancy Packages, Cancer Screening, Organ Function, Medical Check-Up, and disease risk detection. These packages make it easy to obtain accurate, consolidated results in a single testing flow—ideal for routine monitoring as well as early detection.",
+    "imageAlt": "Checkup Packages and Thematic Panels"
   }
 }
