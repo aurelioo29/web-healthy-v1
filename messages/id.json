@@ -14,7 +14,10 @@
     "labTest": "Tes Laboratorium",
     "genomic": "Genomik",
     "homecare": "Homecare Service",
-    "panel": "Panel Pemeriksaan"
+    "panel": "Panel Pemeriksaan",
+    "csr": "CSR & Program Keberlanjutan",
+    "artikel": "Artikel",
+    "manajemen": "Manajemen Laboratorium Klinik"
   },
   "home": {
     "title": "Selamat Datang"

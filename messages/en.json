@@ -14,7 +14,10 @@
     "labTest": "Laboratory Tests",
     "genomic": "Genomics",
     "homecare": "Homecare Service",
-    "panel": "Test Panels"
+    "panel": "Test Panels",
+    "csr": "CSR and Sustainability Program",
+    "artikel": "Article",
+    "manajemen": "Clinical Laboratory Management"
   },
   "home": {
     "title": "Welcome"
