@@ -436,5 +436,60 @@
         "body": "By understanding genetic factors, DNAandMe helps you make smarter, more effective decisions when planning medical care, long-term health management, and choosing what’s best for your body."
       }
     }
+  },
+  "layananHero": {
+    "title": "Clinic Services",
+    "body": "Diagnos’ service development is grounded in medical professionalism to support healthcare delivery and provide a better service experience for patients.",
+    "cta": "See More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Doctor ready to provide consultation",
+    "imageSrc": "/images/layanan-pages/Hero-Layanan.webp"
+  },
+  "vaccine": {
+    "title": "Vaccination",
+    "body": "The vaccination service at Diagnos Healthcare Main Clinic provides optimal protection against various infectious diseases for children, adults, and seniors. With certified medical professionals and assured vaccine quality, the vaccination process is safe, comfortable, and follows medical standards. We provide the following vaccines:",
+    "items": {
+      "0": "Influenza Tetra Vaccine",
+      "1": "Polio IPV Vaccine",
+      "2": "Pneumonia Vaccine"
+    },
+    "cta": "Contact us for more information",
+    "ctaHref": "/kontak",
+    "imageAlt": "Healthcare professional administering a vaccine to a patient"
+  },
+  "vitamin": {
+    "title": "Vitamin Injection/Infusion",
+    "body": "The vitamin injection/infusion service at Diagnos Healthcare Main Clinic is designed to help meet daily nutritional needs more quickly and effectively—especially for those with busy lifestyles, in recovery, or experiencing prolonged fatigue. Performed safely and promptly by professional medical staff, our multivitamin injections are a practical solution to maintain your body’s vitality and fitness. We provide the following vitamins:",
+    "items": {
+      "0": "Prove C Injection",
+      "1": "Prove Vit Multivitamin Infusion",
+      "2": "Cernevit Multivitamin Infusion"
+    },
+    "cta": "Contact us for more information",
+    "ctaHref": "/kontak",
+    "imageAlt": "Vitamin injection/infusion"
+  },
+  "personalMedical": {
+    "title": "Personal Medical Check Up",
+    "body": "The Personal Medical Check Up service at Diagnos Healthcare Main Clinic offers comprehensive health assessments tailored to individual needs. Results are delivered as a personalized report with medical interpretations and relevant recommendations—helping you understand your condition and take early preventive action. Our Personal Medical Check Up products:",
+    "items": {
+      "0": "MCU Bronze",
+      "1": "MCU Silver",
+      "2": "MCU Gold",
+      "3": "MCU Diamond",
+      "4": "Smart MCU Basic",
+      "5": "Smart MCU Advance",
+      "6": "Smart MCU Premium"
+    },
+    "cta": "Contact us for more information",
+    "ctaHref": "/kontak",
+    "imageAlt": "Personal Medical Check Up"
+  },
+  "tesLaboratorium": {
+    "title": "Non-Laboratory Tests",
+    "body": "The Non-Laboratory Test service at Diagnos Healthcare Main Clinic includes various supporting examinations that do not involve lab sample analysis, such as radiology, echocardiography (ECG), ultrasound, treadmill test, spirometry, and audiometry. With modern facilities and professional staff, these services support comprehensive diagnosis and health monitoring.",
+    "cta": "Contact us for more information",
+    "ctaHref": "/kontak",
+    "imageAlt": "Non-Laboratory Tests"
   }
 }

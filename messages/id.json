@@ -436,5 +436,61 @@
         "body": "Dengan memahami faktor-faktor genetik, DNAandMe membantu Anda membuat keputusan yang lebih cerdas dan efektif dalam merencanakan perawatan medis, pengelolaan kesehatan jangka panjang, dan memilih langkah terbaik untuk tubuh Anda."
       }
     }
+  },
+  "layananHero": {
+    "title": "Layanan Klinik",
+    "body": "Pengembangan Layanan dari Diagnos berbasis profesionalisme yang dilakukan oleh tenaga medis untuk menunjang layanan kesehatan dan menghadirkan pengalaman pelayanan yang lebih baik bagi pasien.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Dokter siap melayani konsultasi",
+    "imageSrc": "/images/layanan-pages/Hero-Layanan.webp"
+  },
+  "vaccine": {
+    "title": "Vaksin",
+    "body": "Layanan vaksinasi di Klinik Utama Diagnos Healthcare memberikan perlindungan optimal terhadap berbagai penyakit menular, baik untuk anak-anak, dewasa, maupun lansia. Dengan vaksin yang terjamin kualitasnya dan tenaga medis profesional bersertifikasi, proses vaksinasi dilakukan secara aman, nyaman, dan sesuai standar medis. Beberapa vaksin yang kami sediakan:",
+    "items": {
+      "0": "Vaksin Influenza Tetra",
+      "1": "Vaksin Polio IPV",
+      "2": "Vaksin Pneumonia"
+    },
+    "cta": "Hubungi kami untuk informasi lebih lanjut",
+    "ctaHref": "/kontak",
+    "imageAlt": "Tenaga medis memberikan vaksin kepada pasien"
+  },
+  "vitamin": {
+    "title": "Injeksi/Infus Vitamin",
+    "body": "Layanan injeksi/infus vitamin di Klinik Utama Diagnos Healthcare dirancang untuk membantu memenuhi kebutuhan nutrisi harian tubuh secara lebih cepat dan efektif, terutama bagi Anda yang memiliki gaya hidup sibuk, sedang dalam masa pemulihan, atau mengalami kelelahan berkepanjangan. Dengan tindakan yang cepat, aman, dan ditangani oleh tenaga medis profesional, injeksi multivitamin kami menjadi solusi praktis untuk menjaga vitalitas dan kebugaran tubuh Anda. Beberapa vitamin yang kami sediakan:",
+    "items": {
+      "0": "Injeksi Prove C",
+      "1": "Infus Multivitamin Prove Vit",
+      "2": "Infus Multivitamin Cernevit"
+    },
+    "cta": "Hubungi kami untuk informasi lebih lanjut",
+    "ctaHref": "/kontak",
+    "imageAlt": "Injeksi/Infus Vitamin"
+  },
+  "personalMedical": {
+    "title": "Personal Medical Check Up",
+    "body": "Layanan Personal Medical Check Up di Klinik Utama Diagnos Healthcare menawarkan pemeriksaan kesehatan menyeluruh yang disesuaikan dengan kebutuhan individu. Hasilnya disajikan dalam bentuk laporan yang bersifat personal, lengkap dengan interpretasi medis dan rekomendasi yang relevan. Sehingga membantu Anda memahami kondisi tubuh dan mengambil langkah preventif lebih awal. Produk Personal Medical Check Up kami:",
+    "items": {
+      "0": "MCU Bronze",
+      "1": "MCU Silver",
+      "2": "MCU Gold",
+      "3": "MCU Diamond",
+      "4": "Smart MCU Basic",
+      "5": "Smart MCU Advance",
+      "6": "Smart MCU Premium"
+    },
+    "cta": "Hubungi kami untuk informasi lebih lanjut",
+    "ctaHref": "/kontak",
+    "imageAlt": "Personal Medical Check Up"
+  },
+
+  "tesLaboratorium": {
+    "title": "Tes Non Laboratorium",
+    "body": "Layanan Tes Non-Laboratorium di Klinik Utama Diagnos Healthcare mencakup berbagai pemeriksaan penunjang yang tidak melibatkan analisis sampel di laboratorium, seperti radiologi, echocardiography (EKG), USG, treadmill, spirometri, dan audiometri. Dengan fasilitas modern dan tenaga profesional, layanan ini mendukung proses diagnosa dan pemantauan kesehatan Anda secara komprehensif",
+    "cta": "Hubungi kami untuk informasi lebih lanjut",
+    "ctaHref": "/kontak",
+    "imageAlt": "Tes Non Laboratorium"
   }
 }
