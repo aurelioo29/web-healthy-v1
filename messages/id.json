@@ -319,5 +319,44 @@
       "item6": { "src": "/images/about-pages/6.webp", "alt": "Kegiatan 6" },
       "item7": { "src": "/images/about-pages/7.webp", "alt": "Kegiatan 7" }
     }
+  },
+  "kontak": {
+    "mapTitle": "Lokasi di Google Maps",
+    "addressLabel": "Gedung Graha Anam",
+    "addressFull": "Jl. Teuku Cik Ditiro No. 11 A-C Gondangdia Menteng - Jakarta Pusat",
+    "whatsappLabel": "Nomor Whatsapp",
+    "whatsappNumber": "08551500358",
+    "phoneLabel": "Nomor Telepon",
+    "phoneNumber": "1500358",
+    "emailLabel": "Email",
+    "emailAddress": "info@diagnos.co.id",
+    "form": {
+      "title": "Kami dengan senang hati membantu Anda",
+      "name": "Nama",
+      "email": "Email",
+      "phone": "Nomor HP",
+      "subject": "Perihal",
+      "subjects": {
+        "brand": "Kerjasama Brand",
+        "corporate": "Rujukan Laboratorium",
+        "general": "Layanan Korporat"
+      },
+      "placeholder": {
+        "name": "Masukkan nama Anda",
+        "email": "Masukkan email Anda",
+        "phone": "Masukkan nomor HP Anda",
+        "message": "Apa yang ingin Anda tanyakan?"
+      },
+      "submit": "Kirim",
+      "thanks": "Terima kasih! Pesan Anda sudah kami terima."
+    }
+  },
+  "branchHero": {
+    "title": "Cabang Diagnos Laboratorium dan Klinik Terdekat di Indonesia",
+    "body": "Diagnos Laboratorium berupaya memberikan pelayanan kesehatan kepada Masyarakat Indonesia melalui cabang dan jejaring terdekat dengan Anda.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Gedung Diagnos",
+    "imageSrc": "/images/lokasi-pages/hero.webp"
   }
 }

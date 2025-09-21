@@ -319,5 +319,44 @@
       "item6": { "src": "/images/about-pages/6.webp", "alt": "Activity 6" },
       "item7": { "src": "/images/about-pages/7.webp", "alt": "Activity 7" }
     }
+  },
+  "kontak": {
+    "mapTitle": "Location on Google Maps",
+    "addressLabel": "Graha Anam Building",
+    "addressFull": "Jl. Teuku Cik Ditiro No. 11 A–C, Gondangdia, Menteng – Central Jakarta",
+    "whatsappLabel": "WhatsApp Number",
+    "whatsappNumber": "08551500358",
+    "phoneLabel": "Phone Number",
+    "phoneNumber": "1500358",
+    "emailLabel": "Email",
+    "emailAddress": "info@diagnos.co.id",
+    "form": {
+      "title": "We’re happy to help you",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Mobile Number",
+      "subject": "Subject",
+      "subjects": {
+        "brand": "Brand Partnership",
+        "corporate": "Laboratory Referral",
+        "general": "Corporate Services"
+      },
+      "placeholder": {
+        "name": "Enter your name",
+        "email": "Enter your email",
+        "phone": "Enter your mobile number",
+        "message": "What would you like to ask?"
+      },
+      "submit": "Send",
+      "thanks": "Thanks! Your message has been received."
+    }
+  },
+  "branchHero": {
+    "title": "Diagnos Laboratory Branches and Clinics Near You in Indonesia",
+    "body": "Diagnos Laboratory strives to provide healthcare services to the people of Indonesia through branches and networks closest to you.",
+    "cta": "Learn More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Diagnos Building",
+    "imageSrc": "/images/lokasi-pages/hero.webp"
   }
 }
