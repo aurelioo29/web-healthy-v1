@@ -615,5 +615,75 @@
         "body": "Supporting health services such as vaccinations, vitamin infusions/injections, doctor consultations, as well as non-laboratory procedures including radiology, echocardiography (ECG), ultrasound, treadmill tests, spirometry, and audiometry."
       }
     }
+  },
+  "homecareHero": {
+    "title": "Homecare Service",
+    "body": "Your time matters — and so does your family’s health. Diagnos brings professional medical services straight to your home, delivering convenience, comfort, and safety to support your healthy, active lifestyle.",
+    "cta": "Learn More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Homecare Service",
+    "imageSrc": "/images/homecare-pages/Hero-Banner.webp"
+  },
+  "homecareInfo": {
+    "title": "What is Diagnos Homecare?",
+    "body": "Diagnos Homecare lets you get tested without leaving home. Contact us, and our professional team will come to collect your samples. It’s easy, safe, and comfortable.",
+    "cta": "Contact Us",
+    "ctaHref": "/kontak",
+    "imageAlt": "What is Diagnos Homecare?"
+  },
+  "homecareBenefit": {
+    "title": "What are the benefits of using Diagnos Homecare?",
+    "body": "Diagnos Homecare guarantees comfortable and safe service at your home with peace of mind.",
+    "cta": "Contact Us",
+    "ctaHref": "/kontak",
+    "cards": {
+      "card1": {
+        "title": "Practical & Time-Saving",
+        "desc": "No queues, no travel — just contact us and our team will come to your location.",
+        "icon": "/icons/homecare-pages/1.svg"
+      },
+      "card2": {
+        "title": "Comfort of Your Home",
+        "desc": "Examinations are done in a familiar environment, helping you feel calmer and more relaxed.",
+        "icon": "/icons/homecare-pages/2.svg"
+      },
+      "card3": {
+        "title": "Safe & Hygienic Process",
+        "desc": "Strict health protocols are applied on every visit to ensure your family’s safety.",
+        "icon": "/icons/homecare-pages/3.svg"
+      },
+      "card4": {
+        "title": "Professional Medical Team",
+        "desc": "Handled by trained and experienced staff, according to Diagnos service standards.",
+        "icon": "/icons/homecare-pages/4.svg"
+      },
+      "card5": {
+        "title": "Trusted Test Results",
+        "desc": "Your samples are processed in Diagnos laboratories with high accuracy and modern technology.",
+        "icon": "/icons/homecare-pages/5.svg"
+      }
+    }
+  },
+  "homecareHowTo": {
+    "title": "How do I book the Home Care service?",
+    "subtitle": "Make the most of our home care service: contact us and schedule a visit. Diagnos’s professional medical team will come to your home.",
+    "steps": {
+      "s1": {
+        "icon": "/icons/homecare-pages/6.svg",
+        "title": "Contact our WhatsApp / Call Center"
+      },
+      "s2": {
+        "icon": "/icons/homecare-pages/7.svg",
+        "title": "Customer service schedules your homecare via the nearest Diagnos branch"
+      },
+      "s3": {
+        "icon": "/icons/homecare-pages/8.svg",
+        "title": "Make the payment via bank transfer"
+      },
+      "s4": {
+        "icon": "/icons/homecare-pages/4.svg",
+        "title": "Our home care team arrives according to the agreed schedule"
+      }
+    }
   }
 }

@@ -616,5 +616,75 @@
         "body": "Layanan penunjang kesehatan seperti vaksinasi, infus/injeksi vitamin, konsultasi dokter, serta tindakan non laboratorium seperti radiologi, echocardiography (EKG), USG, treadmill, spirometri, dan audiometri"
       }
     }
+  },
+  "homecareHero": {
+    "title": "Homecare Service",
+    "body": "Waktu Anda berharga — begitu juga kesehatan keluarga. Diagnos hadir dengan layanan medis professional langsung ke rumah anda, memberikan kemudahan, kenyamanan dan keamanan demi mendukung gaya hidup aktif Anda yang sehat.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Homecare Service",
+    "imageSrc": "/images/homecare-pages/Hero-Banner.webp"
+  },
+  "homecareInfo": {
+    "title": "Apa itu Homecare Diagnos?",
+    "body": "Homecare Diagnos adalah layanan yang memudahkan Anda melakukan pemeriksaan tanpa harus keluar rumah. Hubungi kami, dan tim professional kami akan datang untuk pengambilan sampels. Mudah, aman dan nyaman",
+    "cta": "Hubungi kami",
+    "ctaHref": "/kontak",
+    "imageAlt": "Apa itu Homecare Diagnos?"
+  },
+  "homecareBenefit": {
+    "title": "Apa saja kah kelebihan menggunakan Layanan Homecare Diagnos?",
+    "body": "Homecare Diagnos menjamin pelayanan yang nyaman dan aman di rumah Anda tanpa rasa khawatir.",
+    "cta": "Hubungi kami",
+    "ctaHref": "/kontak",
+    "cards": {
+      "card1": {
+        "title": "Praktis dan Hemat Waktu",
+        "desc": "Tidak perlu antre atau bepergian — cukup hubungi kami, dan tim kami akan datang ke lokasi Anda",
+        "icon": "/icons/homecare-pages/1.svg"
+      },
+      "card2": {
+        "title": "Pelayanan Nyaman di Rumah",
+        "desc": "Pemeriksaan dilakukan di lingkungan yang familiar, membuat Anda merasa lebih tenang dan rileks",
+        "icon": "/icons/homecare-pages/2.svg"
+      },
+      "card3": {
+        "title": "Proses Aman dan Higienis",
+        "desc": "Protokol kesehatan ketat diterapkan dalam setiap kunjungan untuk menjamin keamanan Anda dan keluarga",
+        "icon": "/icons/homecare-pages/3.svg"
+      },
+      "card4": {
+        "title": "Tenaga Medis Profesional",
+        "desc": "Ditangani oleh petugas terlatih dan berpengalaman, sesuai standar layanan Diagnos.",
+        "icon": "/icons/homecare-pages/4.svg"
+      },
+      "card5": {
+        "title": "Hasil Pemeriksaan Terpercaya",
+        "desc": "Sampel Anda diproses di laboratorium Diagnos dengan akurasi tinggi dan teknologi mutakhir",
+        "icon": "/icons/homecare-pages/5.svg"
+      }
+    }
+  },
+  "homecareHowTo": {
+    "title": "Bagaimana cara memesan layanan Home Care?",
+    "subtitle": "Manfaatkan Layanan home care, hubungi kami dan jadwalkan kunjungan. Tim medis profesional Diagnos akan datang ke rumah Anda",
+    "steps": {
+      "s1": {
+        "icon": "/icons/homecare-pages/6.svg",
+        "title": "Hubungi WA/ Call center Diagnos"
+      },
+      "s2": {
+        "icon": "/icons/homecare-pages/7.svg",
+        "title": "Customer service akan menjadwalkan layanan homecare oleh cabang diagnos terdekat"
+      },
+      "s3": {
+        "icon": "/icons/homecare-pages/8.svg",
+        "title": "Lakukan pembayaran melalui transfer"
+      },
+      "s4": {
+        "icon": "/icons/homecare-pages/4.svg",
+        "title": "Petugas home care akan datang sesuai dengan jadwal yang telah disepakati"
+      }
+    }
   }
 }
