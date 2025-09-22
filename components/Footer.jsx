@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="mx-auto max-w-7xl px-4 pb-4">
       <div className="overflow-hidden rounded-3xl shadow-sm ring-1 ring-black/5">
         {/* TOP: info area (white) */}
-        <div className="bg-white px-6 py-8 md:px-10 md:py-10">
+        <div className="bg-white px-6 py-8 md:px-20 md:py-10">
           <div className="grid grid-cols-1 md:grid-cols-11">
             {/* Logo */}
             <div className="md:col-span-3">
@@ -22,9 +22,9 @@ export default function Footer() {
                 className="inline-flex items-center gap-3"
               >
                 <img
-                  src="/images/home-pages/logo.webp"
+                  src="/images/home-pages/logo.svg"
                   alt="logo-website-healthy"
-                  className="h-16 w-auto"
+                  className="h-24 w-auto"
                 />
               </Link>
             </div>

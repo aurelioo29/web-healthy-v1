@@ -87,7 +87,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-[#4698E3] text-white rounded-none md:rounded-2xl mx-auto max-w-7xl md:mt-3">
       {/* BAR: Mobile (Menu — Logo — Search) */}
-      <div className="mx-auto max-w-7xl px-4 py-3 md:hidden">
+      <div className="mx-auto max-w-7xl px-4 py-4 md:hidden">
         <div className="grid grid-cols-3 items-center">
           {/* Left: Menu */}
           <div className="flex">
@@ -103,7 +103,7 @@ export default function Navbar() {
           {/* Middle: Logo (centered) */}
           <div className="flex justify-center">
             <Link href={"/"} aria-label="Home">
-              <img src="/images/home-pages/logo.webp" alt="logo" />
+              <img src="/images/home-pages/logo.svg" alt="logo" className="h-16 w-auto"/>
             </Link>
           </div>
 
@@ -121,20 +121,20 @@ export default function Navbar() {
       </div>
 
       {/* BAR: Desktop (Logo — Nav — Actions) */}
-      <div className="mx-auto hidden max-w-7xl items-center justify-between px-6 py-3 md:flex">
+      <div className="mx-auto hidden max-w-7xl items-center justify-between px-10 py-4 md:flex">
         {/* Logo */}
         <Link href={"/"} aria-label="Home">
           <img
-            src="/images/home-pages/logo.webp"
+            src="/images/home-pages/logo.svg"
             alt="logo"
-            className="h-10 w-auto"
+            className="h-16 w-auto"
           />
         </Link>
 
         {/* Desktop nav */}
         <nav
           ref={navRef}
-          className="relative hidden items-center gap-6 md:flex"
+          className="relative hidden items-center gap-10 md:flex"
         >
           {NAV.map((item, i) => {
             const hasDrop = !!item.dropdown || !!item.dropdownItems;
@@ -149,7 +149,7 @@ export default function Navbar() {
                 <Link
                   href={item.href ?? pathname}
                   locale={locale}
-                  className="flex items-center gap-1 rounded px-2 py-1.5 text-sm font-medium hover:bg-white/10"
+                  className="flex items-center gap-1 rounded px-2 py-1.5 text-md font-medium hover:bg-white/10"
                   aria-haspopup={hasDrop ? "menu" : undefined}
                   aria-expanded={openIdx === i}
                 >
