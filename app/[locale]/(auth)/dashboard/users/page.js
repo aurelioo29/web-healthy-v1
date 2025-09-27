@@ -60,7 +60,7 @@ export default function DashboardManageUserPage() {
     <div className="max-w-7xl mx-auto p-2">
       <h1 className="text-2xl font-semibold text-slate-900">User Management</h1>
       <p className="mt-1 text-sm text-slate-600">
-        Tersambung ke BE • query: <code>?search=&amp;size=&amp;page=</code>
+        Membuat dan mengelola user yang dapat mengakses dashboard
       </p>
       <div className="mt-6">
         <UserTable />
