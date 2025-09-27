@@ -724,5 +724,21 @@
     "title": "Checkup Packages & Thematic Panels",
     "body": "Diagnos Laboratories offers Checkup Packages and Thematic Panels that include a complete set of tests to assess overall health. Tailored to specific needs such as Premarital Screening, Pregnancy Packages, Cancer Screening, Organ Function, Medical Check-Up, and disease risk detection. These packages make it easy to obtain accurate, consolidated results in a single testing flow—ideal for routine monitoring as well as early detection.",
     "imageAlt": "Checkup Packages and Thematic Panels"
+  },
+  "keberlanjutanHero": {
+    "title": "CSR & Sustainability Programs",
+    "body": "The implementation of Corporate Social Responsibility (CSR) has become an essential part of business sustainability. The Company recognizes that every achievement is inseparable from the support of many stakeholders—employees, the community, and the surrounding environment.",
+    "cta": "Learn More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Sustainability",
+    "imageSrc": "/images/keberlanjutan-pages/Hero-Banner.webp"
+  },
+  "csrListProgram": {
+    "title": "Sustainability",
+    "heading": "CSR & Sustainability Programs",
+    "subheading": "Our commitment to contributing to society through CSR programs and sustainability initiatives for a healthier and more prosperous future.",
+    "readMore": "Read More",
+    "prev": "Previous",
+    "next": "Next"
   }
 }

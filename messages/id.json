@@ -725,5 +725,44 @@
     "title": "Paket Pemeriksaan dan Panel Tematik",
     "body": "Laboratorium Diagnos menawarkan Paket Pemeriksaan dan Panel Tematik yang mencakup rangkaian tes lengkap untuk menilai kondisi kesehatan secara menyeluruh. Dirancang sesuai kebutuhan spesifik seperti Paket Pemeriksaan Pranikah, Paket Pemeriksaan Kehamilan, Skrining Kanker, Fungsi Organ, Medical Check Up, hingga deteksi risiko penyakit. Paket ini memudahkan Anda mendapatkan hasil yang akurat dan terpadu dalam satu tes. Ideal untuk pemantauan rutin maupun deteksi dini masalah kesehatan.",
     "imageAlt": "Paket Pemeriksaan dan Panel Tematik"
+  },
+  "keberlanjutanHero": {
+    "title": "CSR & Program Keberlanjutan",
+    "body": "Pelaksanaan tanggung jawab sosial perusahaan atau Corporate Social Responsibility (CSR) telah menjadi bagian penting dari keberlanjutan usaha. Dalam hal ini, Perseroan menyadari bahwa setiap keberhasilan yang diraih tidak terlepas dari dukungan banyak pihak, baik karyawan, masyarakat maupun lingkungan sekitar.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Keberlanjutan",
+    "imageSrc": "/images/keberlanjutan-pages/Hero-Banner.webp"
+  },
+  "csrListProgram": {
+    "title": "Keberlanjutan",
+    "heading": "CSR & Program Keberlanjutan",
+    "subheading": "Komitmen kami untuk berkontribusi pada masyarakat melalui program CSR dan inisiatif keberlanjutan demi masa depan yang lebih sehat dan sejahtera.",
+    "readMore": "Baca Selengkapnya",
+    "prev": "Sebelumnya",
+    "next": "Selanjutnya"
+  },
+  "artikelHero": {
+    "title": "Informasi Terpercaya untuk Anda",
+    "body": "Dapatkan wawasan terbaru seputar kesehatan, teknologi diagnostik, dan tips medis dari para ahli untuk membantu Anda menjalani hidup lebih sehat.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Artikel Kesehatan",
+    "imageSrc": "/images/artikel-pages/Hero-Banner.webp"
+  },
+  "artikelLatest": {
+    "title": "ARTIKEL",
+    "heading": "Artikel Terbaru",
+    "subheading": "Jelajahi artikel terbaru kami untuk mendapatkan informasi terkini seputar kesehatan, inovasi diagnostik, dan tips medis dari para ahli.",
+    "readMore": "Baca Selengkapnya"
+  },
+  "artikelCard": {
+    "title": "ARTIKEL",
+    "heading": "Artikel Diagnos Laboratorium",
+    "subheading": "Temukan artikel menarik seputar layanan dan inovasi di Diagnos Laboratorium untuk memahami lebih dalam tentang kesehatan dan teknologi diagnostik terbaru.",
+    "all": "Semua Artikel",
+    "readMore": "Baca Selengkapnya",
+    "prev": "Sebelumnya",
+    "next": "Selanjutnya"
   }
 }
