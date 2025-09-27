@@ -50,7 +50,7 @@ export default function Navbar() {
           {
             title: t("testTypes"),
             items: [
-              { label: t("consult"), href: "/konsultasi-dokter" },
+              { label: t("consult"), href: "/artikel-kesehatan" },
               { label: t("clinic"), href: "/layanan-klinik" },
               { label: t("corporate"), href: "/corporate-health-service" },
               { label: t("ecatalog"), href: "/produk/e-catalog" },
@@ -103,7 +103,11 @@ export default function Navbar() {
           {/* Middle: Logo (centered) */}
           <div className="flex justify-center">
             <Link href={"/"} aria-label="Home">
-              <img src="/images/home-pages/logo.svg" alt="logo" className="h-16 w-auto"/>
+              <img
+                src="/images/home-pages/logo.svg"
+                alt="logo"
+                className="h-16 w-auto"
+              />
             </Link>
           </div>
 
@@ -438,7 +442,7 @@ function ProductsMega({ t, locale }) {
         { label: t("panel"), href: "/panel-pemeriksaan" },
       ],
     },
-    { key: "consult", label: t("consult"), href: "/konsultasi-dokter" },
+    { key: "consult", label: t("consult"), href: "/artikel-kesehatan" },
     { key: "clinic", label: t("clinic"), href: "/layanan-klinik" },
     {
       key: "corporate",
