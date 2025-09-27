@@ -1,8 +1,10 @@
 import { Inter } from "next/font/google";
-import "../globals.css";
+import "../../globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollToTopLeft from "@/components/ScrollToTopLeft";
+import WhatsAppWidgetClient from "@/components/WhatsAppWidgetClient"; // ⬅️ wrapper client
 
 export const dynamicParams = false;
 const SUPPORTED_LOCALES = ["id", "en"];
@@ -11,10 +13,7 @@ export function generateStaticParams() {
   return SUPPORTED_LOCALES.map((locale) => ({ locale }));
 }
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -23,7 +22,6 @@ export const metadata = {
 
 export default async function RootLayout({ children, params }) {
   const { locale } = await params;
-  // pastikan file messages untuk setiap locale ADA
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
@@ -32,7 +30,14 @@ export default async function RootLayout({ children, params }) {
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Navbar />
           {children}
+          <ScrollToTopLeft offset={300} />
           <Footer />
+          <WhatsAppWidgetClient
+            phone="+6281234567890"
+            message="Halo sobat Diagnos 👋 ada yang bisa kami bantu?"
+            brand="#25D366"
+            label="WhatsApp"
+          />
         </NextIntlClientProvider>
       </body>
     </html>
