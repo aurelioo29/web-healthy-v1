@@ -1,0 +1,53 @@
+.quill-viewer .ql-align-justify {
+  text-align: justify !important;
+}
+.quill-viewer .ql-align-center {
+  text-align: center !important;
+}
+.quill-viewer .ql-align-right {
+  text-align: right !important;
+}
+
+.quill-viewer ol,
+.quill-viewer ul {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.quill-viewer li[data-list] {
+  list-style: none;
+  position: relative;
+}
+.quill-viewer li[data-list] > .ql-ui {
+  position: absolute;
+  left: -0.01rem;
+  width: 1rem;
+  text-align: right;
+  pointer-events: none;
+}
+.quill-viewer ol {
+  counter-reset: ql-li;
+}
+.quill-viewer li[data-list="ordered"] {
+  counter-increment: ql-li;
+}
+.quill-viewer li[data-list="ordered"] > .ql-ui::before {
+  content: counter(ql-li) ".";
+}
+.quill-viewer li[data-list="bullet"] > .ql-ui::before {
+  content: "•";
+}
+
+.quill-viewer h1,
+.quill-viewer h2,
+.quill-viewer h3 {
+  margin: 0.8rem 0 0.4rem;
+  font-weight: 700;
+}
+.quill-viewer p {
+  margin: 0.5rem 0;
+}
+
+.quill-viewer .ql-editor [style*="background-color"] {
+  background-color: transparent !important;
+}
