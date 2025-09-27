@@ -14,40 +14,61 @@ export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // helper untuk merangkum berbagai bentuk error dari BE
+  const getErrorText = (err) => {
+    const res = err?.response?.data;
+    if (!res) return err?.message || "Login failed";
+
+    const { errors, message, msg, error } = res;
+
+    if (errors) {
+      if (typeof errors === "string") return errors;
+
+      if (Array.isArray(errors)) {
+        const lines = errors
+          .map((e) => e?.msg || e?.message || e)
+          .filter(Boolean);
+        if (lines.length) return lines.join("\n");
+      }
+
+      if (typeof errors === "object") {
+        const lines = Object.values(errors)
+          .map((v) =>
+            typeof v === "string"
+              ? v
+              : v?.msg || v?.message || JSON.stringify(v)
+          )
+          .filter(Boolean);
+        if (lines.length) return lines.join("\n");
+      }
+    }
+
+    return message || msg || error || "Login failed";
+  };
+
+  const toast = (text, ok = true) =>
+    Toastify({
+      text,
+      duration: 3000,
+      close: true,
+      gravity: "top",
+      position: "right",
+      backgroundColor: ok ? "#4BB543" : "#FF4136",
+    }).showToast();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       setLoading(true);
-      const res = await axios.post("/auth/signin", {
-        username,
-        password,
-      });
+      const res = await axios.post("/auth/signin", { username, password });
 
-      localStorage.setItem("token", res.data.user.token);
-      // localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("token", res?.data?.user?.token);
 
-      Toastify({
-        text: "Login success!",
-        duration: 3000,
-        close: true,
-        gravity: "top",
-        position: "right",
-        backgroundColor: "#4BB543",
-      }).showToast();
-
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 100);
+      toast("Login success!", true);
+      setTimeout(() => router.push("/dashboard"), 100);
     } catch (err) {
-      Toastify({
-        text: err?.response?.data?.message || "Login failed",
-        duration: 3000,
-        close: true,
-        gravity: "top",
-        position: "right",
-        backgroundColor: "#FF4136",
-      }).showToast();
+      toast(getErrorText(err), false);
     } finally {
       setLoading(false);
     }
@@ -102,10 +123,6 @@ export default function LoginForm() {
 
         {/* Remember me + Forgot */}
         <div className="flex justify-end items-end text-sm text-gray-600">
-          {/* <label className="flex items-center gap-2">
-            <input type="checkbox" className="accent-[#4698E3]" />
-            Remember me
-          </label> */}
           <Link
             href="/forgot-password"
             className="text-[#4698E3] hover:underline"

@@ -1,7 +1,16 @@
-import ResetPasswordForm from "./ResetPasswordForm";
 import Image from "next/image";
+import ResetPasswordForm from "./ResetPasswordForm";
+import { redirect } from "next/navigation";
 
-export default function ResetPasswordPage() {
+export const dynamic = "force-dynamic";
+
+export default function ResetPasswordPage({ searchParams }) {
+  const email = searchParams?.email?.toString() || "";
+
+  if (!email) {
+    redirect("/forgot-password");
+  }
+
   return (
     <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-white">
       <div className="flex items-center justify-center p-8">
@@ -13,7 +22,7 @@ export default function ResetPasswordPage() {
             Enter the code and your new password.
           </p>
 
-          <ResetPasswordForm />
+          <ResetPasswordForm initialEmail={email} />
         </div>
       </div>
 

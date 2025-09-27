@@ -6,11 +6,11 @@ import { useSearchParams, useRouter } from "next/navigation";
 import axios from "@/lib/axios";
 import Toastify from "toastify-js";
 
-export default function ResetPasswordForm() {
+export default function ResetPasswordForm({ initialEmail }) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const email = searchParams.get("email") || "";
+  const email = searchParams.get("email") || initialEmail || "";
   const [code, setCode] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -19,25 +19,83 @@ export default function ResetPasswordForm() {
   const [cooldown, setCooldown] = useState(0);
   const [resending, setResending] = useState(false);
 
-  useEffect(() => {
-    let interval;
-    if (cooldown > 0) {
-      interval = setInterval(() => {
-        setCooldown((prev) => prev - 1);
-      }, 1000);
+  const toast = (text, ok = true) =>
+    Toastify({
+      text,
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      backgroundColor: ok ? "#4BB543" : "#FF4136",
+      close: true,
+    }).showToast();
+
+  const getErrorText = (err) => {
+    const res = err?.response?.data;
+    if (!res) return err?.message || "Something went wrong";
+
+    const { errors, message, msg, error } = res;
+    if (errors) {
+      if (typeof errors === "string") return errors;
+      if (Array.isArray(errors)) {
+        const lines = errors
+          .map((e) => e?.msg || e?.message || e)
+          .filter(Boolean);
+        if (lines.length) return lines.join("\n");
+      }
+      if (typeof errors === "object") {
+        const lines = Object.values(errors)
+          .map((v) =>
+            typeof v === "string"
+              ? v
+              : v?.msg || v?.message || JSON.stringify(v)
+          )
+          .filter(Boolean);
+        if (lines.length) return lines.join("\n");
+      }
     }
-    return () => clearInterval(interval);
+    return message || msg || error || "Something went wrong";
+  };
+
+  // helper cookie
+  const getCookie = (name) => {
+    if (typeof document === "undefined") return null;
+    const m = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+    return m ? decodeURIComponent(m[1]) : null;
+  };
+
+  // Proteksi URL: harus punya ?email=... dan cocok dengan cookie resetEmail
+  useEffect(() => {
+    const guard = () => {
+      if (!email) {
+        toast("Link is invalid or expired", false);
+        router.replace("/forgot-password");
+        return;
+      }
+      const fromCookie = getCookie("resetEmail");
+      if (!fromCookie || fromCookie !== email) {
+        toast("You need to request OTP again", false);
+        router.replace("/forgot-password");
+      }
+    };
+    guard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email]);
+
+  // timer untuk tombol resend
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const id = setInterval(() => setCooldown((s) => s - 1), 1000);
+    return () => clearInterval(id);
   }, [cooldown]);
 
   const handleReset = async (e) => {
     e.preventDefault();
 
-    if (!code || code.length !== 6) {
-      return showToast("Invalid code format (6 digits)", "error");
+    if (!/^\d{6}$/.test(code)) {
+      return toast("Invalid code format (6 digits)", false);
     }
-
     if (password !== confirmPassword) {
-      return showToast("Passwords do not match", "error");
+      return toast("Passwords do not match", false);
     }
 
     try {
@@ -50,17 +108,13 @@ export default function ResetPasswordForm() {
         confirmPassword,
       });
 
-      showToast(res.data.message, "success");
+      // hapus cookie proteksi setelah berhasil
+      document.cookie = "resetEmail=; Max-Age=0; Path=/; SameSite=Lax";
 
-      setTimeout(() => {
-        router.push("/login");
-      }, 1000);
+      toast(res?.data?.message || "Password updated", true);
+      setTimeout(() => router.push("/login"), 700);
     } catch (err) {
-      const errorData = err?.response?.data;
-      const msg = errorData?.errors
-        ? Object.values(errorData.errors).join("\n")
-        : errorData?.message || "Something went wrong";
-      showToast(msg, "error");
+      toast(getErrorText(err), false);
     } finally {
       setLoading(false);
     }
@@ -72,23 +126,13 @@ export default function ResetPasswordForm() {
     try {
       setResending(true);
       const res = await axios.post("/auth/forgot-password-code", { email });
-      showToast(res.data.message, "success");
-      setCooldown(300); // 5 mins
+      toast(res?.data?.message || "OTP resent", true);
+      setCooldown(300); // 5 menit
     } catch (err) {
-      showToast(err?.response?.data?.message || "Failed to resend", "error");
+      toast(getErrorText(err), false);
     } finally {
       setResending(false);
     }
-  };
-
-  const showToast = (msg, type) => {
-    Toastify({
-      text: msg,
-      duration: 3000,
-      gravity: "top",
-      position: "right",
-      backgroundColor: type === "error" ? "#FF4136" : "#4BB543",
-    }).showToast();
   };
 
   return (
@@ -98,7 +142,9 @@ export default function ResetPasswordForm() {
           type="text"
           placeholder="OTP Code"
           value={code}
-          onChange={(e) => setCode(e.target.value)}
+          onChange={(e) =>
+            setCode(e.target.value.replace(/\D/g, "").slice(0, 6))
+          }
           maxLength={6}
           className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#4698E3] outline-none"
           required

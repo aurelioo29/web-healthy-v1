@@ -11,6 +11,44 @@ export default function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const toast = (text, ok = true) =>
+    Toastify({
+      text,
+      duration: 3000,
+      gravity: "top",
+      position: "right",
+      backgroundColor: ok ? "#4BB543" : "#FF4136",
+      close: true,
+    }).showToast();
+
+  // satukan semua format error dari BE
+  const getErrorText = (err) => {
+    const res = err?.response?.data;
+    if (!res) return err?.message || "Failed to request OTP";
+
+    const { errors, message, msg, error } = res;
+    if (errors) {
+      if (typeof errors === "string") return errors;
+      if (Array.isArray(errors)) {
+        const lines = errors
+          .map((e) => e?.msg || e?.message || e)
+          .filter(Boolean);
+        if (lines.length) return lines.join("\n");
+      }
+      if (typeof errors === "object") {
+        const lines = Object.values(errors)
+          .map((v) =>
+            typeof v === "string"
+              ? v
+              : v?.msg || v?.message || JSON.stringify(v)
+          )
+          .filter(Boolean);
+        if (lines.length) return lines.join("\n");
+      }
+    }
+    return message || msg || error || "Failed to request OTP";
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,25 +57,18 @@ export default function ForgotPasswordForm() {
 
       const res = await axios.post("/auth/forgot-password-code", { email });
 
-      Toastify({
-        text: res.data.message,
-        duration: 3000,
-        gravity: "top",
-        position: "right",
-        backgroundColor: "#4BB543",
-      }).showToast();
+      // proteksi step berikutnya dengan cookie simple
+      document.cookie = `resetEmail=${encodeURIComponent(
+        email
+      )}; Max-Age=900; Path=/; SameSite=Lax`;
+
+      toast(res?.data?.message || "OTP sent to your email", true);
 
       setTimeout(() => {
-        router.push(`/reset-password?email=${email}`);
-      }, 1000);
+        router.push(`/reset-password?email=${encodeURIComponent(email)}`);
+      }, 600);
     } catch (err) {
-      Toastify({
-        text: err?.response?.data?.message || "Failed to request OTP",
-        duration: 3000,
-        gravity: "top",
-        position: "right",
-        backgroundColor: "#FF4136",
-      }).showToast();
+      toast(getErrorText(err), false);
     } finally {
       setLoading(false);
     }
