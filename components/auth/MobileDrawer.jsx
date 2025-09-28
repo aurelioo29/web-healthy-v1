@@ -101,6 +101,29 @@ export default function MobileDrawer({ open, onClose, role }) {
             </div>
           </details>
 
+          <details className="group">
+            <summary className="list-none cursor-pointer select-none px-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700 flex items-center justify-between">
+              <span>Lab Tests</span>
+              <ChevronDown className="h-4 w-4 transition group-open:rotate-180" />
+            </summary>
+            <div className="mt-1 ml-2 flex flex-col">
+              <Link
+                href="/dashboard/lab-tests/categories"
+                onClick={onClose}
+                className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
+              >
+                Manage Category Lab Tests
+              </Link>
+              <Link
+                href="/dashboard/lab-tests"
+                onClick={onClose}
+                className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
+              >
+                Manage Lab Tests
+              </Link>
+            </div>
+          </details>
+
           <Link
             href="/dashboard/csr"
             onClick={onClose}
