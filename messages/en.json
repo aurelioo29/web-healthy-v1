@@ -740,5 +740,9 @@
     "readMore": "Read More",
     "prev": "Previous",
     "next": "Next"
+  },
+  "tesLaboratoriumCard": {
+    "title": "Tests by Category",
+    "desc": "Our laboratory tests are designed to deliver fast, accurate, and reliable results, supporting more precise diagnosis and optimal treatment."
   }
 }

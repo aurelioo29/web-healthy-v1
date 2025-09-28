@@ -764,5 +764,9 @@
     "readMore": "Baca Selengkapnya",
     "prev": "Sebelumnya",
     "next": "Selanjutnya"
+  },
+  "tesLaboratoriumCard": {
+    "title": "Tes berdasarkan kategori",
+    "desc": "Tes di laboratorium kami dirancang untuk memberikan hasil yang cepat, tepat, dan terpercaya, mendukung diagnosis yang lebih akurat dan perawatan yang optimal."
   }
 }
