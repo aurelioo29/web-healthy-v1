@@ -7,12 +7,12 @@ import withAuth from "@/middleware/withAuth";
 
 function DashboardLayout({ children }) {
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-white">
       <NavbarAdmin />
-      <main className="pt-16 max-w-7xl mx-auto p-6">{children}</main>
+      <main className="flex-1 pt-16 md:pt-20">{children}</main>
       <ScrollToTopLeft offset={300} />
       <FooterAdmin owner="Aurelio" />
-    </>
+    </div>
   );
 }
 
