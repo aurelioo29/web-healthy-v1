@@ -752,5 +752,13 @@
     "ctaHref": "#selengkapnya",
     "imageAlt": "Product Catalog",
     "imageSrc": "/images/catalog-pages/Hero-Banner.webp"
+  },
+  "investorHero": {
+    "title": "Investor Relations",
+    "body": "TPT Diagnos Laboratorium Utama Tbk is a company committed to sustainable growth and transparency. We provide the latest and relevant information for investors, shareholders, and potential strategic partners.",
+    "cta": "See More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Investor Relations",
+    "imageSrc": "/images/investor-pages/Hero-Banner.webp"
   }
 }
