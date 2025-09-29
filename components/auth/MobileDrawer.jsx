@@ -124,6 +124,29 @@ export default function MobileDrawer({ open, onClose, role }) {
             </div>
           </details>
 
+          <details className="group">
+            <summary className="list-none cursor-pointer select-none px-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700 flex items-center justify-between">
+              <span>E-Catalog</span>
+              <ChevronDown className="h-4 w-4 transition group-open:rotate-180" />
+            </summary>
+            <div className="mt-1 ml-2 flex flex-col">
+              <Link
+                href="/dashboard/e-catalog/categories"
+                onClick={onClose}
+                className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
+              >
+                Manage Category E-Catalog
+              </Link>
+              <Link
+                href="/dashboard/e-catalog"
+                onClick={onClose}
+                className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
+              >
+                Manage E-Catalog
+              </Link>
+            </div>
+          </details>
+
           <Link
             href="/dashboard/csr"
             onClick={onClose}

@@ -122,6 +122,54 @@ function LabsMenu() {
   );
 }
 
+function CatalogMenu() {
+  const [open, setOpen] = useState(false);
+  const boxRef = useRef(null);
+  useClickAway(boxRef, () => setOpen(false));
+
+  return (
+    <div className="relative" ref={boxRef}>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="inline-flex items-center gap-1 hover:text-slate-900 text-slate-700 cursor-pointer"
+        aria-haspopup="menu"
+        aria-expanded={open}
+      >
+        E-Catalog
+        <ChevronDown
+          className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`}
+        />
+      </button>
+
+      {open && (
+        <div
+          role="menu"
+          className="absolute right-0 mt-2 w-64 rounded-2xl border border-slate-200 bg-white shadow-lg overflow-hidden z-50"
+        >
+          <div className="py-1">
+            <Link
+              href="/dashboard/e-catalog/categories"
+              className="block px-4 py-2.5 text-sm hover:bg-slate-50"
+              onClick={() => setOpen(false)}
+              role="menuitem"
+            >
+              Manage E-Catalog Categories
+            </Link>
+            <Link
+              href="/dashboard/e-catalog"
+              className="block px-4 py-2.5 text-sm hover:bg-slate-50"
+              onClick={() => setOpen(false)}
+              role="menuitem"
+            >
+              Manage E-Catalog
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function HamburgerButton({ open, onClick }) {
   return (
     <button
@@ -207,6 +255,7 @@ export default function NavbarAdmin() {
           <nav className="hidden md:flex items-center gap-6 text-sm">
             <ArticlesMenu />
             <LabsMenu />
+            <CatalogMenu />
             <Link
               href="/dashboard/csr"
               className="text-slate-700 hover:text-slate-900"
