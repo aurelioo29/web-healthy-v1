@@ -744,5 +744,13 @@
   "tesLaboratoriumCard": {
     "title": "Tests by Category",
     "desc": "Our laboratory tests are designed to deliver fast, accurate, and reliable results, supporting more precise diagnosis and optimal treatment."
+  },
+  "catalogHero": {
+    "title": "Explore a Variety of Featured Products in Our Catalog",
+    "body": "Discover a wide range of diagnostic products and services we offer—from laboratory tests to professional medical care—to support your overall health.",
+    "cta": "See More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Product Catalog",
+    "imageSrc": "/images/catalog-pages/Hero-Banner.webp"
   }
 }

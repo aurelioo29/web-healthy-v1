@@ -768,5 +768,13 @@
   "tesLaboratoriumCard": {
     "title": "Tes berdasarkan kategori",
     "desc": "Tes di laboratorium kami dirancang untuk memberikan hasil yang cepat, tepat, dan terpercaya, mendukung diagnosis yang lebih akurat dan perawatan yang optimal."
+  },
+  "catalogHero": {
+    "title": "Temukan Beragam Produk Unggulan dalam Katalog Kami",
+    "body": "Temukan berbagai produk dan layanan diagnostik unggulan yang kami tawarkan, mulai dari tes laboratorium hingga perawatan medis profesional, untuk mendukung kesehatan Anda secara menyeluruh.",
+    "cta": "Lihat Selengkapnya",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Katalog Produk",
+    "imageSrc": "/images/catalog-pages/Hero-Banner.webp"
   }
 }
