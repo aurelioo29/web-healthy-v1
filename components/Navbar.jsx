@@ -53,7 +53,7 @@ export default function Navbar() {
               { label: t("consult"), href: "/artikel-kesehatan" },
               { label: t("clinic"), href: "/layanan-klinik" },
               { label: t("corporate"), href: "/corporate-health-service" },
-              { label: t("ecatalog"), href: "/produk/e-catalog" },
+              { label: t("ecatalog"), href: "/e-catalog" },
             ],
           },
           {
@@ -449,7 +449,7 @@ function ProductsMega({ t, locale }) {
       label: t("corporate"),
       href: "/corporate-health-service",
     },
-    { key: "ecatalog", label: t("ecatalog"), href: "/produk/e-catalog" },
+    { key: "ecatalog", label: t("ecatalog"), href: "/e-catalog" },
   ];
 
   const dropdownVariants = {
