@@ -3,10 +3,8 @@ import "quill/dist/quill.snow.css";
 import "./QuillViewer.css";
 
 const ZONE = "Asia/Jakarta";
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000/api";
-const ASSET_BASE =
-  process.env.NEXT_PUBLIC_ASSET_BASE_URL || "http://localhost:4000/uploads";
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
+const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL;
 const BRAND = "#4698E3";
 
 async function getData(slug) {

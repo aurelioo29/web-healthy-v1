@@ -4,9 +4,9 @@ import "../../keberlanjutan/[slug]/QuillViewer.css";
 
 const ZONE = "Asia/Jakarta";
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:4000/api";
+  process.env.NEXT_PUBLIC_API_BASE_URL;
 const ASSET_BASE =
-  process.env.NEXT_PUBLIC_ASSET_BASE_URL || "http://localhost:4000/uploads";
+  process.env.NEXT_PUBLIC_ASSET_BASE_URL;
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 const BRAND = "#4698E3";
 
