@@ -760,5 +760,28 @@
     "ctaHref": "#selengkapnya",
     "imageAlt": "Investor Relations",
     "imageSrc": "/images/investor-pages/Hero-Banner.webp"
+  },
+  "artikelHero": {
+    "title": "Trusted Information for You",
+    "body": "Get the latest insights on health, diagnostic technologies, and expert medical tips to help you live healthier.",
+    "cta": "Learn More",
+    "ctaHref": "#selengkapnya",
+    "imageAlt": "Health Articles",
+    "imageSrc": "/images/artikel-pages/Hero-Banner.webp"
+  },
+  "artikelLatest": {
+    "title": "ARTICLES",
+    "heading": "Latest Articles",
+    "subheading": "Explore our newest articles for up-to-date information on health, diagnostic innovation, and expert medical tips.",
+    "readMore": "Read More"
+  },
+  "artikelCard": {
+    "title": "ARTICLES",
+    "heading": "Diagnos Laboratory Articles",
+    "subheading": "Discover engaging articles about our services and innovations at Diagnos Laboratory to better understand health and the latest diagnostic technologies.",
+    "all": "All Articles",
+    "readMore": "Read More",
+    "prev": "Previous",
+    "next": "Next"
   }
 }
