@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import api from "@/lib/axios";
@@ -13,6 +13,36 @@ import {
   ClipboardList,
   Shield,
 } from "lucide-react";
+
+/* ===== Chart.js setup ===== */
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
+import { Line, Bar, Doughnut } from "react-chartjs-2";
+import KPIGrid from "./KIPGrid";
+import ActivityBarChart from "./ActivityBarChart";
+import PieStatsGrid from "./PieStatsGrid";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 const BRAND = "#4698E3";
 
@@ -46,28 +76,6 @@ const Stat = ({ icon: Icon, label, value, hint }) => (
     </div>
   </Card>
 );
-
-const Sparkline = ({ points = [] }) => {
-  // points: array angka 0..100
-  const safe = points.length
-    ? points
-    : Array.from({ length: 10 }, (_, i) => (i % 3 ? 30 : 60));
-  return (
-    <div className="flex items-end gap-1 h-12">
-      {safe.map((n, i) => (
-        <div
-          key={i}
-          className="w-2 rounded-t"
-          style={{
-            height: `${Math.max(6, Math.min(100, n))}%`,
-            background: BRAND,
-            opacity: 0.25,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
 
 const RecentItem = ({ log }) => {
   const color =
@@ -127,11 +135,14 @@ export default function DashboardPage() {
   const [totalUsers, setTotalUsers] = useState(null);
   const [totalCSR, setTotalCSR] = useState(null);
   const [totalCategories, setTotalCategories] = useState(null);
-  // fake sparkline (isi real nanti dari /activity-logs atau /upload/csr histogram)
-  const [spark, setSpark] = useState([]);
 
   // recent
   const [recent, setRecent] = useState([]);
+
+  // for charts
+  const [csrList, setCsrList] = useState([]);
+  const [articleCats, setArticleCats] = useState([]); // [{name, count}]
+  const [activityLogs, setActivityLogs] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -139,8 +150,6 @@ export default function DashboardPage() {
       router.replace("/login");
       return;
     }
-
-    // 1) auth
     api
       .get("/auth/me", { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => setMe(res.data?.user))
@@ -157,7 +166,7 @@ export default function DashboardPage() {
         setLoading(true);
         setErr("");
 
-        const [u, c, cat, logs] = await Promise.all([
+        const [u, c, cat, logs, csrAll, catsAll] = await Promise.all([
           api.get("/users", { params: { size: 1, page: 1 } }).catch(() => null),
           api
             .get("/upload/csr", { params: { size: 1, page: 1 } })
@@ -167,8 +176,15 @@ export default function DashboardPage() {
             .catch(() => null),
           api
             .get("/activity-logs", {
-              params: { size: 5, sortBy: "created_at", sortDir: "DESC" },
+              // ambil banyak dikit biar line chartnya mantap
+              params: { size: 300, sortBy: "created_at", sortDir: "DESC" },
             })
+            .catch(() => null),
+          api
+            .get("/upload/csr", { params: { size: 500, page: 1 } })
+            .catch(() => null),
+          api
+            .get("/category-articles", { params: { size: 200, page: 1 } })
             .catch(() => null),
         ]);
 
@@ -180,10 +196,33 @@ export default function DashboardPage() {
 
         const logsData = logs?.data?.data?.logs || [];
         setRecent(
-          logsData.map((l) => ({ ...l, when: toJakartaHMS(l.created_at) }))
+          logsData
+            .slice(0, 5)
+            .map((l) => ({ ...l, when: toJakartaHMS(l.created_at) }))
         );
+        setActivityLogs(logsData);
 
-        setSpark(Array.from({ length: 16 }, (_, i) => 20 + ((i * 13) % 70)));
+        // csr list for doughnut (published vs draft)
+        const csrItems =
+          csrAll?.data?.data?.csr ||
+          csrAll?.data?.data?.items ||
+          csrAll?.data?.data?.rows ||
+          [];
+        setCsrList(csrItems);
+
+        // article categories for bar chart
+        const catRows =
+          catsAll?.data?.data?.categories ||
+          catsAll?.data?.data?.rows ||
+          catsAll?.data?.data ||
+          [];
+        // Kalau API belum kasih count per kategori, kita tetap render 0
+        setArticleCats(
+          catRows.map((r) => ({
+            name: r.name ?? "Unknown",
+            count: r.article_count ?? r.total_articles ?? r.count ?? 0,
+          }))
+        );
       } catch (e) {
         setErr(
           e?.response?.data?.message || e.message || "Gagal memuat dashboard"
@@ -195,6 +234,56 @@ export default function DashboardPage() {
     load();
     return () => (mounted = false);
   }, []);
+
+  /* ===== CHARTS: transformers ===== */
+  // Line: activity 14 hari terakhir (semua logs)
+  const activity14 = useMemo(() => {
+    const days = 14;
+    const labels = [];
+    const map = new Map();
+    // seed tanggal kosong dulu
+    for (let i = days - 1; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const key = d.toISOString().slice(0, 10);
+      labels.push(
+        new Intl.DateTimeFormat("id-ID", {
+          day: "2-digit",
+          month: "short",
+        }).format(d)
+      );
+      map.set(key, 0);
+    }
+    (activityLogs || []).forEach((l) => {
+      const key = new Date(l.created_at).toISOString().slice(0, 10);
+      if (map.has(key)) map.set(key, map.get(key) + 1);
+    });
+    return {
+      labels,
+      data: Array.from(map.values()),
+    };
+  }, [activityLogs]);
+
+  // Doughnut: CSR status split
+  const csrStatus = useMemo(() => {
+    let published = 0;
+    let draft = 0;
+    (csrList || []).forEach((x) =>
+      String(x.status) === "published" ? (published += 1) : (draft += 1)
+    );
+    return { published, draft };
+  }, [csrList]);
+
+  // Bar: Artikel per Kategori (top 8)
+  const catBar = useMemo(() => {
+    const sorted = [...(articleCats || [])]
+      .sort((a, b) => (b.count ?? 0) - (a.count ?? 0))
+      .slice(0, 8);
+    return {
+      labels: sorted.map((s) => s.name),
+      data: sorted.map((s) => s.count ?? 0),
+    };
+  }, [articleCats]);
 
   if (!me) {
     return (
@@ -246,37 +335,12 @@ export default function DashboardPage() {
       )}
 
       {/* Stats */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat
-          icon={Users2}
-          label="Total Users"
-          value={loading ? "…" : totalUsers}
-        />
-        <Stat
-          icon={FileText}
-          label="Total CSR"
-          value={loading ? "…" : totalCSR}
-        />
-        <Stat
-          icon={Tag}
-          label="Categories"
-          value={loading ? "…" : totalCategories}
-        />
-        <Card className="p-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="text-sm text-slate-600">This week activity</div>
-              <div className="text-lg font-semibold" style={{ color: BRAND }}>
-                {recent.length || 0} events
-              </div>
-            </div>
-            <Activity className="h-5 w-5" style={{ color: BRAND }} />
-          </div>
-          <div className="mt-3">
-            <Sparkline points={spark} />
-          </div>
-        </Card>
-      </div>
+      <KPIGrid />
+
+      {/* ===== CHARTS GRID ===== */}
+      <ActivityBarChart />
+
+      <PieStatsGrid />
 
       {/* Two columns */}
       <div className="grid gap-4 lg:grid-cols-12">
@@ -336,6 +400,31 @@ export default function DashboardPage() {
             >
               <Tag className="h-4 w-4" /> Manage Categories Articles
             </Link>
+            <Link
+              href="/dashboard/lab-tests"
+              className="rounded-lg px-3 py-2 ring-1 ring-slate-200 hover:bg-slate-50 text-sm inline-flex items-center gap-2"
+            >
+              <FileText className="h-4 w-4" /> Manage Lab Test Laboratorium
+            </Link>
+            <Link
+              href="/dashboard/lab-tests/categories"
+              className="rounded-lg px-3 py-2 ring-1 ring-slate-200 hover:bg-slate-50 text-sm inline-flex items-center gap-2"
+            >
+              <Tag className="h-4 w-4" /> Manage Categories Lab Test
+              Laboratorium
+            </Link>
+            <Link
+              href="/dashboard/e-catalog"
+              className="rounded-lg px-3 py-2 ring-1 ring-slate-200 hover:bg-slate-50 text-sm inline-flex items-center gap-2"
+            >
+              <FileText className="h-4 w-4" /> Manage E-Catalog
+            </Link>
+            <Link
+              href="/dashboard/e-catalog/categories"
+              className="rounded-lg px-3 py-2 ring-1 ring-slate-200 hover:bg-slate-50 text-sm inline-flex items-center gap-2"
+            >
+              <Tag className="h-4 w-4" /> Manage Categories E-Catalog
+            </Link>
             {me.role === "superadmin" && (
               <>
                 <Link
@@ -343,12 +432,6 @@ export default function DashboardPage() {
                   className="rounded-lg px-3 py-2 ring-1 ring-slate-200 hover:bg-slate-50 text-sm inline-flex items-center gap-2"
                 >
                   <Users2 className="h-4 w-4" /> Manage Users
-                </Link>
-                <Link
-                  href="/dashboard/activity-logs"
-                  className="rounded-lg px-3 py-2 ring-1 ring-slate-200 hover:bg-slate-50 text-sm inline-flex items-center gap-2"
-                >
-                  <Activity className="h-4 w-4" /> Activity Logs
                 </Link>
               </>
             )}
