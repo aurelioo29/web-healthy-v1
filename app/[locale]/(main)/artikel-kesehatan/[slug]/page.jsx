@@ -3,18 +3,27 @@ import "quill/dist/quill.snow.css";
 import "../../keberlanjutan/[slug]/QuillViewer.css";
 
 const ZONE = "Asia/Jakarta";
+
 const API_BASE =
-  process.env.NEXT_PUBLIC_API_BASE_URL;
-const ASSET_BASE =
-  process.env.NEXT_PUBLIC_ASSET_BASE_URL;
-const SITE = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "";
+
+const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
+const SITE = process.env.NEXT_PUBLIC_SITE_URL || "";
 const BRAND = "#4698E3";
+
+// helper join base + path
+const join = (base, path) =>
+  `${base.replace(/\/$/, "")}/${String(path).replace(/^\/+/, "")}`;
 
 /* ===== Fetch ===== */
 async function getData(slug) {
-  const res = await fetch(`${API_BASE}/upload/articles/${slug}`, {
-    next: { revalidate: 60 },
-  });
+  if (!API_BASE) {
+    throw new Error(
+      "Missing API base URL. Set NEXT_PUBLIC_API_URL or NEXT_PUBLIC_API_BASE_URL in .env.local"
+    );
+  }
+  const url = join(API_BASE, `/upload/articles/${encodeURIComponent(slug)}`);
+  const res = await fetch(url, { next: { revalidate: 60 } });
   if (!res.ok) return null;
   const json = await res.json();
   return json?.data || null;
@@ -22,25 +31,20 @@ async function getData(slug) {
 
 /* ===== Meta ===== */
 export async function generateMetadata({ params }) {
-  const { slug } = await params;
+  const { slug } = await params; // tidak perlu await
   const data = await getData(slug);
   if (!data) return { title: "Article Not Found" };
 
   const img =
     data.imageUrl ||
-    (data.image
-      ? `${ASSET_BASE.replace(/\/$/, "")}/${String(data.image).replace(
-          /^\/+/,
-          ""
-        )}`
-      : undefined);
+    (data.image && ASSET_BASE ? join(ASSET_BASE, data.image) : undefined);
 
   const description = (data.content || "")
     .replace(/<[^>]+>/g, " ")
     .trim()
     .slice(0, 160);
 
-  const canonical = `${SITE}/artikel-kesehatan/${slug}`;
+  const canonical = `${SITE.replace(/\/$/, "")}/artikel-kesehatan/${slug}`;
 
   return {
     title: data.title,
@@ -67,46 +71,35 @@ function fmtLong(iso) {
   }).format(d);
 }
 
-/* ===== Share Buttons (pakai aset dari /public/icons/sosmed) ===== */
+/* ===== Share Buttons ===== */
 function ShareButtons({ url, title }) {
   const U = encodeURIComponent(url);
   const T = encodeURIComponent(title);
-
   const buttons = [
     {
       href: `https://www.facebook.com/sharer/sharer.php?u=${U}`,
       bg: "#1877F2",
-      label: "Share",
       icon: "/icons/sosmed/facebook.svg",
-      aria: "Share to Facebook",
     },
     {
       href: `https://wa.me/?text=${encodeURIComponent(`${title} — ${url}`)}`,
       bg: "#25D366",
-      label: "Share",
       icon: "/icons/sosmed/whatsApp.svg",
-      aria: "Share to WhatsApp",
     },
     {
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${U}`,
       bg: "#0A66C2",
-      label: "Share",
       icon: "/icons/sosmed/linkedin.svg",
-      aria: "Share to LinkedIn",
     },
     {
       href: `https://twitter.com/intent/tweet?url=${U}&text=${T}`,
       bg: "#000000",
-      label: "Share",
       icon: "/icons/sosmed/twitter.svg",
-      aria: "Share to X",
     },
     {
       href: `mailto:?subject=${T}&body=${U}`,
       bg: "#EA4335",
-      label: "Share",
       icon: "/icons/sosmed/mail.svg",
-      aria: "Share via Email",
     },
   ];
 
@@ -137,15 +130,10 @@ export default async function ArticleDetailPage({ params }) {
 
   const img =
     data.imageUrl ||
-    (data.image
-      ? `${ASSET_BASE.replace(/\/$/, "")}/${String(data.image).replace(
-          /^\/+/,
-          ""
-        )}`
-      : "");
+    (data.image && ASSET_BASE ? join(ASSET_BASE, data.image) : "");
 
   const dateStr = data?.date ? fmtLong(data.date) : null;
-  const canonical = `${SITE}/artikel-kesehatan/${slug}`;
+  const canonical = `${SITE.replace(/\/$/, "")}/artikel-kesehatan/${slug}`;
 
   return (
     <main className="mx-auto max-w-6xl px-4 md:px-6 py-10 md:py-12">
@@ -178,7 +166,6 @@ export default async function ArticleDetailPage({ params }) {
         />
       </div>
 
-      {/* Share row (pakai aset svg & animasi hover naik) */}
       <ShareButtons url={canonical} title={data.title} />
     </main>
   );
