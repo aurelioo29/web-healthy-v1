@@ -783,5 +783,9 @@
     "readMore": "Read More",
     "prev": "Previous",
     "next": "Next"
+  },
+  "beritaHome": {
+    "title": "Read Our Latest Articles",
+    "desc": "Trusted Health Articles Just for You"
   }
 }

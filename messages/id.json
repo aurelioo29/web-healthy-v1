@@ -784,5 +784,9 @@
     "ctaHref": "#selengkapnya",
     "imageAlt": "Hubungan Investor",
     "imageSrc": "/images/investor-pages/Hero-Banner.webp"
+  },
+  "beritaHome": {
+    "title": "Baca Artikel Terbaru",
+    "desc": "Artikel Kesehatan Terpercaya Hanya Untukmu"
   }
 }

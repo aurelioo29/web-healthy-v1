@@ -1,6 +1,7 @@
 "use client";
 
 import BannerHero from "@/components/BannerHero";
+import BeritaHome from "@/components/BeritaHome";
 import EventPromo from "@/components/EventPromo";
 import LayananFreemode from "@/components/LayananFreemode";
 import ProdukLayanan from "@/components/ProdukLayanan";
@@ -25,7 +26,7 @@ export default function Home() {
 
       <TestimoniVideo />
 
-      {/* <h1>{t("title")}</h1> */}
+      <BeritaHome />
     </div>
   );
 }
