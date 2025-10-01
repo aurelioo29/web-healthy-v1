@@ -1,32 +1,68 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, A11y } from "swiper/modules";
 import "swiper/css";
+import api from "@/lib/axios";
+
+/* ===== constants & helpers ===== */
+const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
+const PLACEHOLDER = "/images/catalog-pages/placeholder.png";
+const DETAIL_PREFIX = "/e-catalog"; // ⬅️ ganti ke "/catalogs" kalau rute detail kamu itu
+
+const imgUrl = (image, imageUrlFromBE, folder = "catalogs") => {
+  if (imageUrlFromBE) return imageUrlFromBE;
+  if (!image) return PLACEHOLDER;
+  if (/^https?:\/\//i.test(image)) return image;
+  if (!ASSET_BASE) return PLACEHOLDER;
+  const rel = image.includes("/") ? image : `${folder}/${image}`;
+  return `${ASSET_BASE.replace(/\/$/, "")}/${rel.replace(/^\/+/, "")}`;
+};
+
+const stripHtml = (html = "") =>
+  String(html).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+
+const makeExcerpt = (html = "", n = 140) => {
+  const s = stripHtml(html);
+  return s.length > n ? `${s.slice(0, n)}…` : s;
+};
+
+// IDR tanpa ,00
+const money = (amount, currency = "IDR") => {
+  const noFraction = ["IDR", "JPY", "KRW"].includes(
+    String(currency || "").toUpperCase()
+  );
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency,
+    minimumFractionDigits: noFraction ? 0 : 2,
+    maximumFractionDigits: noFraction ? 0 : 2,
+  }).format(Number(amount || 0));
+};
+
+/* ===================================================== */
 
 export default function LayananFreemode() {
   const t = useTranslations("layanan");
 
+  // fallback konten (kalau API kosong/error)
   const keys = ["card1", "card2", "card3", "card4", "card5"];
-
-  // helper aman: coba key, kalau missing jangan error
-  const safeT = (key) => {
+  const safeT = (k) => {
     try {
-      return t(key);
+      return t(k);
     } catch {
       return undefined;
     }
   };
-
-  const cards = keys.map((k) => {
+  const fallbackCards = keys.map((k) => {
     const base = `card.${k}`;
     const desc = safeT(`${base}.desc`) ?? safeT(`${base}.description`) ?? "";
-
     return {
+      id: `fallback-${k}`,
       title: safeT(`${base}.title`) ?? "",
       desc,
       img: safeT(`${base}.img`) ?? "",
@@ -34,8 +70,57 @@ export default function LayananFreemode() {
       href: safeT(`${base}.href`) ?? "#",
       price: safeT(`${base}.price`) ?? "",
       disc: safeT(`${base}.disc`) ?? "",
+      isFallback: true,
     };
   });
+
+  // state dari API E-Catalog
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        setLoading(true);
+        const { data } = await api.get("/upload/catalogs", {
+          params: { status: "published", size: 20, page: 1 },
+        });
+        if (!alive) return;
+        const list = data?.data?.catalogs || data?.data || [];
+        const mapped = list.map((it) => {
+          const po = Number(it.price_original || 0);
+          const pd = Number(it.price_discount || 0);
+          const showDisc = pd > 0 && pd < po;
+          return {
+            id: it.id,
+            title: it.title,
+            desc: makeExcerpt(it.content || it.excerpt || "", 120),
+            img: imgUrl(it.image, it.imageUrl),
+            alt: it.title,
+            href: `${DETAIL_PREFIX}/${it.slug}`,
+            price: money(showDisc ? pd : po, it.currency || "IDR"),
+            disc: showDisc ? money(po, it.currency || "IDR") : "",
+            isFallback: false,
+          };
+        });
+        setRows(mapped);
+      } catch {
+        setRows([]); // biar pakai fallback
+      } finally {
+        if (alive) setLoading(false);
+      }
+    })();
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  // pilih data tampil: API > fallback
+  const cards = useMemo(
+    () => (rows && rows.length ? rows : fallbackCards),
+    [rows, fallbackCards]
+  );
 
   return (
     <section className="mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
@@ -43,6 +128,11 @@ export default function LayananFreemode() {
         <h2 className="text-2xl md:text-3xl font-bold">{t("title")}</h2>
         <p className="mt-4 text-[#667289]">{t("description")}</p>
       </div>
+
+      {/* skeleton garis kecil biar ada feedback saat loading */}
+      {loading && (
+        <div className="mt-6 h-1 w-24 mx-auto rounded bg-slate-200 animate-pulse" />
+      )}
 
       <div className="mt-8">
         <Swiper
@@ -54,9 +144,9 @@ export default function LayananFreemode() {
           spaceBetween={16}
           className="!pb-2"
         >
-          {cards.map((c, i) => (
+          {cards.map((c) => (
             <SwiperSlide
-              key={i}
+              key={c.id}
               className="!w-[280px] sm:!w-[300px] md:!w-[340px] lg:!w-[360px]"
             >
               <Card {...c} />
@@ -68,21 +158,26 @@ export default function LayananFreemode() {
   );
 }
 
-function Card({ title, desc, img, alt, href, price, disc }) {
+/* ===== Card ===== */
+function Card({ title, desc, img, alt, href, price, disc, isFallback }) {
   return (
     <article className="h-full overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-lg flex flex-col">
-      {/* Gambar fix 1:1 */}
+      {/* Gambar kotak 1:1 */}
       <div className="relative aspect-square w-full">
         <Image
-          src={img}
-          alt={alt}
+          src={img || PLACEHOLDER}
+          alt={alt || title}
           fill
           sizes="(max-width: 768px) 80vw, 25vw"
           className="object-cover"
+          onError={(e) => {
+            // fallback ke placeholder bila gagal load
+            (e.currentTarget).src = PLACEHOLDER;
+          }}
         />
       </div>
 
-      {/* Body fleksibel: isi tumbuh, CTA nempel bawah */}
+      {/* Body fleksibel */}
       <div className="flex grow flex-col p-4">
         {/* TITLE: clamp 2 baris + tinggi konstan */}
         <h3 className="text-base md:text-lg font-semibold text-center leading-6 line-clamp-2 min-h-[48px]">
@@ -94,7 +189,7 @@ function Card({ title, desc, img, alt, href, price, disc }) {
           {desc}
         </p>
 
-        {/* PRICE AREA: selalu ada, tapi pakai placeholder invisible agar tinggi sama */}
+        {/* PRICE AREA */}
         <div className="my-5 flex items-baseline justify-center gap-2 min-h-[24px]">
           {disc ? (
             <span className="text-sm text-red-500 line-through">{disc}</span>
@@ -113,9 +208,9 @@ function Card({ title, desc, img, alt, href, price, disc }) {
           href={href}
           className="mt-auto inline-flex w-full items-center justify-center rounded-xl
                      bg-[#4698E3] px-4 py-2 text-sm font-medium text-white
-                     transition hover:bg-[#4698E3]"
+                     transition hover:opacity-95"
         >
-          Lihat Produk
+          {isFallback ? "Lihat Produk" : "View Details"}
         </Link>
       </div>
     </article>
