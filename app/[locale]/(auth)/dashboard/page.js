@@ -211,16 +211,17 @@ export default function DashboardPage() {
         setCsrList(csrItems);
 
         // article categories for bar chart
-        const catRows =
-          catsAll?.data?.data?.categories ||
-          catsAll?.data?.data?.rows ||
-          catsAll?.data?.data ||
+        let catRows =
+          catsAll?.data?.data?.categories ??
+          catsAll?.data?.data?.rows ??
+          catsAll?.data?.data ??
           [];
-        // Kalau API belum kasih count per kategori, kita tetap render 0
+
+        if (!Array.isArray(catRows)) catRows = [];
         setArticleCats(
           catRows.map((r) => ({
             name: r.name ?? "Unknown",
-            count: r.article_count ?? r.total_articles ?? r.count ?? 0,
+            count: Number(r.article_count ?? r.total_articles ?? r.count ?? 0),
           }))
         );
       } catch (e) {
