@@ -62,7 +62,7 @@ export default function DoctorsSection() {
     <section className="py-12 md:py-16">
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <h2 className="text-3xl font-bold md:text-4xl">
-          Dokter dari Diagnos Laboratorium
+          Dokter dari Royal Klinik
         </h2>
 
         {/* Mobile: Swiper */}

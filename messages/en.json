@@ -59,25 +59,25 @@
   "footer": {
     "headquarters": {
       "title": "Headquarters",
-      "name": "Graham Anam Building",
-      "address": "Jl. Teuku Cik Ditiro No. 11 AC Gondangdia\nMenteng – Central Jakarta 10350"
+      "name": "Royal Klinik",
+      "address": "Komplek Cemara Asri\nJl. Boulevard Soutthern Lake Residence R3 1-3"
     },
     "menu": {
       "title": "Menu",
       "about": "About Us",
-      "ecatalogue": "E-Catalogue"
+      "ecatalogue": "E-Catalog"
     },
     "callcenter": {
       "title": "Call Center",
       "alt": "Diagnos Call Center 1500-358"
     },
     "download": {
-      "title": "Download the DNAandMe App at"
+      "title": "Download aplikasi royal klinik di"
     },
     "social": {
       "title": "Stay Connected"
     },
-    "copyright": "PT Diagnos Laboratorium Utama, Tbk"
+    "copyright": "Royal Klinik"
   },
   "eventPromo": {
     "title": "Latest Events & Promos for You",
@@ -446,50 +446,64 @@
     "imageSrc": "/images/layanan-pages/Hero-Layanan.webp"
   },
   "vaccine": {
-    "title": "Vaccination",
-    "body": "The vaccination service at Diagnos Healthcare Main Clinic provides optimal protection against various infectious diseases for children, adults, and seniors. With certified medical professionals and assured vaccine quality, the vaccination process is safe, comfortable, and follows medical standards. We provide the following vaccines:",
+    "title": "Kamar Eksekutif",
+    "body": "Fasilitas :",
     "items": {
-      "0": "Influenza Tetra Vaccine",
-      "1": "Polio IPV Vaccine",
-      "2": "Pneumonia Vaccine"
+      "0": "Tempat Tidur Elektrik",
+      "1": "Kamar Tidur Tamu",
+      "2": "Meja Makan",
+      "3": "Sofa",
+      "4": "Tv LCD 42'",
+      "5": "Air Panas",
+      "6": "Mini Bar",
+      "7": "Kulkas",
+      "8": "Air Conditioner",
+      "9": "Dispenser"
     },
-    "cta": "Contact us for more information",
-    "ctaHref": "/kontak",
-    "imageAlt": "Healthcare professional administering a vaccine to a patient"
+    "cta": "Hubungi kami untuk informasi lebih lanjut",
+    "ctaHref": "https://wa.me/6281161617181",
+    "imageAlt": "Tenaga medis memberikan vaksin kepada pasien"
   },
   "vitamin": {
-    "title": "Vitamin Injection/Infusion",
-    "body": "The vitamin injection/infusion service at Diagnos Healthcare Main Clinic is designed to help meet daily nutritional needs more quickly and effectively—especially for those with busy lifestyles, in recovery, or experiencing prolonged fatigue. Performed safely and promptly by professional medical staff, our multivitamin injections are a practical solution to maintain your body’s vitality and fitness. We provide the following vitamins:",
+    "title": "Kamar Super VIP",
+    "body": "Fasilitas :",
     "items": {
-      "0": "Prove C Injection",
-      "1": "Prove Vit Multivitamin Infusion",
-      "2": "Cernevit Multivitamin Infusion"
+      "0": "Tempat Tidur Elektrik",
+      "1": "Meja Makan",
+      "2": "Sofa",
+      "3": "TV LCD 32'",
+      "4": "Air Panas",
+      "5": "Mini Bar",
+      "6": "Kulkas",
+      "7": "Air Conditioner",
+      "8": "Dispenser"
     },
-    "cta": "Contact us for more information",
-    "ctaHref": "/kontak",
-    "imageAlt": "Vitamin injection/infusion"
+    "cta": "Hubungi kami untuk informasi lebih lanjut",
+    "ctaHref": "https://wa.me/6281161617181",
+    "imageAlt": "Injeksi/Infus Vitamin"
   },
   "personalMedical": {
-    "title": "Personal Medical Check Up",
-    "body": "The Personal Medical Check Up service at Diagnos Healthcare Main Clinic offers comprehensive health assessments tailored to individual needs. Results are delivered as a personalized report with medical interpretations and relevant recommendations—helping you understand your condition and take early preventive action. Our Personal Medical Check Up products:",
+    "title": "Kamar VIP",
+    "body": "Fasilitas :",
     "items": {
-      "0": "MCU Bronze",
-      "1": "MCU Silver",
-      "2": "MCU Gold",
-      "3": "MCU Diamond",
-      "4": "Smart MCU Basic",
-      "5": "Smart MCU Advance",
-      "6": "Smart MCU Premium"
+      "0": "Tempat Tidur Elektrik",
+      "1": "Meja Makan",
+      "2": "Sofa",
+      "3": "TV LCD 32'",
+      "4": "Air Panas",
+      "5": "Mini Bar",
+      "6": "Kulkas",
+      "7": "Air Conditioner"
     },
-    "cta": "Contact us for more information",
-    "ctaHref": "/kontak",
+    "cta": "Hubungi kami untuk informasi lebih lanjut",
+    "ctaHref": "https://wa.me/6281161617181",
     "imageAlt": "Personal Medical Check Up"
   },
   "tesLaboratorium": {
     "title": "Non-Laboratory Tests",
     "body": "The Non-Laboratory Test service at Diagnos Healthcare Main Clinic includes various supporting examinations that do not involve lab sample analysis, such as radiology, echocardiography (ECG), ultrasound, treadmill test, spirometry, and audiometry. With modern facilities and professional staff, these services support comprehensive diagnosis and health monitoring.",
     "cta": "Contact us for more information",
-    "ctaHref": "/kontak",
+    "ctaHref": "https://wa.me/6281161617181",
     "imageAlt": "Non-Laboratory Tests"
   },
   "corporateHero": {

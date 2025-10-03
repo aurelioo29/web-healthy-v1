@@ -12,12 +12,12 @@ export default function VaccineSection() {
       <div className="mx-auto grid max-w-7xl items-start gap-6 px-4 md:grid-cols-2 md:gap-8 md:px-6">
         <div className="relative md:order-1">
           <div
-            className="absolute -inset-3 rounded-3xl bg-[#4698E3]/15 blur-2xl"
+            className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468]/15 blur-2xl"
             aria-hidden
           />
           <div className="relative overflow-hidden rounded-3xl ring-1 ring-black/5">
             <Image
-              src="/images/layanan-pages/Vaksin.webp"
+              src="/images/layanan-pages/kamar-eksekutif.png"
               alt={t("imageAlt")}
               width={1280}
               height={860}
@@ -28,7 +28,7 @@ export default function VaccineSection() {
         </div>
 
         <div className="md:hidden md:order-2">
-          <div className="w-full rounded-xl bg-gradient-to-r from-[#63b3f2] to-[#4698E3] py-3 text-center font-semibold text-white shadow-lg">
+          <div className="w-full rounded-xl bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] py-3 text-center font-semibold text-white shadow-lg">
             {t("title")}
           </div>
         </div>
@@ -36,7 +36,7 @@ export default function VaccineSection() {
         <div className="relative md:order-2 my-auto">
           {/* DESKTOP: pill judul mengambang */}
           <div className="pointer-events-none absolute -top-7 right-8 z-10 hidden md:block">
-            <span className="inline-block rounded-lg bg-gradient-to-r from-[#63b3f2] to-[#4698E3] px-5 py-2 text-2xl font-semibold text-white shadow-lg">
+            <span className="inline-block rounded-lg bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-5 py-2 text-2xl font-semibold text-white shadow-lg">
               {t("title")}
             </span>
           </div>
@@ -47,16 +47,23 @@ export default function VaccineSection() {
               {t("body")}
             </p>
 
-            <ol className="mt-6 list-decimal space-y-3 pl-5 text-slate-900">
+            <ol className="mt-6 list-disc space-y-2 pl-5 text-slate-900">
               <li>{t("items.0")}</li>
               <li>{t("items.1")}</li>
               <li>{t("items.2")}</li>
+              <li>{t("items.3")}</li>
+              <li>{t("items.4")}</li>
+              <li>{t("items.5")}</li>
+              <li>{t("items.6")}</li>
+              <li>{t("items.7")}</li>
+              <li>{t("items.8")}</li>
+              <li>{t("items.9")}</li>
             </ol>
 
-            <div className="mt-16">
+            <div className="mt-10">
               <Link
                 href={t("ctaHref")}
-                className="inline-flex items-center justify-center rounded-lg bg-[#4698E3] px-5 py-2.5 text-white transition hover:bg-[#3b86cf]"
+                className="inline-flex items-center justify-center rounded-lg bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-5 py-2.5 text-white transition "
               >
                 {t("cta")}
               </Link>

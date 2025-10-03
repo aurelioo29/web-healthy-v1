@@ -152,7 +152,7 @@ function MotionCard({ title, desc, img, alt, href }) {
           <motion.span whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
             <Link
               href={href}
-              className="inline-block rounded-xl bg-[#4698E3] px-4 py-2 text-sm font-medium text-white"
+              className="inline-block rounded-xl bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-4 py-2 text-sm font-medium text-white"
             >
               Lihat Selengkapnya
             </Link>

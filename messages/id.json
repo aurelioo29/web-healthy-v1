@@ -59,25 +59,25 @@
   "footer": {
     "headquarters": {
       "title": "Headquarters",
-      "name": "Graham Anam Building",
-      "address": "Jl. Teuku Cik Ditiro No. 11 AC Gondangdia\nMenteng – Jakarta Pusat 10350"
+      "name": "Royal Klinik",
+      "address": "Komplek Cemara Asri\nJl. Boulevard Soutthern Lake Residence R3 1-3"
     },
     "menu": {
       "title": "Menu",
       "about": "Tentang Kami",
-      "ecatalogue": "E-Catalogue"
+      "ecatalogue": "E-Catalog"
     },
     "callcenter": {
       "title": "Call Center",
       "alt": "Call Center Diagnos 1500-358"
     },
     "download": {
-      "title": "Download aplikasi DNAandMe di"
+      "title": "Download aplikasi royal klinik di"
     },
     "social": {
       "title": "Tetap Terhubung"
     },
-    "copyright": "PT Diagnos Laboratorium Utama, Tbk"
+    "copyright": "Royal Klinik"
   },
   "eventPromo": {
     "title": "Event & Promo Terbaru Buat Anda",
@@ -446,43 +446,57 @@
     "imageSrc": "/images/layanan-pages/Hero-Layanan.webp"
   },
   "vaccine": {
-    "title": "Vaksin",
-    "body": "Layanan vaksinasi di Klinik Utama Diagnos Healthcare memberikan perlindungan optimal terhadap berbagai penyakit menular, baik untuk anak-anak, dewasa, maupun lansia. Dengan vaksin yang terjamin kualitasnya dan tenaga medis profesional bersertifikasi, proses vaksinasi dilakukan secara aman, nyaman, dan sesuai standar medis. Beberapa vaksin yang kami sediakan:",
+    "title": "Kamar Eksekutif",
+    "body": "Fasilitas :",
     "items": {
-      "0": "Vaksin Influenza Tetra",
-      "1": "Vaksin Polio IPV",
-      "2": "Vaksin Pneumonia"
+      "0": "Tempat Tidur Elektrik",
+      "1": "Kamar Tidur Tamu",
+      "2": "Meja Makan",
+      "3": "Sofa",
+      "4": "Tv LCD 42'",
+      "5": "Air Panas",
+      "6": "Mini Bar",
+      "7": "Kulkas",
+      "8": "Air Conditioner",
+      "9": "Dispenser"
     },
     "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "/kontak",
+    "ctaHref": "https://wa.me/6281161617181",
     "imageAlt": "Tenaga medis memberikan vaksin kepada pasien"
   },
   "vitamin": {
-    "title": "Injeksi/Infus Vitamin",
-    "body": "Layanan injeksi/infus vitamin di Klinik Utama Diagnos Healthcare dirancang untuk membantu memenuhi kebutuhan nutrisi harian tubuh secara lebih cepat dan efektif, terutama bagi Anda yang memiliki gaya hidup sibuk, sedang dalam masa pemulihan, atau mengalami kelelahan berkepanjangan. Dengan tindakan yang cepat, aman, dan ditangani oleh tenaga medis profesional, injeksi multivitamin kami menjadi solusi praktis untuk menjaga vitalitas dan kebugaran tubuh Anda. Beberapa vitamin yang kami sediakan:",
+    "title": "Kamar Super VIP",
+    "body": "Fasilitas :",
     "items": {
-      "0": "Injeksi Prove C",
-      "1": "Infus Multivitamin Prove Vit",
-      "2": "Infus Multivitamin Cernevit"
+      "0": "Tempat Tidur Elektrik",
+      "1": "Meja Makan",
+      "2": "Sofa",
+      "3": "TV LCD 32'",
+      "4": "Air Panas",
+      "5": "Mini Bar",
+      "6": "Kulkas",
+      "7": "Air Conditioner",
+      "8": "Dispenser"
     },
     "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "/kontak",
+    "ctaHref": "https://wa.me/6281161617181",
     "imageAlt": "Injeksi/Infus Vitamin"
   },
   "personalMedical": {
-    "title": "Personal Medical Check Up",
-    "body": "Layanan Personal Medical Check Up di Klinik Utama Diagnos Healthcare menawarkan pemeriksaan kesehatan menyeluruh yang disesuaikan dengan kebutuhan individu. Hasilnya disajikan dalam bentuk laporan yang bersifat personal, lengkap dengan interpretasi medis dan rekomendasi yang relevan. Sehingga membantu Anda memahami kondisi tubuh dan mengambil langkah preventif lebih awal. Produk Personal Medical Check Up kami:",
+    "title": "Kamar VIP",
+    "body": "Fasilitas :",
     "items": {
-      "0": "MCU Bronze",
-      "1": "MCU Silver",
-      "2": "MCU Gold",
-      "3": "MCU Diamond",
-      "4": "Smart MCU Basic",
-      "5": "Smart MCU Advance",
-      "6": "Smart MCU Premium"
+      "0": "Tempat Tidur Elektrik",
+      "1": "Meja Makan",
+      "2": "Sofa",
+      "3": "TV LCD 32'",
+      "4": "Air Panas",
+      "5": "Mini Bar",
+      "6": "Kulkas",
+      "7": "Air Conditioner"
     },
     "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "/kontak",
+    "ctaHref": "https://wa.me/6281161617181",
     "imageAlt": "Personal Medical Check Up"
   },
 
@@ -490,7 +504,7 @@
     "title": "Tes Non Laboratorium",
     "body": "Layanan Tes Non-Laboratorium di Klinik Utama Diagnos Healthcare mencakup berbagai pemeriksaan penunjang yang tidak melibatkan analisis sampel di laboratorium, seperti radiologi, echocardiography (EKG), USG, treadmill, spirometri, dan audiometri. Dengan fasilitas modern dan tenaga profesional, layanan ini mendukung proses diagnosa dan pemantauan kesehatan Anda secara komprehensif",
     "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "/kontak",
+    "ctaHref": "https://wa.me/6281161617181",
     "imageAlt": "Tes Non Laboratorium"
   },
   "corporateHero": {

@@ -12,7 +12,7 @@ export default function TestimoniVideo() {
   const slides = [
     {
       quote:
-        "Pengambilan sample DNA test sangat cepat dan nyaman, recommended untuk anak-anak juga. Thank you Diagnos Laboratorium!",
+        "Pengambilan sample DNA test sangat cepat dan nyaman, recommended untuk anak-anak juga. Thank you Royal Klinik!",
       name: "Ridho Hafiedz & Seroja Hafiedz",
       title: "Musician, Selebritis, 50 tahun.",
       avatar: "/images/avatars/ridho-seroja.jpg",

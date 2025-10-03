@@ -48,7 +48,7 @@ export default function ScrollToTopLeft({
         type="button"
         onClick={onClick}
         aria-label={ariaLabel}
-        className="pointer-events-auto inline-flex h-11 w-11 items-center justify-center rounded-full shadow-md ring-1 ring-slate-200 bg-[#4698E3] hover:bg-slate-50 text-white hover:text-slate-900 transition cursor-pointer"
+        className="pointer-events-auto inline-flex h-11 w-11 items-center justify-center rounded-full shadow-md ring-1 ring-slate-200 bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] hover:bg-slate-50 text-white transition cursor-pointer"
       >
         <ArrowUp className="h-5 w-5" />
       </button>

@@ -24,7 +24,10 @@ const imgUrl = (image, imageUrlFromBE, folder = "catalogs") => {
 };
 
 const stripHtml = (html = "") =>
-  String(html).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  String(html)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
 const makeExcerpt = (html = "", n = 140) => {
   const s = stripHtml(html);
@@ -172,7 +175,7 @@ function Card({ title, desc, img, alt, href, price, disc, isFallback }) {
           className="object-cover"
           onError={(e) => {
             // fallback ke placeholder bila gagal load
-            (e.currentTarget).src = PLACEHOLDER;
+            e.currentTarget.src = PLACEHOLDER;
           }}
         />
       </div>
@@ -206,9 +209,7 @@ function Card({ title, desc, img, alt, href, price, disc, isFallback }) {
         {/* CTA */}
         <Link
           href={href}
-          className="mt-auto inline-flex w-full items-center justify-center rounded-xl
-                     bg-[#4698E3] px-4 py-2 text-sm font-medium text-white
-                     transition hover:opacity-95"
+          className="mt-auto inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-4 py-2 text-sm font-medium text-white transition hover:opacity-95"
         >
           {isFallback ? "Lihat Produk" : "View Details"}
         </Link>

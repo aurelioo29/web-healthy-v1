@@ -120,7 +120,7 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-[#4698E3] text-white rounded-none md:rounded-2xl mx-auto max-w-7xl md:mt-3">
+    <header className="sticky top-0 z-50 bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] text-white rounded-none md:rounded-2xl mx-auto max-w-7xl md:mt-3">
       {/* ===== Mobile drawer: FULL, dari KIRI ===== */}
       <AnimatePresence>
         {mobileOpen && (
@@ -279,7 +279,7 @@ export default function Navbar() {
           <img
             src="/images/home-pages/logo.svg"
             alt="logo"
-            className="h-14 w-auto"
+            className="h-20 w-auto"
           />
         </Link>
 
@@ -309,7 +309,7 @@ export default function Navbar() {
                   aria-expanded={openIdx === i}
                   aria-current={active ? "page" : undefined}
                   className={[
-                    "relative flex items-center gap-1 rounded px-2 py-1.5 text-md font-medium hover:bg-white/10",
+                    "relative flex items-center gap-1 rounded px-2 py-1.5 text-md font-medium hover:font-semibold hover:text-teal-100",
                     active ? "text-teal-100" : "",
                     // garis bawah tipis di tengah (sesuai screenshot)
                     active

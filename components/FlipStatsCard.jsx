@@ -144,7 +144,7 @@ export default function FlipStatsCard({ icon, value, label, cta }) {
 
         {/* BACK */}
         <div
-          className="absolute inset-0 rounded-xl bg-[#4698E3] p-5 text-left [backface-visibility:hidden]"
+          className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] p-5 text-left [backface-visibility:hidden]"
           style={{ transform: "rotateY(180deg)" }}
         >
           <div className="grid h-full place-items-center">

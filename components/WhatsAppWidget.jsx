@@ -19,10 +19,15 @@ function useClickAway(ref, onAway) {
   }, [ref, onAway]);
 }
 
+function formatPhoneNumber(phone) {
+  return String(phone).replace(/[^\d]/g, "");
+}
+
 export default function WhatsAppWidget({
-  phone = "+6281234567890",
-  // kalau curiga emoji bikin masalah di lingkungan tertentu, coba tanpa emoji
-  message = "Halo sobat Diagnos, ada yang bisa kami bantu?",
+  phone1 = "+6281161617181",
+  phone2 = "+6281161617180",
+
+  message = "Halo sobat Royal Klinik, ada yang bisa kami bantu?",
   brand = "#25D366",
   label = "WhatsApp",
   iconSrc = "/icons/sosmed/whatsApp.svg", // ambil dari /public
@@ -31,12 +36,19 @@ export default function WhatsAppWidget({
   const panelRef = useRef(null);
   useClickAway(panelRef, () => setOpen(false));
 
-  const phoneDigits = String(phone).replace(/[^\d]/g, "");
-  const waLink = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(
+  const phoneDigits1 = formatPhoneNumber(phone1);
+  const phoneDigits2 = formatPhoneNumber(phone2);
+
+  const waLink1 = `https://wa.me/${phoneDigits1}?text=${encodeURIComponent(
     message
   )}`;
 
-  const openChat = () => window.open(waLink, "_blank", "noopener,noreferrer");
+  const waLink2 = `https://wa.me/${phoneDigits2}?text=${encodeURIComponent(
+    message
+  )}`;
+
+  const openChat = () => window.open(waLink1, "_blank", "noopener,noreferrer");
+  const openChat2 = () => window.open(waLink2, "_blank", "noopener,noreferrer");
 
   return (
     <>
@@ -67,7 +79,7 @@ export default function WhatsAppWidget({
           {/* Body */}
           <div className="p-4">
             <div className="relative rounded-2xl bg-white ring-1 ring-slate-200 shadow px-4 py-3 text-slate-800 text-sm">
-              Halo sobat Diagnos,
+              Halo sobat Royal Klinik,
               <br />
               ada yang bisa kami bantu?
               <span
@@ -76,14 +88,22 @@ export default function WhatsAppWidget({
               />
             </div>
 
-            <div className="mt-4 flex items-end justify-end">
+            <div className="mt-4 flex flex-row justify-evenly gap-3">
               <button
                 onClick={openChat}
-                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-white font-semibold shadow hover:opacity-95 focus:outline-none"
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-white font-semibold shadow hover:opacity-95 focus:outline-none cursor-pointer"
                 style={{ backgroundColor: brand }}
               >
                 <img src={iconSrc} alt="" className="h-4 w-4" />
-                Open chat
+                Admin 1
+              </button>
+              <button
+                onClick={openChat2}
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-white font-semibold shadow hover:opacity-95 focus:outline-none cursor-pointer"
+                style={{ backgroundColor: brand }}
+              >
+                <img src={iconSrc} alt="" className="h-4 w-4" />
+                Admin 2
               </button>
             </div>
           </div>

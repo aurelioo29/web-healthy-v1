@@ -14,8 +14,10 @@ export default function LocaleSwitcher({ className = "" }) {
       <Link
         href={pathname}
         locale={loc}
-        className={`px-1.5 text-base font-semibold transition-opacity ${
-          active ? "text-[#295279] " : "text-white/90 hover:opacity-100"
+        className={`px-1.5 text-lg font-semibold transition-opacity ${
+          active
+            ? "text-teal-100 opacity-300"
+            : "text-white/90 hover:opacity-200"
         }`}
       >
         {label}
@@ -25,7 +27,7 @@ export default function LocaleSwitcher({ className = "" }) {
 
   return (
     <div
-      className={"inline-flex items-center gap-2 px-2 py-1 " + className}
+      className={"inline-flex items-center gap-1 px-2 py-1 " + className}
       aria-label="Language switcher"
     >
       <Item loc="en" label="EN" />

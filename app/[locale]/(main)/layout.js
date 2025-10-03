@@ -34,7 +34,7 @@ export default async function RootLayout({ children, params }) {
           <Footer />
           <WhatsAppWidgetClient
             phone="+6281234567890"
-            message="Halo sobat Diagnos 👋 ada yang bisa kami bantu?"
+            message="Halo sobat Royal Klinik, 👋 ada yang bisa kami bantu?"
             brand="#25D366"
             label="WhatsApp"
           />
