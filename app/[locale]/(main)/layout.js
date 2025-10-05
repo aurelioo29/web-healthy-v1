@@ -38,7 +38,7 @@ export default async function RootLayout({ children, params }) {
           <ScrollToTopLeft offset={300} />
           <Footer />
           <WhatsAppWidgetClient
-            phone="+6281234567890"
+            phone="+6281161617181"
             message="Halo sobat Royal Klinik, 👋 ada yang bisa kami bantu?"
             brand="#25D366"
             label="WhatsApp"
