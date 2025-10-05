@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import api from "@/lib/axios";
+import Image from "next/image";
+
+export const dynamic = "force-dynamic"; // cegah SSG untuk halaman search
+// export const revalidate = 0; // alternatif, kalau kamu prefer ini
 
 const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
 const PLACEHOLDER = "/images/artikel-pages/placeholder.png";
@@ -68,15 +72,12 @@ function ArticleCard({ a }) {
           className="h-full w-full object-cover"
           onError={(e) => (e.currentTarget.src = PLACEHOLDER)}
         />
-
-        {/* badges kanan-atas */}
         <div className="absolute right-2 top-2 flex flex-col items-end gap-1">
           {cat ? (
             <span className="max-w-auto truncate rounded-full bg-[#4698E3]/95 px-3 py-1 text-[11px] font-semibold text-white shadow">
               {cat.toUpperCase()}
             </span>
           ) : null}
-
           {a.isLatest ? (
             <span className="max-w-[72%] truncate rounded-full bg-emerald-600/90 px-3 py-1 text-[11px] font-semibold text-white shadow">
               ARTIKEL TERBARU
@@ -108,7 +109,8 @@ function ArticleCard({ a }) {
   );
 }
 
-export default function SearchPage() {
+/** ==== Komponen yang memanggil useSearchParams ==== */
+function SearchPageInner() {
   const sp = useSearchParams();
   const router = useRouter();
   const q = (sp.get("q") || "").trim();
@@ -120,7 +122,6 @@ export default function SearchPage() {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
-  // ambil dari API yang sama seperti autocomplete, dengan fallback FE filter
   useEffect(() => {
     let alive = true;
     const load = async () => {
@@ -139,7 +140,7 @@ export default function SearchPage() {
         let data = res?.data?.data ?? {};
         let list = data.articles || [];
 
-        // 2) fallback case-sensitivity status (Published)
+        // 2) fallback case-sensitivity
         if (!list.length) {
           res = await api.get("/upload/articles", {
             params: { search: q, status: "Published", page, size },
@@ -204,21 +205,49 @@ export default function SearchPage() {
     router.push(`?${p.toString()}`);
   };
 
+  // ====== TEKS DI ATAS BACKGROUND ======
+  const bannerTitle = (
+    <>
+      Search Results for: <span className="text-sky-300">{q || "-"}</span>
+    </>
+  );
+
+  const bannerNote = loading
+    ? "Loading…"
+    : err
+    ? err
+    : !q
+    ? "Ketik kata kunci di kolom pencarian."
+    : rows.length === 0
+    ? "Tidak ada artikel ditemukan."
+    : `${rows.length} artikel ditemukan${
+        totalPages > 1 ? ` (hal. ${page}/${totalPages})` : ""
+      }`;
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-8">
-      <h1 className="text-2xl font-bold mb-6">
-        Search Results for: <span className="text-sky-600">“{q || "-"}”</span>
-      </h1>
+      {/* HERO dengan background image + overlay teks */}
+      <section className="relative h-44 sm:h-56 md:h-64 lg:h-72 rounded-2xl overflow-hidden mb-8">
+        <Image
+          src="/images/Hero-Banner.webp"
+          alt="Hero Banner"
+          fill
+          priority
+          className="object-cover"
+        />
+        {/* konten di atas gambar */}
+        <div className="absolute inset-0 flex flex-col items-start justify-center px-6 md:px-8">
+          <h1 className="text-white text-2xl md:text-3xl font-bold drop-shadow-sm">
+            {bannerTitle}
+          </h1>
+          <p className="mt-2 text-white/90 text-sm md:text-base">
+            {bannerNote}
+          </p>
+        </div>
+      </section>
 
-      {loading ? (
-        <div className="text-slate-500">Loading…</div>
-      ) : err ? (
-        <div className="text-rose-600">{err}</div>
-      ) : !q ? (
-        <p className="text-slate-500">Ketik kata kunci di kolom pencarian.</p>
-      ) : rows.length === 0 ? (
-        <p className="text-slate-500">Tidak ada artikel ditemukan.</p>
-      ) : (
+      {/* Hanya render list + pagination kalau ada hasil */}
+      {rows.length > 0 && !err && (
         <>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {rows.map((a) => (
@@ -258,5 +287,14 @@ export default function SearchPage() {
         </>
       )}
     </main>
+  );
+}
+
+/** ==== Page boundary: WAJIB pakai Suspense ==== */
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="p-6 text-slate-500">Loading…</div>}>
+      <SearchPageInner />
+    </Suspense>
   );
 }
