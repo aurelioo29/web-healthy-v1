@@ -445,66 +445,9 @@
     "imageAlt": "Doctor ready to provide consultation",
     "imageSrc": "/images/layanan-pages/Hero-Layanan.webp"
   },
-  "vaccine": {
-    "title": "Kamar Eksekutif",
-    "body": "Fasilitas :",
-    "items": {
-      "0": "Tempat Tidur Elektrik",
-      "1": "Kamar Tidur Tamu",
-      "2": "Meja Makan",
-      "3": "Sofa",
-      "4": "Tv LCD 42'",
-      "5": "Air Panas",
-      "6": "Mini Bar",
-      "7": "Kulkas",
-      "8": "Air Conditioner",
-      "9": "Dispenser"
-    },
-    "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "https://wa.me/6281161617181",
-    "imageAlt": "Tenaga medis memberikan vaksin kepada pasien"
-  },
   "vitamin": {
-    "title": "Kamar Super VIP",
-    "body": "Fasilitas :",
-    "items": {
-      "0": "Tempat Tidur Elektrik",
-      "1": "Meja Makan",
-      "2": "Sofa",
-      "3": "TV LCD 32'",
-      "4": "Air Panas",
-      "5": "Mini Bar",
-      "6": "Kulkas",
-      "7": "Air Conditioner",
-      "8": "Dispenser"
-    },
-    "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "https://wa.me/6281161617181",
-    "imageAlt": "Injeksi/Infus Vitamin"
-  },
-  "personalMedical": {
-    "title": "Kamar VIP",
-    "body": "Fasilitas :",
-    "items": {
-      "0": "Tempat Tidur Elektrik",
-      "1": "Meja Makan",
-      "2": "Sofa",
-      "3": "TV LCD 32'",
-      "4": "Air Panas",
-      "5": "Mini Bar",
-      "6": "Kulkas",
-      "7": "Air Conditioner"
-    },
-    "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "https://wa.me/6281161617181",
-    "imageAlt": "Personal Medical Check Up"
-  },
-  "tesLaboratorium": {
-    "title": "Non-Laboratory Tests",
-    "body": "The Non-Laboratory Test service at Diagnos Healthcare Main Clinic includes various supporting examinations that do not involve lab sample analysis, such as radiology, echocardiography (ECG), ultrasound, treadmill test, spirometry, and audiometry. With modern facilities and professional staff, these services support comprehensive diagnosis and health monitoring.",
     "cta": "Contact us for more information",
-    "ctaHref": "https://wa.me/6281161617181",
-    "imageAlt": "Non-Laboratory Tests"
+    "ctaHref": "https://wa.me/6281161617181"
   },
   "corporateHero": {
     "title": "Corporate Health Service",

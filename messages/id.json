@@ -445,67 +445,9 @@
     "imageAlt": "Dokter siap melayani konsultasi",
     "imageSrc": "/images/layanan-pages/Hero-Layanan.webp"
   },
-  "vaccine": {
-    "title": "Kamar Eksekutif",
-    "body": "Fasilitas :",
-    "items": {
-      "0": "Tempat Tidur Elektrik",
-      "1": "Kamar Tidur Tamu",
-      "2": "Meja Makan",
-      "3": "Sofa",
-      "4": "Tv LCD 42'",
-      "5": "Air Panas",
-      "6": "Mini Bar",
-      "7": "Kulkas",
-      "8": "Air Conditioner",
-      "9": "Dispenser"
-    },
-    "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "https://wa.me/6281161617181",
-    "imageAlt": "Tenaga medis memberikan vaksin kepada pasien"
-  },
   "vitamin": {
-    "title": "Kamar Super VIP",
-    "body": "Fasilitas :",
-    "items": {
-      "0": "Tempat Tidur Elektrik",
-      "1": "Meja Makan",
-      "2": "Sofa",
-      "3": "TV LCD 32'",
-      "4": "Air Panas",
-      "5": "Mini Bar",
-      "6": "Kulkas",
-      "7": "Air Conditioner",
-      "8": "Dispenser"
-    },
     "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "https://wa.me/6281161617181",
-    "imageAlt": "Injeksi/Infus Vitamin"
-  },
-  "personalMedical": {
-    "title": "Kamar VIP",
-    "body": "Fasilitas :",
-    "items": {
-      "0": "Tempat Tidur Elektrik",
-      "1": "Meja Makan",
-      "2": "Sofa",
-      "3": "TV LCD 32'",
-      "4": "Air Panas",
-      "5": "Mini Bar",
-      "6": "Kulkas",
-      "7": "Air Conditioner"
-    },
-    "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "https://wa.me/6281161617181",
-    "imageAlt": "Personal Medical Check Up"
-  },
-
-  "tesLaboratorium": {
-    "title": "Tes Non Laboratorium",
-    "body": "Layanan Tes Non-Laboratorium di Klinik Utama Diagnos Healthcare mencakup berbagai pemeriksaan penunjang yang tidak melibatkan analisis sampel di laboratorium, seperti radiologi, echocardiography (EKG), USG, treadmill, spirometri, dan audiometri. Dengan fasilitas modern dan tenaga profesional, layanan ini mendukung proses diagnosa dan pemantauan kesehatan Anda secara komprehensif",
-    "cta": "Hubungi kami untuk informasi lebih lanjut",
-    "ctaHref": "https://wa.me/6281161617181",
-    "imageAlt": "Tes Non Laboratorium"
+    "ctaHref": "https://wa.me/6281161617181"
   },
   "corporateHero": {
     "title": "Corporate Health Service",
