@@ -5,14 +5,22 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ChevronDown, X } from "lucide-react";
 
-const BRAND = "#4698E3";
+const DEFAULT_BRAND = "#4698E3";
 const DURATION = 220; // ms, samain dengan Tailwind duration-200
 
-export default function MobileDrawer({ open, onClose, role }) {
+export default function MobileDrawer({
+  open,
+  onClose,
+  role,
+  navItems = [],
+  brandColor = DEFAULT_BRAND,
+}) {
   // kontrol mount/unmount + animasi keluar
   const [render, setRender] = React.useState(open);
   const [closing, setClosing] = React.useState(false);
   const [entered, setEntered] = React.useState(false); // untuk animasi masuk
+
+  const year = new Date().getFullYear();
 
   React.useEffect(() => {
     if (open) {
@@ -61,7 +69,7 @@ export default function MobileDrawer({ open, onClose, role }) {
           flex flex-col overflow-y-auto overscroll-contain
           transform transition-transform duration-200
           ${entered && !closing ? "translate-x-0" : "-translate-x-full"}`}
-        style={{ "--tw-ring-color": BRAND }}
+        style={{ "--tw-ring-color": brandColor }}
       >
         <div className="flex items-center justify-between">
           <span className="font-semibold text-slate-900">Menu</span>
@@ -78,105 +86,47 @@ export default function MobileDrawer({ open, onClose, role }) {
 
         {/* Links */}
         <nav className="flex flex-col">
-          <details className="group">
-            <summary className="list-none cursor-pointer select-none px-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700 flex items-center justify-between">
-              <span>Articles</span>
-              <ChevronDown className="h-4 w-4 transition group-open:rotate-180" />
-            </summary>
-            <div className="mt-1 ml-2 flex flex-col">
-              <Link
-                href="/dashboard/articles/categories"
-                onClick={onClose}
-                className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
-              >
-                Manage Category Articles
-              </Link>
-              <Link
-                href="/dashboard/articles"
-                onClick={onClose}
-                className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
-              >
-                Manage Articles
-              </Link>
-            </div>
-          </details>
+          {navItems.map((item) => {
+            if (item.type === "link") {
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onClose}
+                  className="px-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700"
+                >
+                  {item.label}
+                </Link>
+              );
+            }
 
-          <details className="group">
-            <summary className="list-none cursor-pointer select-none px-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700 flex items-center justify-between">
-              <span>Lab Tests</span>
-              <ChevronDown className="h-4 w-4 transition group-open:rotate-180" />
-            </summary>
-            <div className="mt-1 ml-2 flex flex-col">
-              <Link
-                href="/dashboard/lab-tests/categories"
-                onClick={onClose}
-                className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
-              >
-                Manage Category Lab Tests
-              </Link>
-              <Link
-                href="/dashboard/lab-tests"
-                onClick={onClose}
-                className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
-              >
-                Manage Lab Tests
-              </Link>
-            </div>
-          </details>
-
-          <details className="group">
-            <summary className="list-none cursor-pointer select-none px-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700 flex items-center justify-between">
-              <span>E-Catalog</span>
-              <ChevronDown className="h-4 w-4 transition group-open:rotate-180" />
-            </summary>
-            <div className="mt-1 ml-2 flex flex-col">
-              <Link
-                href="/dashboard/e-catalog/categories"
-                onClick={onClose}
-                className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
-              >
-                Manage Category E-Catalog
-              </Link>
-              <Link
-                href="/dashboard/e-catalog"
-                onClick={onClose}
-                className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
-              >
-                Manage E-Catalog
-              </Link>
-            </div>
-          </details>
-
-          <Link
-            href="/dashboard/csr"
-            onClick={onClose}
-            className="px-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700"
-          >
-            CSR
-          </Link>
-
-          {role === "superadmin" && (
-            <>
-              <Link
-                href="/dashboard/users"
-                onClick={onClose}
-                className="px-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700"
-              >
-                Manage User
-              </Link>
-              <Link
-                href="/dashboard/activity-logs"
-                onClick={onClose}
-                className="px-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700"
-              >
-                Activity Logs
-              </Link>
-            </>
-          )}
+            // Dropdown/Accordion
+            return (
+              <details key={item.label} className="group">
+                <summary className="list-none cursor-pointer select-none px-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700 flex items-center justify-between">
+                  <span>{item.label}</span>
+                  <ChevronDown className="h-4 w-4 transition group-open:rotate-180" />
+                </summary>
+                <div className="mt-1 ml-2 flex flex-col">
+                  {item.items?.map((child) => (
+                    <Link
+                      key={child.href}
+                      href={child.href}
+                      onClick={onClose}
+                      className="px-3 py-2 text-sm rounded-lg hover:bg-slate-50 text-slate-700"
+                    >
+                      {child.label}
+                    </Link>
+                  ))}
+                </div>
+              </details>
+            );
+          })}
         </nav>
 
         <div className="mt-auto pt-3 pb-[env(safe-area-inset-bottom)] text-[11px] text-slate-400">
-          <span style={{ color: BRAND }}>Admin</span> • responsive & tidy
+          <span style={{ color: brandColor }}>Admin</span> • © {year} All rights
+          reserved.
         </div>
       </aside>
     </>,

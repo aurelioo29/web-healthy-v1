@@ -4,12 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
-import NavbarUser from "./NavbarUser";
 import axios from "@/lib/axios";
+import NavbarUser from "./NavbarUser";
 import MobileDrawer from "./MobileDrawer";
+import { usePathname } from "next/navigation";
 
 const BRAND = "#4698E3";
 
+/** Hooks */
 function useClickAway(ref, onAway) {
   useEffect(() => {
     const onClick = (e) => {
@@ -26,20 +28,36 @@ function useClickAway(ref, onAway) {
   }, [ref, onAway]);
 }
 
-function ArticlesMenu() {
+/** Reusable Dropdown */
+function Dropdown({ label, items = [], activePath }) {
   const [open, setOpen] = useState(false);
   const boxRef = useRef(null);
   useClickAway(boxRef, () => setOpen(false));
+
+  // Active state kalau ada child yang match
+  const isActive = items.some((it) => activePath.startsWith(it.href));
+
+  if (!items?.length) {
+    return <span className="text-slate-700">{label}</span>;
+  }
 
   return (
     <div className="relative" ref={boxRef}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1 hover:text-slate-900 text-slate-700 cursor-pointer"
+        className={`inline-flex items-center gap-1 cursor-pointer ${
+          isActive
+            ? "text-slate-900 font-medium"
+            : "text-slate-700 hover:text-slate-900"
+        }`}
         aria-haspopup="menu"
         aria-expanded={open}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowDown") setOpen(true);
+          if (e.key === "Escape") setOpen(false);
+        }}
       >
-        Articles
+        {label}
         <ChevronDown
           className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`}
         />
@@ -51,22 +69,23 @@ function ArticlesMenu() {
           className="absolute right-0 mt-2 w-64 rounded-2xl border border-slate-200 bg-white shadow-lg overflow-hidden z-50"
         >
           <div className="py-1">
-            <Link
-              href="/dashboard/articles/categories"
-              className="block px-4 py-2.5 text-sm hover:bg-slate-50"
-              onClick={() => setOpen(false)}
-              role="menuitem"
-            >
-              Manage Category Articles
-            </Link>
-            <Link
-              href="/dashboard/articles"
-              className="block px-4 py-2.5 text-sm hover:bg-slate-50"
-              onClick={() => setOpen(false)}
-              role="menuitem"
-            >
-              Manage Articles
-            </Link>
+            {items.map((it) => {
+              const childActive = activePath.startsWith(it.href);
+              return (
+                <Link
+                  key={it.href}
+                  href={it.href}
+                  className={`block px-4 py-2.5 text-sm hover:bg-slate-50 ${
+                    childActive
+                      ? "text-slate-900 font-medium"
+                      : "text-slate-700"
+                  }`}
+                  role="menuitem"
+                >
+                  {it.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}
@@ -74,101 +93,72 @@ function ArticlesMenu() {
   );
 }
 
-function LabsMenu() {
-  const [open, setOpen] = useState(false);
-  const boxRef = useRef(null);
-  useClickAway(boxRef, () => setOpen(false));
+/** Data-driven nav */
+const NAV_ITEMS = [
+  {
+    type: "dropdown",
+    label: "Slideshow",
+    items: [
+      { label: "Manage Testimoni", href: "/dashboard/testimoni" },
+      { label: "Manage Event & Promo", href: "/dashboard/event-promo" },
+      { label: "Manage CSR", href: "/dashboard/csr" },
+      { label: "Manage Layanan Klinik", href: "/dashboard/layanan-klinik" },
+    ],
+  },
+  {
+    type: "dropdown",
+    label: "About",
+    items: [
+      { label: "About (Overview)", href: "/dashboard/about" },
+      { label: "About Gallery", href: "/dashboard/about/gallery" },
+      { label: "About Certificates", href: "/dashboard/about/sertifikat" },
+      { label: "About President", href: "/dashboard/about/president" },
+      { label: "About Core Values", href: "/dashboard/about/core-values" },
+    ],
+  },
+  {
+    type: "dropdown",
+    label: "Articles",
+    items: [
+      {
+        label: "Manage Category Articles",
+        href: "/dashboard/articles/categories",
+      },
+      { label: "Manage Articles", href: "/dashboard/articles" },
+    ],
+  },
+  {
+    type: "dropdown",
+    label: "Lab Tests",
+    items: [
+      {
+        label: "Manage Lab Test Categories",
+        href: "/dashboard/lab-tests/categories",
+      },
+      { label: "Manage Lab Tests", href: "/dashboard/lab-tests" },
+    ],
+  },
+  {
+    type: "dropdown",
+    label: "E-Catalog",
+    items: [
+      {
+        label: "Manage E-Catalog Categories",
+        href: "/dashboard/e-catalog/categories",
+      },
+      { label: "Manage E-Catalog", href: "/dashboard/e-catalog" },
+    ],
+  },
+];
 
-  return (
-    <div className="relative" ref={boxRef}>
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1 hover:text-slate-900 text-slate-700 cursor-pointer"
-        aria-haspopup="menu"
-        aria-expanded={open}
-      >
-        Lab Tests
-        <ChevronDown
-          className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`}
-        />
-      </button>
-
-      {open && (
-        <div
-          role="menu"
-          className="absolute right-0 mt-2 w-64 rounded-2xl border border-slate-200 bg-white shadow-lg overflow-hidden z-50"
-        >
-          <div className="py-1">
-            <Link
-              href="/dashboard/lab-tests/categories"
-              className="block px-4 py-2.5 text-sm hover:bg-slate-50"
-              onClick={() => setOpen(false)}
-              role="menuitem"
-            >
-              Manage Lab Test Categories
-            </Link>
-            <Link
-              href="/dashboard/lab-tests"
-              className="block px-4 py-2.5 text-sm hover:bg-slate-50"
-              onClick={() => setOpen(false)}
-              role="menuitem"
-            >
-              Manage Lab Tests
-            </Link>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function CatalogMenu() {
-  const [open, setOpen] = useState(false);
-  const boxRef = useRef(null);
-  useClickAway(boxRef, () => setOpen(false));
-
-  return (
-    <div className="relative" ref={boxRef}>
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className="inline-flex items-center gap-1 hover:text-slate-900 text-slate-700 cursor-pointer"
-        aria-haspopup="menu"
-        aria-expanded={open}
-      >
-        E-Catalog
-        <ChevronDown
-          className={`h-4 w-4 transition ${open ? "rotate-180" : ""}`}
-        />
-      </button>
-
-      {open && (
-        <div
-          role="menu"
-          className="absolute right-0 mt-2 w-64 rounded-2xl border border-slate-200 bg-white shadow-lg overflow-hidden z-50"
-        >
-          <div className="py-1">
-            <Link
-              href="/dashboard/e-catalog/categories"
-              className="block px-4 py-2.5 text-sm hover:bg-slate-50"
-              onClick={() => setOpen(false)}
-              role="menuitem"
-            >
-              Manage E-Catalog Categories
-            </Link>
-            <Link
-              href="/dashboard/e-catalog"
-              className="block px-4 py-2.5 text-sm hover:bg-slate-50"
-              onClick={() => setOpen(false)}
-              role="menuitem"
-            >
-              Manage E-Catalog
-            </Link>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+const SUPERADMIN_ITEMS = {
+  type: "dropdown",
+  label: "Account Panel",
+  items: [
+    { label: "Manage Users", href: "/dashboard/users" },
+    { label: "Activity Logs", href: "/dashboard/activity-logs" },
+  ],
+};
 
 function HamburgerButton({ open, onClick }) {
   return (
@@ -179,19 +169,16 @@ function HamburgerButton({ open, onClick }) {
     >
       <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
       <div className="absolute inset-0 grid place-content-center">
-        {/* bar 1 */}
         <span
           className={`block h-0.5 w-5 bg-slate-700 transition-transform duration-200 ${
             open ? "translate-y-1.5 rotate-45" : "-translate-y-1.5"
           }`}
         />
-        {/* bar 2 */}
         <span
           className={`block h-0.5 w-5 bg-slate-700 transition-opacity duration-200 ${
             open ? "opacity-0" : "opacity-100"
           }`}
         />
-        {/* bar 3 */}
         <span
           className={`block h-0.5 w-5 bg-slate-700 transition-transform duration-200 ${
             open ? "-translate-y-1.5 -rotate-45" : "translate-y-1.5"
@@ -205,6 +192,7 @@ function HamburgerButton({ open, onClick }) {
 export default function NavbarAdmin() {
   const [role, setRole] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -215,19 +203,23 @@ export default function NavbarAdmin() {
       .catch(() => setRole(""));
   }, []);
 
+  // Lock scroll saat drawer buka
   useEffect(() => {
-    if (mobileOpen) {
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-    } else {
-      document.documentElement.style.overflow = "";
-      document.body.style.overflow = "";
-    }
+    const lock = () => {
+      document.documentElement.style.overflow = mobileOpen ? "hidden" : "";
+      document.body.style.overflow = mobileOpen ? "hidden" : "";
+    };
+    lock();
     return () => {
       document.documentElement.style.overflow = "";
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  const desktopItems = [
+    ...NAV_ITEMS,
+    ...(role === "superadmin" ? [SUPERADMIN_ITEMS] : []),
+  ];
 
   return (
     <>
@@ -253,33 +245,28 @@ export default function NavbarAdmin() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6 text-sm">
-            <ArticlesMenu />
-            <LabsMenu />
-            <CatalogMenu />
-            <Link
-              href="/dashboard/csr"
-              className="text-slate-700 hover:text-slate-900"
-            >
-              CSR
-            </Link>
-
-            {role === "superadmin" && (
-              <>
+            {desktopItems.map((item) =>
+              item.type === "link" ? (
                 <Link
-                  href="/dashboard/users"
-                  className="text-slate-700 hover:text-slate-900"
+                  key={item.href}
+                  href={item.href}
+                  className={`${
+                    pathname.startsWith(item.href)
+                      ? "text-slate-900 font-medium"
+                      : "text-slate-700 hover:text-slate-900"
+                  }`}
                 >
-                  Manage User
+                  {item.label}
                 </Link>
-                <Link
-                  href="/dashboard/activity-logs"
-                  className="text-slate-700 hover:text-slate-900"
-                >
-                  Activity Logs
-                </Link>
-              </>
+              ) : (
+                <Dropdown
+                  key={item.label}
+                  label={item.label}
+                  items={item.items}
+                  activePath={pathname}
+                />
+              )
             )}
-
             <NavbarUser />
           </nav>
 
@@ -290,10 +277,13 @@ export default function NavbarAdmin() {
         </div>
       </header>
 
+      {/* Mobile Drawer pakai data yang sama */}
       <MobileDrawer
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
         role={role}
+        navItems={desktopItems}
+        brandColor={BRAND}
       />
     </>
   );
