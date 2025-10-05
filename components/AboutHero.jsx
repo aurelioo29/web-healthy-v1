@@ -35,10 +35,8 @@ export default function AboutHero() {
 
                 {/* Tombol ke AboutSection di halaman yang sama */}
                 <Link
-                  href="#about-section"
-                  className="mt-6 inline-flex items-center justify-center rounded-xl
-                             bg-[#4698E3] px-5 py-2.5 text-white font-medium
-                             hover:bg-[#4698E3]/80 transition"
+                  href="#selengkapnya"
+                  className="mt-6 inline-flex items-center justify-center rounded-xl bg-[#4698E3] px-5 py-2.5 text-white font-medium hover:bg-[#4698E3]/80 transition"
                 >
                   {t("cta")}
                 </Link>

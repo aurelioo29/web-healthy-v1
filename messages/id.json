@@ -281,29 +281,7 @@
   },
   "sertifikat": {
     "title": "Sertifikasi",
-    "description": "Raihan akreditasi resmi sebagai bukti komitmen kami terhadap kualitas dan kepercayaan layanan kesehatan.",
-    "cards": {
-      "card1": {
-        "title": "Sertifikat Akreditasi Diagnos Padang",
-        "img": "/images/about-pages/sertifikat-1.webp",
-        "imageAlt": "Sertifikat Akreditasi Diagnos Padang"
-      },
-      "card2": {
-        "title": "Sertifikat Akreditasi Diagnos Denpasar",
-        "img": "/images/about-pages/sertifikat-2.webp",
-        "imageAlt": "Sertifikat Akreditasi Diagnos Denpasar"
-      },
-      "card3": {
-        "title": "Sertifikat Akreditasi Diagnos Ciputat",
-        "img": "/images/about-pages/sertifikat-3.webp",
-        "imageAlt": "Sertifikat Akreditasi Diagnos Ciputat"
-      },
-      "card4": {
-        "title": "Sertifikat Akreditasi Diagnos Ciputat",
-        "img": "/images/about-pages/sertifikat-3.webp",
-        "imageAlt": "Sertifikat Akreditasi Diagnos Ciputat"
-      }
-    }
+    "description": "Raihan akreditasi resmi sebagai bukti komitmen kami terhadap kualitas dan kepercayaan layanan kesehatan."
   },
   "aboutHero": {
     "title": "Tentang Kami",
@@ -312,16 +290,7 @@
   },
   "komitmen": {
     "title": "Bukti Komitmen Terhadap Kualitas",
-    "description": "Akreditasi kami sebagai jaminan atas kualitas layanan kesehatan yang memenuhi standar nasional dan internasional.",
-    "gallery": {
-      "item1": { "src": "/images/about-pages/1.webp", "alt": "Kegiatan 1" },
-      "item2": { "src": "/images/about-pages/2.webp", "alt": "Kegiatan 2" },
-      "item3": { "src": "/images/about-pages/3.webp", "alt": "Kegiatan 3" },
-      "item4": { "src": "/images/about-pages/4.webp", "alt": "Kegiatan 4" },
-      "item5": { "src": "/images/about-pages/5.webp", "alt": "Kegiatan 5" },
-      "item6": { "src": "/images/about-pages/6.webp", "alt": "Kegiatan 6" },
-      "item7": { "src": "/images/about-pages/7.webp", "alt": "Kegiatan 7" }
-    }
+    "description": "Akreditasi kami sebagai jaminan atas kualitas layanan kesehatan yang memenuhi standar nasional dan internasional."
   },
   "kontak": {
     "mapTitle": "Lokasi di Google Maps",
