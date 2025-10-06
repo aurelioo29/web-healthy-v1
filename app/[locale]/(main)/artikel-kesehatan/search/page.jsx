@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic"; // cegah SSG untuk halaman search
 // export const revalidate = 0; // alternatif, kalau kamu prefer ini
 
 const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
-const PLACEHOLDER = "/images/artikel-pages/placeholder.png";
+const PLACEHOLDER = "/images/catalog-pages/placeholder.png";
 
 const imgUrl = (image, imageUrlFromBE, folder = "articles") => {
   if (imageUrlFromBE) return imageUrlFromBE;

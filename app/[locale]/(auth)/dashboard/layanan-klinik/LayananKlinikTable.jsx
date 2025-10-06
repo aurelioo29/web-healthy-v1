@@ -9,7 +9,7 @@ import LayananKlinikFormModal from "./LayananKlinikFormModal";
    Helpers & constants
 ========================= */
 const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
-const PLACEHOLDER = "/images/artikel-pages/placeholder.png";
+const PLACEHOLDER = "/images/catalog-pages/placeholder.png";
 
 // Endpoint layanan
 const LIST_PATH = "/upload/layanan-klinik";
