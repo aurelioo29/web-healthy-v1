@@ -8,7 +8,7 @@ import api from "@/lib/axios";
 
 /* ===== Const & helpers ===== */
 const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
-const PLACEHOLDER = "/images/artikel-pages/placeholder.png";
+const PLACEHOLDER = "/images/catalog-pages/placeholder.png";
 
 const imgUrl = (image, imageUrlFromBE, folder = "articles") => {
   if (imageUrlFromBE) return imageUrlFromBE;

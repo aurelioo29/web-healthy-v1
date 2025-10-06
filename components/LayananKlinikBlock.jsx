@@ -25,7 +25,7 @@ export default function LayananKlinikBlock({
       />
       <div className="relative overflow-hidden rounded-3xl ring-1 ring-black/5">
         <Image
-          src={imageUrl || "/images/artikel-pages/placeholder.png"}
+          src={imageUrl || "/images/catalog-pages/placeholder.png"}
           alt={imageAlt || title || "Service"}
           width={1280}
           height={860}

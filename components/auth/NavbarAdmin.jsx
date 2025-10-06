@@ -103,6 +103,9 @@ const NAV_ITEMS = [
       { label: "Manage Event & Promo", href: "/dashboard/event-promo" },
       { label: "Manage CSR", href: "/dashboard/csr" },
       { label: "Manage Layanan Klinik", href: "/dashboard/layanan-klinik" },
+      { label: "Manage Lokasi Klinik", href: "/dashboard/lokasi-klinik" },
+      { label: "Manage Corporate Health", href: "/dashboard/corporate-health" },
+      { label: "Manage Dokter", href: "/dashboard/dokter" },
     ],
   },
   {
