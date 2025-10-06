@@ -116,7 +116,7 @@ const NAV_ITEMS = [
       { label: "About Gallery", href: "/dashboard/about/gallery" },
       { label: "About Certificates", href: "/dashboard/about/sertifikat" },
       { label: "About President", href: "/dashboard/about/president" },
-      { label: "About Core Values", href: "/dashboard/about/core-values" },
+      // { label: "About Core Values", href: "/dashboard/about/core-values" },
     ],
   },
   {

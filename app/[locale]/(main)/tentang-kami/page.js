@@ -11,6 +11,7 @@ export default function TentangKamiPages() {
     <>
       <AboutHero />
       <About />
+      <FounderProfile />
       <Sertifikat />
       <GaleriKomitmen />
       {/* />
