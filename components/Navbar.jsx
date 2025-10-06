@@ -74,7 +74,7 @@ export default function Navbar() {
           {
             title: t("testTypes"),
             items: [
-              { label: t("consult"), href: "/artikel-kesehatan" },
+              { label: t("consult"), href: "/konsultasi-dokter" },
               { label: t("clinic"), href: "/layanan-klinik" },
               { label: t("corporate"), href: "/corporate-health-service" },
               { label: t("ecatalog"), href: "/e-catalog" },
@@ -541,7 +541,7 @@ function ProductsMega({ t, locale }) {
         { label: t("panel"), href: "/panel-pemeriksaan" },
       ],
     },
-    { key: "consult", label: t("consult"), href: "/artikel-kesehatan" },
+    { key: "consult", label: t("consult"), href: "/konsultasi-dokter" },
     { key: "clinic", label: t("clinic"), href: "/layanan-klinik" },
     {
       key: "corporate",
