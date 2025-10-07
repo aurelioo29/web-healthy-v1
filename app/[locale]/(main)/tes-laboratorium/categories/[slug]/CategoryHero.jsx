@@ -61,7 +61,7 @@ export default function CategoryHero({
 
                 <Link
                   href={ctaHref}
-                  className="mt-4 inline-flex items-center rounded-xl bg-[#4698E3] px-5 py-2.5 text-white font-semibold hover:bg-[#3b86cf] transition text-sm"
+                  className="mt-4 inline-flex items-center rounded-xl bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-5 py-2.5 text-white font-semibold hover:bg-[#3b86cf] transition text-sm"
                 >
                   {ctaText}
                 </Link>

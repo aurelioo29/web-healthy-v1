@@ -97,8 +97,7 @@ function CatalogCard({ item }) {
 
         <Link
           href={`/e-catalog/${item.slug}`}
-          className="mt-auto inline-flex items-center justify-center rounded-lg px-4 py-2 font-medium text-white hover:opacity-95 transition"
-          style={{ background: BRAND }}
+          className="mt-auto inline-flex items-center justify-center rounded-lg px-4 py-2 font-medium text-white hover:opacity-95 transition bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468]"
         >
           View Details
         </Link>
@@ -299,10 +298,7 @@ export default function CatalogUserPage() {
       <div className="grid gap-6 md:grid-cols-12">
         {/* ===== SIDEBAR KATEGORI ===== */}
         <aside className="md:col-span-3 lg:col-span-2 h-max sticky top-24 rounded-2xl ring-1 ring-slate-200 bg-white overflow-hidden">
-          <div
-            className="px-4 py-3 font-semibold text-white"
-            style={{ background: BRAND }}
-          >
+          <div className="px-4 py-3 font-semibold text-white bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468]">
             CATEGORIES
           </div>
           <div className="p-3 space-y-2">

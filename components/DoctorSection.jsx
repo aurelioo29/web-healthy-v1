@@ -44,7 +44,7 @@ function DoctorCard({ doc }) {
           href={ctaHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-14 inline-flex items-center justify-center rounded-xl bg-[#4698E3] px-5 py-2.5 text-white font-medium hover:bg-[#27537c] transition"
+          className="mt-14 inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-5 py-2.5 text-white font-medium hover:bg-[#27537c] transition"
         >
           Jadwalkan Konsultasi
         </a>

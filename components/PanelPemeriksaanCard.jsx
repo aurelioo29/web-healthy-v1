@@ -237,7 +237,7 @@ export default function PanelPemeriksaanCard() {
                   <div className="mt-4 grid grid-cols-1 gap-2">
                     <Link
                       href={detailPath(it.slug)}
-                      className="inline-flex items-center justify-center rounded-lg bg-[#2E6F63] px-4 py-2.5 text-white hover:bg-[#24584F] transition"
+                      className="inline-flex items-center justify-center rounded-lg bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-4 py-2.5 text-white hover:bg-[#24584F] transition"
                     >
                       View Details
                     </Link>

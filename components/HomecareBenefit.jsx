@@ -40,7 +40,7 @@ export default function HomecareBenefit() {
           <div className="mt-6">
             <Link
               href={t("ctaHref")}
-              className="inline-flex items-center justify-center rounded-lg bg-[#4698E3] px-5 py-2.5 text-white shadow-sm transition hover:bg-[#3b86cf]"
+              className="inline-flex items-center justify-center rounded-lg bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-5 py-2.5 text-white shadow-sm transition hover:bg-[#3b86cf]"
             >
               {t("cta")}
             </Link>

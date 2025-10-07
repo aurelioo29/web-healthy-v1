@@ -137,7 +137,7 @@ export default function CategoryPage() {
         {/* Sidebar kiri */}
         <aside className="md:col-span-4 lg:col-span-2 sticky top-24 h-max rounded-2xl border border-slate-200 bg-white overflow-hidden">
           {/* Header */}
-          <div className="bg-[#4698E3] text-white px-5 py-3 font-semibold">
+          <div className="bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] text-white px-5 py-3 font-semibold">
             Kategori Tes
           </div>
 
