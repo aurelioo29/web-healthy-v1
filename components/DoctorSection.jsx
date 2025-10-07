@@ -1,13 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import React from "react";
-import api from "@/lib/axios";
 
 const WA_PHONE = "6281161617181";
 const buildWaLink = (msg) =>
@@ -15,22 +13,26 @@ const buildWaLink = (msg) =>
     msg
   )}`;
 
+const IMAGE_BASE = "http://192.168.0.103:8000/storage/assets";
+
 function DoctorCard({ doc }) {
   const ctaHref =
     doc.cta ||
     buildWaLink(
       `Hi Royal Klinik, saya ingin bertanya tentang Konsultasi Dokter (${doc.name} - ${doc.role}).`
     );
+  const [src, setSrc] = React.useState(doc.img);
 
   return (
     <div className="flex h-full flex-col items-center rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
       <div className="relative w-full aspect-[4/5]">
         <Image
-          src={doc.img}
+          src={src}
           alt={doc.name}
           fill
-          className="object-contain"
           sizes="(max-width: 768px) 90vw, 30vw"
+          className="object-contain"
+          onError={() => setSrc("/images/placeholder-doctor.png")}
           priority={false}
         />
       </div>
@@ -39,12 +41,11 @@ function DoctorCard({ doc }) {
         <h3 className="text-lg font-semibold text-slate-900">{doc.name}</h3>
         <p className="mt-1 text-sm text-slate-500">{doc.role}</p>
 
-        {/* External link -> pakai <a>, bukan <Link> */}
         <a
           href={ctaHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-14 inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-5 py-2.5 text-white font-medium hover:bg-[#27537c] transition"
+          className="mt-14 inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-5 py-2.5 text-white font-medium hover:bg-[#24584F] transition"
         >
           Jadwalkan Konsultasi
         </a>
@@ -63,34 +64,24 @@ export default function DoctorsSection() {
       try {
         setLoading(true);
         setErr("");
-        // BE kamu: GET /upload/dokters?page=1&size=…&search=…
-        const { data } = await api.get("/upload/dokters", {
-          params: { page: 1, size: 12 },
-          headers: { "Cache-Control": "no-cache" },
-        });
+        const r = await fetch("/api/doctors", { cache: "no-store" });
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        const list = await r.json();
 
-        // Unwrap fleksibel
-        const box = data?.data ?? data?.result ?? data ?? {};
-        const list =
-          box.dokters ||
-          box.items ||
-          box.rows ||
-          box.list ||
-          box.data ||
-          (Array.isArray(data) ? data : []) ||
-          [];
-
-        const mapped = list.map((d) => ({
-          name: d.name || d.title || d.full_name || d.nama || "Dokter",
-          role: d.specialization || d.role || "Dokter",
-          img: d.imageUrl || d.image || "/images/placeholder-doctor.png",
-          // kalau BE suatu hari ngasih link khusus, hormati; else fallback WA
-          cta: d.cta_link || "",
+        const mapped = (list || []).map((d) => ({
+          id: d.id,
+          name: d.nama_dokter || d.name || "Dokter",
+          role: d.spesialisasi || d.specialization || "Dokter",
+          img: d.foto
+            ? `${IMAGE_BASE.replace(/\/$/, "")}/${String(d.foto).replace(
+                /^\//,
+                ""
+              )}`
+            : "/images/placeholder-doctor.png",
         }));
-
         setDoctors(mapped);
       } catch (e) {
-        setErr(e?.response?.data?.message || e.message || "Gagal load dokter");
+        setErr(e.message || "Gagal load dokter");
         setDoctors([]);
       } finally {
         setLoading(false);
@@ -105,14 +96,9 @@ export default function DoctorsSection() {
           Dokter dari Royal Klinik
         </h2>
 
-        {err && (
-          <p className="mt-4 text-sm text-red-600">
-            {err} — cek lagi payload BE & extractor.
-          </p>
-        )}
+        {err && <p className="mt-4 text-sm text-red-600">{err}</p>}
 
-        {/* Skeleton simple biar nggak kering */}
-        {loading && (
+        {loading ? (
           <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
             {Array.from({ length: 3 }).map((_, i) => (
               <div
@@ -126,34 +112,27 @@ export default function DoctorsSection() {
               </div>
             ))}
           </div>
-        )}
-
-        {!loading && (
-          <>
-            {/* Mobile: Swiper */}
-            <div className="mt-8 md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                className="doctors-swiper"
-                slidesPerView={1}
-                spaceBetween={16}
-                pagination={{ clickable: true }}
-              >
-                {doctors.map((d, i) => (
-                  <SwiperSlide key={i}>
-                    <DoctorCard doc={d} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </div>
-
-            {/* Desktop: Grid */}
-            <div className="mt-10 hidden gap-6 md:grid md:grid-cols-3">
-              {doctors.map((d, i) => (
-                <DoctorCard key={i} doc={d} />
+        ) : (
+          <div className="mt-8">
+            <Swiper
+              modules={[Pagination]}
+              className="doctors-swiper"
+              pagination={{ clickable: true }}
+              spaceBetween={16}
+              slidesPerView={1}
+              breakpoints={{
+                640: { slidesPerView: 2, spaceBetween: 16 },
+                768: { slidesPerView: 3, spaceBetween: 20 },
+                1024: { slidesPerView: 3, spaceBetween: 24 },
+              }}
+            >
+              {doctors.map((d) => (
+                <SwiperSlide key={d.id ?? d.name}>
+                  <DoctorCard doc={d} />
+                </SwiperSlide>
               ))}
-            </div>
-          </>
+            </Swiper>
+          </div>
         )}
       </div>
 

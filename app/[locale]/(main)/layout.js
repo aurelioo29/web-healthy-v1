@@ -34,7 +34,7 @@ export default async function RootLayout({ children, params }) {
     <html lang={locale} className="scroll-smooth">
       <body className={`${inter.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <SplashScreen />
+          {/* <SplashScreen /> */}
           <Navbar />
           {children}
           <ScrollToTopLeft offset={300} />

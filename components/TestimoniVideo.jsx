@@ -1,99 +1,98 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 import Image from "next/image";
-import api from "@/lib/axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, A11y, Autoplay, Keyboard } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Quote } from "lucide-react";
 
-/* ===== Helpers ===== */
-const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
-const AVATAR_PLACEHOLDER = "/icons/auth/avatar.webp"; // opsional, boleh diganti/dihapus
+/* ===== Konstanta asset LAN ===== */
+const IMAGE_BASE = "http://192.168.0.103:8000/storage/assets";
+const VIDEO_BASE = "http://192.168.0.103:8000/storage/assets";
+const AVATAR_PLACEHOLDER = "/icons/auth/avatar.webp";
 
-const buildImageUrl = (image, imageUrlFromBE, folder = "testimonis") => {
-  if (imageUrlFromBE) return imageUrlFromBE;
-  if (!image) return AVATAR_PLACEHOLDER;
-  if (/^https?:\/\//i.test(image)) return image;
-  if (!ASSET_BASE) return AVATAR_PLACEHOLDER;
-  const rel = image.includes("/") ? image : `${folder}/${image}`;
-  return `${ASSET_BASE.replace(/\/$/, "")}/${rel.replace(/^\/+/, "")}`;
+/* ===== Helpers ===== */
+const buildAbsUrl = (base, file) => {
+  const f = String(file || "").trim();
+  if (!f) return "";
+  if (/^https?:\/\//i.test(f)) return f;
+  return `${base.replace(/\/$/, "")}/${f.replace(/^\//, "")}`;
 };
 
 function getYouTubeId(input = "") {
   const s = String(input).trim();
-  if (!s) return ""; // tidak ada video
-  // Kalau sudah 11-char id
-  if (/^[\w-]{11}$/.test(s)) return s;
-
+  if (!s) return "";
+  if (/^[\w-]{11}$/.test(s)) return s; // sudah ID
   try {
     const u = new URL(s);
-    // https://www.youtube.com/watch?v=VIDEOID
     if (u.searchParams.get("v")) return u.searchParams.get("v");
-    // https://youtu.be/VIDEOID
     const parts = u.pathname.split("/").filter(Boolean);
-    // /embed/VIDEOID, /shorts/VIDEOID, /VIDEOID
     if (u.hostname.includes("youtu.be")) return parts[0] || "";
     if (parts[0] === "embed" || parts[0] === "shorts") return parts[1] || "";
     return "";
   } catch {
-    // fallback: mungkin memang sudah id tapi tidak lulus regex
-    return s;
+    return ""; // bukan URL YouTube
   }
 }
 
 const fmtTitleLine = (job, age) => {
   const bits = [];
   if (job) bits.push(job);
-  if (Number.isFinite(Number(age))) bits.push(`${age} tahun`);
+  if (age) bits.push(`${age} tahun`);
   return bits.join(", ");
 };
 
-/* ===== Component ===== */
+/* ===== Komponen ===== */
 export default function TestimoniVideo() {
-  const [slides, setSlides] = useState([]);
-  const [active, setActive] = useState(0);
-  const [playing, setPlaying] = useState(false);
+  const [slides, setSlides] = React.useState([]);
+  const [active, setActive] = React.useState(0);
+  const [playing, setPlaying] = React.useState(false);
 
-  // Ambil 5 terbaru
-  useEffect(() => {
+  React.useEffect(() => {
     let alive = true;
     (async () => {
       try {
-        const res = await api.get("/upload/testimonis", {
-          params: { page: 1, size: 5 }, // cukup 5 terbaru
-          headers: { "Cache-Control": "no-cache" },
-        });
+        // Ambil langsung dari proxy Next (tidak kena CORS)
+        const r = await fetch("/api/testimonis", { cache: "no-store" });
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        const list = await r.json(); // ← hasil normalisasi dari route.js kamu
 
-        const payload = res?.data?.data;
-        let list = Array.isArray(payload)
-          ? payload
-          : payload?.items ||
-            payload?.rows ||
-            payload?.data ||
-            payload?.testimonis ||
-            [];
+        // Map sesuai field Laravel kamu
+        const mapped = (list || [])
+          .map((t) => {
+            const name = t.nama_testimoni || "";
+            const age = t.umur || "";
+            const job = t.pekerjaan || "";
+            const quote = t.isi_testimoni || "";
+            const img = buildAbsUrl(IMAGE_BASE, t.foto);
+            const videoRaw = t.link_video || "";
 
-        // Safety: urutkan DESC by created_at bila BE tidak mengurutkan
-        list = [...list].sort((a, b) => {
-          const da = new Date(a.created_at || a.createdAt || 0).getTime();
-          const db = new Date(b.created_at || b.createdAt || 0).getTime();
-          return db - da;
-        });
+            // Deteksi YouTube vs file MP4
+            const ytId = getYouTubeId(videoRaw);
+            const videoUrl = ytId ? "" : buildAbsUrl(VIDEO_BASE, videoRaw);
 
-        // Map -> slides
-        const mapped = list.slice(0, 5).map((t) => ({
-          quote: t.content || "",
-          name: t.name || "",
-          title: fmtTitleLine(t.job, t.age),
-          avatar: buildImageUrl(t.image, t.imageUrl, "testimonis"),
-          videoId: getYouTubeId(t.link_video || ""),
-        }));
+            return {
+              name,
+              title: fmtTitleLine(job, age),
+              quote,
+              avatar: img || AVATAR_PLACEHOLDER,
+              ytId,
+              videoUrl, // bisa kosong kalau bukan MP4
+              createdAt: t.created_at || t.updated_at || "",
+            };
+          })
+          // urutkan terbaru (opsional)
+          .sort(
+            (a, b) =>
+              new Date(b.createdAt || 0).getTime() -
+              new Date(a.createdAt || 0).getTime()
+          )
+          .slice(0, 5);
 
         if (alive) setSlides(mapped);
-      } catch (e) {
+      } catch {
         if (alive) setSlides([]);
       }
     })();
@@ -102,8 +101,11 @@ export default function TestimoniVideo() {
     };
   }, []);
 
-  const vid = slides[active]?.videoId;
-  const hasVideo = Boolean(vid);
+  const current = slides[active];
+  const hasYouTube = Boolean(current?.ytId);
+  const hasMp4 = Boolean(
+    current?.videoUrl && /\.mp4(\?|$)/i.test(current.videoUrl)
+  );
 
   if (!slides.length) {
     return (
@@ -118,8 +120,8 @@ export default function TestimoniVideo() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
-      {/* Mobile: stack; Desktop: 2 kolom */}
       <div className="grid grid-cols-1 md:grid-cols-2 items-start md:items-center gap-8 md:gap-10">
+        {/* Kiri: teks & slider quote */}
         <div className="order-1">
           <h2 className="text-2xl md:text-3xl font-bold">Apa Kata Mereka?</h2>
 
@@ -181,21 +183,23 @@ export default function TestimoniVideo() {
           </Swiper>
         </div>
 
+        {/* Kanan: video / poster */}
         <div className="order-2 rounded-2xl overflow-hidden bg-black/5">
           <div className="relative aspect-video">
-            {hasVideo && playing ? (
+            {/* YouTube */}
+            {hasYouTube && playing ? (
               <iframe
-                key={vid}
-                src={`https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0&modestbranding=1`}
+                key={current.ytId}
+                src={`https://www.youtube-nocookie.com/embed/${current.ytId}?autoplay=1&rel=0&modestbranding=1`}
                 title="YouTube video"
                 className="absolute inset-0 h-full w-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
               />
-            ) : hasVideo ? (
+            ) : hasYouTube ? (
               <>
                 <Image
-                  src={`https://i.ytimg.com/vi/${vid}/hqdefault.jpg`}
+                  src={`https://i.ytimg.com/vi/${current.ytId}/hqdefault.jpg`}
                   alt="YouTube preview"
                   fill
                   className="object-cover"
@@ -221,20 +225,35 @@ export default function TestimoniVideo() {
                   </span>
                 </button>
               </>
-            ) : (
-              // Tidak ada link_video → tampilkan avatar besar orang aktif
+            ) : null}
+
+            {/* MP4 (file lokal dari server) */}
+            {!hasYouTube && hasMp4 ? (
+              <video
+                key={current.videoUrl}
+                controls
+                className="absolute inset-0 h-full w-full object-cover bg-black"
+                poster={current.avatar || AVATAR_PLACEHOLDER}
+              >
+                <source src={current.videoUrl} type="video/mp4" />
+                Browser Anda tidak mendukung pemutar video.
+              </video>
+            ) : null}
+
+            {/* Fallback avatar besar */}
+            {!hasYouTube && !hasMp4 ? (
               <div className="absolute inset-0 grid place-items-center bg-white">
                 <div className="relative h-40 w-40 overflow-hidden rounded-full ring-4 ring-[#e2e8f0]">
                   <Image
-                    src={slides[active]?.avatar || AVATAR_PLACEHOLDER}
-                    alt={slides[active]?.name || "Avatar"}
+                    src={current?.avatar || AVATAR_PLACEHOLDER}
+                    alt={current?.name || "Avatar"}
                     fill
                     className="object-cover"
                     sizes="160px"
                   />
                 </div>
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </div>

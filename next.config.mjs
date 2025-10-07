@@ -7,6 +7,14 @@ const nextConfig = {
   // output: "export",
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "192.168.0.103",
+        port: "8000",
+        pathname: "/storage/**",
+      },
+    ],
   },
   // allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev"],
   trailingSlash: true,
