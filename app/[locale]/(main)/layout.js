@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTopLeft from "@/components/ScrollToTopLeft";
 import WhatsAppWidgetClient from "@/components/WhatsAppWidgetClient"; // ⬅️ wrapper client
+import SplashScreen from "@/components/SplashScreen";
 
 export const dynamicParams = false;
 const SUPPORTED_LOCALES = ["id", "en"];
@@ -33,6 +34,7 @@ export default async function RootLayout({ children, params }) {
     <html lang={locale} className="scroll-smooth">
       <body className={`${inter.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <SplashScreen />
           <Navbar />
           {children}
           <ScrollToTopLeft offset={300} />
