@@ -744,5 +744,13 @@
   "beritaHome": {
     "title": "Read Our Latest Articles",
     "desc": "Trusted Health Articles Just for You"
+  },
+  "panelPemeriksaanCard": {
+    "title": "Diagnostic Packages & Panels at Diagnos Laboratory",
+    "desc": "Our package and thematic panel services offer a comprehensive suite of medical tests designed to deliver accurate, in-depth insights into your health—supporting early detection and appropriate care."
+  },
+  "genomikCard": {
+    "title": "Genomic Testing at Diagnos Laboratory",
+    "desc": "Genomic testing at Diagnos helps you understand your personal genetic risks, so you can take informed health actions early."
   }
 }
