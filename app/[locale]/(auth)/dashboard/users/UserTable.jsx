@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Settings, CircleX, Search } from "lucide-react";
 import api from "@/lib/axios";
 import CreateUserButton from "./UserCreateButton";
+import RoleModal from "./RoleModal";
 
 const STATUS_STYLE = {
   active: {
@@ -68,6 +69,8 @@ function Pagination({ page, pages, onChange }) {
 
 export default function UserTable() {
   const [rows, setRows] = useState([]);
+  const [roleOpen, setRoleOpen] = useState(false);
+  const [selected, setSelected] = useState(null);
   const [meta, setMeta] = useState({
     totalUser: 0,
     totalPages: 1,
@@ -138,6 +141,28 @@ export default function UserTable() {
       setLoading(false);
     }
   }
+
+  const onEdit = (user) => {
+    setSelected(user);
+    setRoleOpen(true);
+  };
+
+  const onDelete = async (user) => {
+    if (
+      !confirm(
+        `Hapus user "${user.username}"? Tindakan ini tidak bisa di-undo.`
+      )
+    )
+      return;
+    try {
+      await api.delete(`/users/${user.id}`);
+      // refresh halaman 1 biar konsisten
+      await fetchUsers({ pageArg: 1, sizeArg: size, searchArg: "" });
+      setPage(1);
+    } catch (e) {
+      alert(e?.response?.data?.message || e.message || "Gagal hapus user");
+    }
+  };
 
   useEffect(() => {
     fetchUsers({ pageArg: page, sizeArg: size, searchArg: search });
@@ -285,13 +310,16 @@ export default function UserTable() {
                       <button
                         type="button"
                         title="Settings"
+                        onClick={() => onEdit(u)} // ← pasang handler
                         className="rounded-lg p-2 text-sky-600 hover:bg-sky-100 cursor-pointer"
                       >
                         <Settings size={18} />
                       </button>
+
                       <button
                         type="button"
                         title="Delete"
+                        onClick={() => onDelete(u)} // ← pasang handler
                         className="rounded-lg p-2 text-rose-600 hover:bg-rose-50 cursor-pointer"
                       >
                         <CircleX size={18} />
@@ -318,6 +346,16 @@ export default function UserTable() {
       </div>
 
       {err && <div className="px-6 pb-4 text-sm text-rose-600">{err}</div>}
+
+      <RoleModal
+        open={roleOpen}
+        onClose={() => setRoleOpen(false)}
+        user={selected}
+        onSaved={() => {
+          // reload data setelah save
+          fetchUsers({ pageArg: page, sizeArg: size, searchArg: search });
+        }}
+      />
     </div>
   );
 }
