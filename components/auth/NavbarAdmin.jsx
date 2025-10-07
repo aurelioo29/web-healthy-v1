@@ -143,6 +143,17 @@ const NAV_ITEMS = [
   },
   {
     type: "dropdown",
+    label: "Investor",
+    items: [
+      {
+        label: "Manage Investor Categories",
+        href: "/dashboard/investor/categories",
+      },
+      { label: "Manage Investors", href: "/dashboard/investor" },
+    ],
+  },
+  {
+    type: "dropdown",
     label: "E-Catalog",
     items: [
       {
