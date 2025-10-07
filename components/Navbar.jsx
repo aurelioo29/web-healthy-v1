@@ -61,34 +61,35 @@ export default function Navbar() {
     {
       label: t("products"),
       match: [
-        re("/tes-laboratorium"),
-        re("/genomik"),
-        re("/homecare-service"),
-        re("/panel-pemeriksaan"),
-        re("/layanan-klinik"),
-        re("/corporate-health-service"),
-        re("/e-catalog"),
+        // re("/tes-laboratorium"),
+        // re("/genomik"),
+        // re("/homecare-service"),
+        // re("/panel-pemeriksaan"),
+        // re("/layanan-klinik"),
+        // re("/corporate-health-service"),
+        // re("/e-catalog"),
       ],
       dropdown: {
         columns: [
           {
             title: t("testTypes"),
             items: [
+              { label: t("labTest"), href: "/tes-laboratorium" },
               { label: t("consult"), href: "/konsultasi-dokter" },
               { label: t("clinic"), href: "/layanan-klinik" },
               { label: t("corporate"), href: "/corporate-health-service" },
               { label: t("ecatalog"), href: "/e-catalog" },
             ],
           },
-          {
-            title: t("services"),
-            items: [
-              { label: t("labTest"), href: "/tes-laboratorium" },
-              { label: t("genomic"), href: "/genomik" },
-              { label: t("homecare"), href: "/homecare-service" },
-              { label: t("panel"), href: "/panel-pemeriksaan" },
-            ],
-          },
+          // {
+          //   title: t("services"),
+          //   items: [
+          //     { label: t("labTest"), href: "/tes-laboratorium" },
+          //     { label: t("genomic"), href: "/genomik" },
+          //     { label: t("homecare"), href: "/homecare-service" },
+          //     { label: t("panel"), href: "/panel-pemeriksaan" },
+          //   ],
+          // },
         ],
       },
     },
@@ -98,12 +99,12 @@ export default function Navbar() {
         re("/insight"),
         re("/keberlanjutan"),
         re("/artikel-kesehatan"),
-        re("/manajemen-laboratorium"),
+        // re("/manajemen-laboratorium"),
       ],
       dropdownItems: [
         { label: t("csr"), href: "/keberlanjutan" },
         { label: t("artikel"), href: "/artikel-kesehatan" },
-        { label: t("manajemen"), href: "/manajemen-laboratorium" },
+        // { label: t("manajemen"), href: "/manajemen-laboratorium" },
       ],
     },
 
@@ -531,16 +532,17 @@ function ProductsMega({ t, locale }) {
   const [activeKey, setActiveKey] = useState(null);
 
   const groups = [
-    {
-      key: "jenis",
-      label: t("testTypes"),
-      children: [
-        { label: t("labTest"), href: "/tes-laboratorium" },
-        { label: t("genomic"), href: "/genomik" },
-        { label: t("homecare"), href: "/homecare-service" },
-        { label: t("panel"), href: "/panel-pemeriksaan" },
-      ],
-    },
+    // {
+    //   key: "jenis",
+    //   label: t("testTypes"),
+    //   children: [
+    //     { label: t("labTest"), href: "/tes-laboratorium" },
+    //     { label: t("genomic"), href: "/genomik" },
+    //     { label: t("homecare"), href: "/homecare-service" },
+    //     { label: t("panel"), href: "/panel-pemeriksaan" },
+    //   ],
+    // },
+    { key: "labTest", label: t("labTest"), href: "/tes-laboratorium" },
     { key: "consult", label: t("consult"), href: "/konsultasi-dokter" },
     { key: "clinic", label: t("clinic"), href: "/layanan-klinik" },
     {
