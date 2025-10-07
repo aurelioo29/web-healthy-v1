@@ -154,7 +154,7 @@ export default function CabangDiagnosiSection() {
               className={`rounded-full px-6 py-2 text-sm font-medium ring-1 transition
                 ${
                   isActive
-                    ? "bg-[#4698E3] text-white ring-transparent"
+                    ? "bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] text-white ring-transparent"
                     : "bg-white text-slate-800 ring-slate-200 hover:bg-slate-50"
                 }`}
               aria-pressed={isActive}
@@ -264,7 +264,7 @@ function Card({ branch }) {
       {/* CTA */}
       <Link
         href={href}
-        className="mt-7 inline-flex w-full items-center justify-center rounded-xl bg-[#4698E3] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3b86cf] transition"
+        className="mt-7 inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-4 py-2 text-sm font-semibold text-white hover:bg-[#3b86cf] transition"
       >
         Selengkapnya
       </Link>

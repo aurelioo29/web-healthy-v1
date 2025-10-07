@@ -173,8 +173,7 @@ export default async function BranchDetailPage({ params }) {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl px-4 py-2 font-semibold text-white transition"
-                style={{ backgroundColor: UI_CONFIG.themeColor }}
+                className="inline-flex items-center gap-2 rounded-xl px-4 py-2 font-semibold text-white transition bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468]"
               >
                 <MessageCircle className="h-5 w-5" />
                 Pesan Sekarang
