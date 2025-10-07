@@ -13,7 +13,7 @@ const buildWaLink = (msg) =>
     msg
   )}`;
 
-const IMAGE_BASE = "http://192.168.0.103:8000/storage/assets";
+const IMAGE_BASE = `${process.env.NEXT_FETCH_LARAVEL_API_URL}/storage/assets`;
 
 function DoctorCard({ doc }) {
   const ctaHref =

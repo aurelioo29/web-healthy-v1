@@ -1,5 +1,5 @@
 export async function GET() {
-  const upstream = "http://192.168.0.103:8000/getDataDokter";
+  const upstream = "http://192.168.0.101:8000/getDataDokter";
   try {
     const r = await fetch(upstream, { cache: "no-store" });
     if (!r.ok) {

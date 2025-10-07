@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 export default function SplashScreen({
-  logoSrc = "/images/splash-screen.gif",
+  logoSrc = "/images/home-pages/logo.svg",
   bg = "#ffffff",
   minDuration = 1000,
 }) {
