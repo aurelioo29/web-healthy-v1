@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Settings, CircleX, Search } from "lucide-react";
+import { Settings, CircleX, Search, KeyRound } from "lucide-react";
 import api from "@/lib/axios";
 import CreateUserButton from "./UserCreateButton";
 import RoleModal from "./RoleModal";
+import ChangePasswordModal from "./UserChangePasswordModal";
 
 const STATUS_STYLE = {
   active: {
@@ -81,6 +82,7 @@ export default function UserTable() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
+  const [passOpen, setPassOpen] = useState(false);
 
   async function fetchUsers({
     pageArg = page,
@@ -145,6 +147,11 @@ export default function UserTable() {
   const onEdit = (user) => {
     setSelected(user);
     setRoleOpen(true);
+  };
+
+  const onChangePassword = (user) => {
+    setSelected(user);
+    setPassOpen(true);
   };
 
   const onDelete = async (user) => {
@@ -315,7 +322,14 @@ export default function UserTable() {
                       >
                         <Settings size={18} />
                       </button>
-
+                      <button
+                        type="button"
+                        title="Change password"
+                        onClick={() => onChangePassword(u)}
+                        className="rounded-lg p-2 text-amber-600 hover:bg-amber-50 cursor-pointer"
+                      >
+                        <KeyRound size={18} />
+                      </button>
                       <button
                         type="button"
                         title="Delete"
@@ -353,6 +367,16 @@ export default function UserTable() {
         user={selected}
         onSaved={() => {
           // reload data setelah save
+          fetchUsers({ pageArg: page, sizeArg: size, searchArg: search });
+        }}
+      />
+
+      <ChangePasswordModal
+        open={passOpen}
+        onClose={() => setPassOpen(false)}
+        user={selected}
+        onSaved={() => {
+          // tidak perlu refetch list, tapi kalau ingin silakan
           fetchUsers({ pageArg: page, sizeArg: size, searchArg: search });
         }}
       />
