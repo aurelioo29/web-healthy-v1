@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Settings, CircleX, Search, KeyRound } from "lucide-react";
 import api from "@/lib/axios";
-import CreateUserButton from "./UserCreateButton";
+import CreateUserButton from "./CreateUserButton";
 import RoleModal from "./RoleModal";
 import ChangePasswordModal from "./UserChangePasswordModal";
 
@@ -84,6 +84,27 @@ export default function UserTable() {
   const [err, setErr] = useState("");
   const [passOpen, setPassOpen] = useState(false);
 
+  // role saya (yang login)
+  const [myRole, setMyRole] = useState("");
+
+  // ranking role: makin tinggi makin berkuasa
+  const RANK = { admin: 1, superadmin: 2, developer: 3 };
+  const cantActOn = (targetRoleRaw) =>
+    (RANK[myRole] || 0) <= (RANK[targetRoleRaw] || 0);
+
+  // ambil role saya
+  useEffect(() => {
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    if (!token) return;
+    api
+      .get("/auth/me", { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) =>
+        setMyRole(String(res?.data?.user?.role || "").toLowerCase())
+      )
+      .catch(() => setMyRole(""));
+  }, []);
+
   async function fetchUsers({
     pageArg = page,
     sizeArg = size,
@@ -103,35 +124,40 @@ export default function UserTable() {
 
       const { users, totalUser, totalPages, currentPage } = data.data;
 
-      const normalized = (users || []).map((u) => ({
-        id: u.id,
-        name: u.name || u.username,
-        username: u.username,
-        email: u.email,
-        role:
-          String(u.role || "").toLowerCase() === "superadmin"
-            ? "Superadmin"
-            : "Admin",
-        createdAt: u.created_at
-          ? new Date(u.created_at).toLocaleDateString("en-GB")
-          : "-",
-        // aktif hijau; selain itu oranye
-        status:
-          (u.status || (u.isVerified ? "active" : "inactive")).toLowerCase() ===
-          "active"
-            ? "active"
-            : "inactive",
-        avatar: `https://i.pravatar.cc/80?u=${encodeURIComponent(
-          u.email || u.username || String(u.id)
-        )}`,
-      }));
+      const normalized = (users || []).map((u) => {
+        const roleRaw = String(u.role || "").toLowerCase();
+        return {
+          id: u.id,
+          name: u.name || u.username,
+          username: u.username,
+          email: u.email,
+          role:
+            roleRaw === "developer"
+              ? "Developer"
+              : roleRaw === "superadmin"
+              ? "Superadmin"
+              : "Admin",
+          roleRaw, // ← simpan mentah untuk guard
+          createdAt: u.created_at
+            ? new Date(u.created_at).toLocaleDateString("en-GB")
+            : "-",
+          status:
+            (
+              u.status || (u.isVerified ? "active" : "inactive")
+            ).toLowerCase() === "active"
+              ? "active"
+              : "inactive",
+          avatar: `https://i.pravatar.cc/80?u=${encodeURIComponent(
+            u.email || u.username || String(u.id)
+          )}`,
+        };
+      });
 
       setRows(normalized);
       setMeta({ totalUser, totalPages, currentPage });
     } catch (e) {
       const status = e?.response?.status;
       if (status === 404) {
-        // controller kamu return 404 kalau kosong
         setRows([]);
         setMeta({ totalUser: 0, totalPages: 1, currentPage: 1 });
       } else {
@@ -155,6 +181,11 @@ export default function UserTable() {
   };
 
   const onDelete = async (user) => {
+    // server side harus tetap validasi; guard kecil di UI:
+    if (cantActOn(user.roleRaw)) {
+      alert("Anda tidak memiliki izin untuk menghapus user dengan role ini.");
+      return;
+    }
     if (
       !confirm(
         `Hapus user "${user.username}"? Tindakan ini tidak bisa di-undo.`
@@ -163,7 +194,6 @@ export default function UserTable() {
       return;
     try {
       await api.delete(`/users/${user.id}`);
-      // refresh halaman 1 biar konsisten
       await fetchUsers({ pageArg: 1, sizeArg: size, searchArg: "" });
       setPage(1);
     } catch (e) {
@@ -225,6 +255,7 @@ export default function UserTable() {
 
           <div className="flex items-center gap-2">
             <CreateUserButton
+              currentRole={myRole}
               onSuccess={() =>
                 fetchUsers({ pageArg: 1, sizeArg: size, searchArg: "" })
               }
@@ -273,7 +304,7 @@ export default function UserTable() {
             {loading && (
               <tr>
                 <td colSpan={6} className="py-10 text-center text-slate-500">
-                  Loading users… santai, server-mu bukan Usain Bolt.
+                  Loading users…
                 </td>
               </tr>
             )}
@@ -287,61 +318,95 @@ export default function UserTable() {
             )}
 
             {!loading &&
-              rows.map((u, idx) => (
-                <tr key={u.id} className="hover:bg-slate-50/60">
-                  <td className="py-4 pl-6 pr-3 text-slate-700">
-                    {(meta.currentPage - 1) * size + idx + 1}
-                  </td>
-                  <td className="py-4 px-3">
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={u.avatar}
-                        alt={u.name}
-                        className="h-9 w-9 rounded-full object-cover ring-1 ring-slate-200"
-                      />
-                      <div>
-                        <div className="font-medium text-slate-900">
-                          {u.name}
+              rows.map((u, idx) => {
+                const protectedRow = cantActOn(u.roleRaw);
+                return (
+                  <tr key={u.id} className="hover:bg-slate-50/60">
+                    <td className="py-4 pl-6 pr-3 text-slate-700">
+                      {(meta.currentPage - 1) * size + idx + 1}
+                    </td>
+                    <td className="py-4 px-3">
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={u.avatar}
+                          alt={u.name}
+                          className="h-9 w-9 rounded-full object-cover ring-1 ring-slate-200"
+                        />
+                        <div>
+                          <div className="font-medium text-slate-900">
+                            {u.name}
+                          </div>
+                          <div className="text-xs text-slate-500">
+                            {u.email}
+                          </div>
                         </div>
-                        <div className="text-xs text-slate-500">{u.email}</div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="py-4 px-3 text-slate-600">{u.createdAt}</td>
-                  <td className="py-4 px-3 text-slate-700">{u.role}</td>
-                  <td className="py-4 px-3">
-                    <StatusBadge value={u.status} />
-                  </td>
-                  <td className="py-4 pr-6 pl-3">
-                    <div className="flex items-center justify-end gap-3">
-                      <button
-                        type="button"
-                        title="Settings"
-                        onClick={() => onEdit(u)} // ← pasang handler
-                        className="rounded-lg p-2 text-sky-600 hover:bg-sky-100 cursor-pointer"
-                      >
-                        <Settings size={18} />
-                      </button>
-                      <button
-                        type="button"
-                        title="Change password"
-                        onClick={() => onChangePassword(u)}
-                        className="rounded-lg p-2 text-amber-600 hover:bg-amber-50 cursor-pointer"
-                      >
-                        <KeyRound size={18} />
-                      </button>
-                      <button
-                        type="button"
-                        title="Delete"
-                        onClick={() => onDelete(u)} // ← pasang handler
-                        className="rounded-lg p-2 text-rose-600 hover:bg-rose-50 cursor-pointer"
-                      >
-                        <CircleX size={18} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className="py-4 px-3 text-slate-600">{u.createdAt}</td>
+                    <td className="py-4 px-3 text-slate-700">{u.role}</td>
+                    <td className="py-4 px-3">
+                      <StatusBadge value={u.status} />
+                    </td>
+                    <td className="py-4 pr-6 pl-3">
+                      <div className="flex items-center justify-end gap-3">
+                        <button
+                          type="button"
+                          title={
+                            protectedRow
+                              ? "You cannot edit this role"
+                              : "Settings"
+                          }
+                          onClick={() => !protectedRow && onEdit(u)}
+                          disabled={protectedRow}
+                          className={`rounded-lg p-2 ${
+                            protectedRow
+                              ? "opacity-40 cursor-not-allowed"
+                              : "text-sky-600 hover:bg-sky-100 cursor-pointer"
+                          }`}
+                        >
+                          <Settings size={18} />
+                        </button>
+
+                        <button
+                          type="button"
+                          title={
+                            protectedRow
+                              ? "You cannot change this password"
+                              : "Change password"
+                          }
+                          onClick={() => !protectedRow && onChangePassword(u)}
+                          disabled={protectedRow}
+                          className={`rounded-lg p-2 ${
+                            protectedRow
+                              ? "opacity-40 cursor-not-allowed"
+                              : "text-amber-600 hover:bg-amber-50 cursor-pointer"
+                          }`}
+                        >
+                          <KeyRound size={18} />
+                        </button>
+
+                        <button
+                          type="button"
+                          title={
+                            protectedRow
+                              ? "You cannot delete this user"
+                              : "Delete"
+                          }
+                          onClick={() => !protectedRow && onDelete(u)}
+                          disabled={protectedRow}
+                          className={`rounded-lg p-2 ${
+                            protectedRow
+                              ? "opacity-40 cursor-not-allowed"
+                              : "text-rose-600 hover:bg-rose-50 cursor-pointer"
+                          }`}
+                        >
+                          <CircleX size={18} />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
@@ -365,8 +430,8 @@ export default function UserTable() {
         open={roleOpen}
         onClose={() => setRoleOpen(false)}
         user={selected}
+        myRole={myRole}
         onSaved={() => {
-          // reload data setelah save
           fetchUsers({ pageArg: page, sizeArg: size, searchArg: search });
         }}
       />
@@ -375,8 +440,8 @@ export default function UserTable() {
         open={passOpen}
         onClose={() => setPassOpen(false)}
         user={selected}
+        myRole={myRole} // kalau modal mau ikut guard internal
         onSaved={() => {
-          // tidak perlu refetch list, tapi kalau ingin silakan
           fetchUsers({ pageArg: page, sizeArg: size, searchArg: search });
         }}
       />

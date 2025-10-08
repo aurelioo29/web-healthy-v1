@@ -21,7 +21,7 @@ export default function DashboardManageUserPage() {
       router.replace("/login?next=/dashboard/users");
       return;
     }
-    if (roleLS && roleLS !== "superadmin") {
+    if (roleLS && !["superadmin", "developer"].includes(roleLS)) {
       router.replace("/dashboard");
       return;
     }
@@ -31,8 +31,8 @@ export default function DashboardManageUserPage() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        const role = res?.data?.user?.role;
-        if (role !== "superadmin") {
+        const role = String(res?.data?.user?.role || "").toLowerCase();
+        if (!["superadmin", "developer"].includes(role)) {
           router.replace("/dashboard");
         } else {
           setAllowed(true);

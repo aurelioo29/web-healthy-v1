@@ -209,11 +209,13 @@ export default function NavbarAdmin() {
   const pathname = usePathname();
 
   useEffect(() => {
+    const lsRole = String(localStorage.getItem("role") || "").toLowerCase();
+    if (lsRole) setRole(lsRole); 
     const token = localStorage.getItem("token");
     if (!token) return;
     axios
       .get("/auth/me", { headers: { Authorization: `Bearer ${token}` } })
-      .then((res) => setRole(res.data.user.role))
+      .then((res) => setRole(String(res?.data?.user?.role || "").toLowerCase()))
       .catch(() => setRole(""));
   }, []);
 
@@ -230,9 +232,10 @@ export default function NavbarAdmin() {
     };
   }, [mobileOpen]);
 
+  const canSeeAccountPanel = role === "superadmin" || role === "developer";
   const desktopItems = [
     ...NAV_ITEMS,
-    ...(role === "superadmin" ? [SUPERADMIN_ITEMS] : []),
+    ...(canSeeAccountPanel ? [SUPERADMIN_ITEMS] : []),
   ];
 
   return (

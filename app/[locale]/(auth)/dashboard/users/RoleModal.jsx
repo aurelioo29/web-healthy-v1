@@ -5,14 +5,23 @@ import api from "@/lib/axios";
 
 const BRAND = "#4698E3";
 
-export default function RoleModal({ open, onClose, user, onSaved }) {
+export default function RoleModal({
+  open,
+  onClose,
+  user,
+  onSaved,
+  myRole = "admin",
+}) {
   const [role, setRole] = useState("Admin");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!open) return;
+    const lr = String(user?.role || "").toLowerCase();
     const r =
-      String(user?.role || "").toLowerCase() === "superadmin"
+      lr === "developer"
+        ? "Developer"
+        : lr === "superadmin"
         ? "Superadmin"
         : "Admin";
     setRole(r);
@@ -22,12 +31,16 @@ export default function RoleModal({ open, onClose, user, onSaved }) {
 
   const submit = async (e) => {
     e.preventDefault();
+
+    // hanya Developer yang boleh mengubah SET ke Developer
+    if (String(myRole) !== "developer" && role === "Developer") {
+      alert("Hanya Developer yang boleh mengubah role menjadi Developer.");
+      return;
+    }
+
     try {
       setLoading(true);
-      // kirim "role" huruf kecil ke server (admin|superadmin)
-      await api.put(`/users/${user.id}/role`, {
-        role: role.toLowerCase(),
-      });
+      await api.put(`/users/${user.id}/role`, { role: role.toLowerCase() });
       onSaved?.();
       onClose?.();
     } catch (err) {
@@ -64,6 +77,7 @@ export default function RoleModal({ open, onClose, user, onSaved }) {
           >
             <option>Admin</option>
             <option>Superadmin</option>
+            {myRole === "developer" && <option>Developer</option>}
           </select>
         </div>
 

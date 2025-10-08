@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import { Plus, X, AlertTriangle } from "lucide-react";
 
-export default function CreateUserButton({ onSuccess }) {
+export default function CreateUserButton({ onSuccess, currentRole = "" }) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
     username: "",
@@ -15,14 +15,26 @@ export default function CreateUserButton({ onSuccess }) {
   });
   const [loading, setLoading] = useState(false);
 
-  // ⬇️ new: state error
   const [fieldErr, setFieldErr] = useState({});
   const [globalErr, setGlobalErr] = useState("");
+
+  // superadmin/admin tidak boleh membuat developer
+  const roleOptions =
+    currentRole === "developer"
+      ? ["admin", "superadmin", "developer"]
+      : ["admin", "superadmin"];
+
+  // pastikan value role valid
+  useEffect(() => {
+    if (!roleOptions.includes(form.role)) {
+      setForm((s) => ({ ...s, role: "admin" }));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentRole, open]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((s) => ({ ...s, [name]: value }));
-    // clear error per-field saat user mengetik
     if (fieldErr[name]) {
       const next = { ...fieldErr };
       delete next[name];
@@ -52,12 +64,10 @@ export default function CreateUserButton({ onSuccess }) {
     try {
       await api.post("/auth/create-users", form);
       close();
-      onSuccess?.(); // refresh table
+      onSuccess?.();
     } catch (error) {
       const data = error?.response?.data;
-      // prioritas: errors object
       if (data?.errors && typeof data.errors === "object") {
-        // handle kasus lawas: 'undefined' → jadikan global
         if (data.errors.undefined && !data.errors._global) {
           data.errors._global = data.errors.undefined;
           delete data.errors.undefined;
@@ -98,7 +108,6 @@ export default function CreateUserButton({ onSuccess }) {
               </button>
             </div>
 
-            {/* Global error banner */}
             {globalErr && (
               <div className="mb-4 flex items-start gap-2 rounded-lg border border-rose-200 bg-rose-50 p-3 text-rose-700">
                 <AlertTriangle className="mt-0.5 h-4 w-4" />
@@ -196,8 +205,15 @@ export default function CreateUserButton({ onSuccess }) {
                     fieldErr.role ? "ring-rose-300" : "ring-slate-200"
                   }`}
                 >
-                  <option value="admin">Admin</option>
-                  <option value="superadmin">Superadmin</option>
+                  {roleOptions.map((r) => (
+                    <option key={r} value={r}>
+                      {r === "admin"
+                        ? "Admin"
+                        : r === "superadmin"
+                        ? "Superadmin"
+                        : "Developer"}
+                    </option>
+                  ))}
                 </select>
                 {fieldErr.role && (
                   <p className="mt-1 text-xs text-rose-600">{fieldErr.role}</p>
@@ -222,7 +238,6 @@ export default function CreateUserButton({ onSuccess }) {
               </div>
             </form>
 
-            {/* (Opsional) tampilkan daftar error lain yang tidak terikat field */}
             {Object.entries(fieldErr).filter(
               ([k]) =>
                 ![
