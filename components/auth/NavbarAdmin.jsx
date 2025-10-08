@@ -238,22 +238,36 @@ export default function NavbarAdmin() {
   return (
     <>
       <header className="sticky top-0 z-[200] w-full border-b bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-        <div className="max-w-7xl mx-auto flex h-16 md:h-20 items-center justify-between px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex h-16 md:h-20 lg:h-24 items-center justify-between px-4 sm:px-6">
           {/* Left: Burger + Logo */}
           <div className="flex items-center gap-3">
             <HamburgerButton
               open={mobileOpen}
               onClick={() => setMobileOpen((v) => !v)}
             />
-            <Link href="/dashboard" className="inline-flex items-center">
+
+            {/* Brand group: logo + text */}
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-2 md:gap-3"
+            >
               <Image
-                src="/images/logo.png"
-                alt="Logo"
-                width={140}
-                height={40}
+                src="/images/home-pages/logo.svg"
+                alt="Royal Klinik logo"
+                width={200}
+                height={80}
                 priority
-                className="h-8 w-auto object-contain md:h-9"
+                // Logo makin besar sesuai breakpoint (tanpa mengecil di desktop)
+                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
+                sizes="(max-width: 640px) 140px, (max-width: 768px) 160px, 200px"
               />
+              <span
+                // Sesuaikan tinggi teks dengan tinggi logo
+                className="text-[#001A9E] font-semibold leading-none tracking-tight
+                 text-lg sm:text-xl md:text-2xl lg:text-3xl"
+              >
+                Royal Klinik
+              </span>
             </Link>
           </div>
 
