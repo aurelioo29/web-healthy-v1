@@ -1,4 +1,4 @@
-export default function FooterAdmin({ owner = "Aurelio" }) {
+export default function FooterAdmin({ owner = "Royal Klinik" }) {
   const year = new Date().getFullYear();
 
   return (

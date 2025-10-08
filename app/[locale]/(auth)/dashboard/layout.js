@@ -11,7 +11,7 @@ function DashboardLayout({ children }) {
       <NavbarAdmin />
       <main className="flex-1 pt-16 md:pt-20">{children}</main>
       <ScrollToTopLeft offset={300} />
-      <FooterAdmin owner="Aurelio" />
+      <FooterAdmin owner="Royal Klinik" />
     </div>
   );
 }
