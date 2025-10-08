@@ -2,7 +2,7 @@
 export const dynamic = "force-dynamic"; // jangan di-prerender
 const UPSTREAM =
   process.env.TESTIMONI_UPSTREAM ||
-  "http://192.168.0.101:8000/getDataTestimoni";
+  "https://admin.royal-klinik.cloud/getDataTestimoni";
 
 export async function GET() {
   try {

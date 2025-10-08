@@ -13,7 +13,7 @@ const buildWaLink = (msg) =>
     msg
   )}`;
 
-const IMAGE_BASE = `${process.env.NEXT_FETCH_LARAVEL_API_URL}/storage/assets`;
+const IMAGE_BASE = "https://admin.royal-klinik.cloud//storage/assets";
 
 function DoctorCard({ doc }) {
   const ctaHref =

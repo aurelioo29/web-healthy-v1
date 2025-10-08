@@ -9,8 +9,8 @@ import "swiper/css/pagination";
 import { Quote } from "lucide-react";
 
 /* ===== Konstanta asset LAN ===== */
-const IMAGE_BASE = `${process.env.NEXT_FETCH_LARAVEL_API_URL}/storage/assets`;
-const VIDEO_BASE = `${process.env.NEXT_FETCH_LARAVEL_API_URL}/storage/assets`;
+const IMAGE_BASE = "https://admin.royal-klinik.cloud//storage/assets";
+const VIDEO_BASE = "https://admin.royal-klinik.cloud//storage/assets";
 const AVATAR_PLACEHOLDER = "/icons/auth/avatar.webp";
 
 /* ===== Helpers ===== */
