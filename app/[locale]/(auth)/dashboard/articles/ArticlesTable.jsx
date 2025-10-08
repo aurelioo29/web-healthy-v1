@@ -124,8 +124,6 @@ function StatusBadge({ value }) {
 }
 
 function ArticleRow({ item, me, onEdit, onDelete, onPreview }) {
-  const canEdit = me && item.author_id === me.id;
-
   return (
     <tr className="hover:bg-slate-50/60">
       <td className="py-4 pl-6 pr-3 text-slate-700">{item.rowNo}</td>
@@ -182,23 +180,20 @@ function ArticleRow({ item, me, onEdit, onDelete, onPreview }) {
         <div className="flex justify-end gap-2">
           <button
             type="button"
-            title={canEdit ? "Edit" : "Only author can edit"}
-            disabled={!canEdit}
-            onClick={() => canEdit && onEdit(item)}
-            className={`grid h-8 w-8 place-content-center rounded-full ring-1 ring-slate-200 hover:bg-slate-50 ${
-              !canEdit ? "opacity-40 cursor-not-allowed" : ""
-            }`}
+            title={"Edit"}
+            className={
+              "grid h-8 w-8 place-content-center rounded-full ring-1 ring-slate-200 hover:bg-slate-50"
+            }
           >
             <Pencil className="h-4 w-4 text-slate-700" />
           </button>
           <button
             type="button"
-            title={canEdit ? "Delete" : "Only author can delete"}
-            disabled={!canEdit}
-            onClick={() => canEdit && onDelete(item)}
-            className={`grid h-8 w-8 place-content-center rounded-full ring-1 ring-slate-200 hover:bg-slate-50 ${
-              !canEdit ? "opacity-40 cursor-not-allowed" : ""
-            }`}
+            title={"Delete"}
+            onClick={() => onDelete(item)}
+            className={
+              "grid h-8 w-8 place-content-center rounded-full ring-1 ring-slate-200 hover:bg-slate-50"
+            }
           >
             <Trash2 className="h-4 w-4 text-slate-700" />
           </button>

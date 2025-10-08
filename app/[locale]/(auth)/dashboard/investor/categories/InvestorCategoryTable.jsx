@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import InvestorCategoryFormModal from "./InvestorCategoryFormModal";
+import { Pencil, Trash2, Plus, Search } from "lucide-react";
 
 const BRAND = "#4698E3";
 
@@ -14,7 +15,6 @@ const toYMD = (s) => {
 };
 
 function Row({ item, me, onEdit, onDelete }) {
-  const canEdit = me && item.author_id === me.id;
   return (
     <tr className="hover:bg-slate-50/60">
       <td className="py-4 pl-6 pr-3 text-slate-700">{item.rowNo}</td>
@@ -30,24 +30,20 @@ function Row({ item, me, onEdit, onDelete }) {
       <td className="py-4 pr-6 pl-3">
         <div className="flex justify-end gap-2">
           <button
-            title={canEdit ? "Edit" : "Only author can edit"}
-            disabled={!canEdit}
-            onClick={() => canEdit && onEdit(item)}
-            className={`px-3 py-1.5 rounded-lg ring-1 ring-slate-200 hover:bg-slate-50 ${
-              !canEdit ? "opacity-40 cursor-not-allowed" : ""
-            }`}
+            type="button"
+            title={"Edit"}
+            onClick={() => onEdit(item)}
+            className="grid h-8 w-8 place-content-center rounded-full ring-1 ring-slate-200 hover:bg-sky-100"
           >
-            Edit
+            <Pencil className="h-4 w-4 text-slate-700 cursor-pointer hover:text-sky-600" />
           </button>
           <button
-            title={canEdit ? "Delete" : "Only author can delete"}
-            disabled={!canEdit}
-            onClick={() => canEdit && onDelete(item)}
-            className={`px-3 py-1.5 rounded-lg ring-1 ring-slate-200 hover:bg-slate-50 ${
-              !canEdit ? "opacity-40 cursor-not-allowed" : ""
-            }`}
+            type="button"
+            title={"Delete"}
+            onClick={() => onDelete(item)}
+            className="grid h-8 w-8 place-content-center rounded-full ring-1 ring-slate-200 hover:bg-rose-100"
           >
-            Delete
+            <Trash2 className="h-4 w-4 text-slate-700 hover:text-rose-600 cursor-pointer" />
           </button>
         </div>
       </td>
