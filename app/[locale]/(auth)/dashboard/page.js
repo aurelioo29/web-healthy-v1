@@ -310,13 +310,13 @@ export default function DashboardPage() {
           </p>
         </div>
         <div className="flex gap-2">
-          <Link
+          {/* <Link
             href="/dashboard/csr"
             className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-white text-sm font-medium"
             style={{ background: BRAND }}
           >
             <Plus className="h-4 w-4" /> Add CSR
-          </Link>
+          </Link> */}
           {me.role === "superadmin" && (
             <Link
               href="/dashboard/users"
