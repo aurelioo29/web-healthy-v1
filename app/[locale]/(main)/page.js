@@ -20,7 +20,7 @@ export default function Home() {
 
       {/* <StatsGrid /> */}
 
-      <ImageCardGrid />
+      <ImageCardGrid limit={4} />
 
       <ProdukLayanan />
 

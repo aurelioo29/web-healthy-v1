@@ -3,37 +3,21 @@
 import React from "react";
 import Image from "next/image";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import api from "@/lib/axios";
 
 /* --- loader agar URL remote bisa dipakai tanpa next.config --- */
 const passThroughLoader = ({ src }) => src;
+const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
 
-/* ====== DEMO ITEMS (boleh ganti ke /public/images/...) ====== */
-const DEMO_ITEMS = [
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=80",
-    title: "Ruang Tunggu",
-    alt: "Ruang tunggu",
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
-    title: "Poli Umum",
-    alt: "Poli umum",
-  },
-  {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=1200&q=80",
-    title: "Apotek",
-    alt: "Apotek",
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80",
-    title: "Vaksinasi",
-    alt: "Vaksinasi",
-  },
-];
+/* rakit URL publik kalau BE hanya kirim relative path */
+const ensureImageUrl = (imageUrl, image, folder = "home-card") => {
+  if (imageUrl) return imageUrl;
+  if (!image) return "";
+  if (/^https?:\/\//i.test(image)) return image;
+  if (!ASSET_BASE) return "";
+  const rel = image.includes("/") ? image : `${folder}/${image}`;
+  return `${ASSET_BASE.replace(/\/$/, "")}/${rel.replace(/^\/+/, "")}`;
+};
 
 /* ===== Preview Modal with animation ===== */
 function PreviewModal({ open, item, onClose }) {
@@ -84,12 +68,7 @@ function PreviewModal({ open, item, onClose }) {
                 transition={{ type: "spring", stiffness: 200, damping: 25 }}
                 drag={zoomed}
                 dragMomentum={false}
-                dragConstraints={{
-                  left: -120,
-                  right: 120,
-                  top: -80,
-                  bottom: 80,
-                }}
+                dragConstraints={{ left: -120, right: 120, top: -80, bottom: 80 }}
                 onDoubleClick={() => setZoomed((z) => !z)}
                 whileTap={{ cursor: zoomed ? "grabbing" : "zoom-out" }}
               >
@@ -142,12 +121,66 @@ function PreviewModal({ open, item, onClose }) {
   );
 }
 
-/* ===== Card Grid ===== */
-export default function ImageCardGrid({ items = [] }) {
+/* ===== Card Grid (integrated fetch) ===== */
+export default function ImageCardGrid({ items, limit = 4 }) {
   const [preview, setPreview] = React.useState(null);
+  const [fetched, setFetched] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
-  // kalau tidak ada props, pakai DEMO_ITEMS
-  const list = items?.length ? items : DEMO_ITEMS;
+  // kalau items tidak diberikan → fetch 4 terbaru & published
+  React.useEffect(() => {
+    if (items?.length) return;
+    let alive = true;
+    (async () => {
+      setLoading(true);
+      try {
+        const { data } = await api.get("/upload/home-card", {
+          params: { page: 1, size: limit, status: "published", sort: "-created_at" },
+          headers: { "Cache-Control": "no-cache" },
+        });
+
+        const payload = data?.data ?? data ?? {};
+        const list =
+          (Array.isArray(payload) && payload) ||
+          payload.homeCards ||
+          payload.items ||
+          payload.rows ||
+          payload.data ||
+          [];
+
+        const mapped = list
+          .filter((it) => String(it.status).toLowerCase() === "published")
+          .sort(
+            (a, b) =>
+              new Date(b.created_at || b.createdAt || 0) -
+              new Date(a.created_at || a.createdAt || 0)
+          )
+          .slice(0, limit)
+          .map((it) => ({
+            id: it.id,
+            src: ensureImageUrl(it.imageUrl, it.image, "home-card"),
+            title: it.title || "",
+            alt: it.title || "Home card",
+          }))
+          .filter((it) => it.src);
+
+        if (alive) setFetched(mapped);
+      } catch {
+        if (alive) setFetched([]);
+      } finally {
+        if (alive) setLoading(false);
+      }
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [items, limit]);
+
+  // prioritas: props.items kalau ada; else hasil fetch
+  const list = items?.length ? items : fetched;
+
+  if (loading && !list.length) return null; // bisa ganti skeleton
+  if (!list.length) return null;
 
   return (
     <>
