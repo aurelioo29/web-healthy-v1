@@ -1,11 +1,12 @@
 import LayananHero from "@/components/LayananHero";
 import React from "react";
 import LayananKlinik from "@/components/LayananKlinik";
+import HeroSectionClient from "@/components/HeroSectionClient";
 
 export default function LayananKlinikPage() {
   return (
     <>
-      <LayananHero />
+      <HeroSectionClient pageKey="clinic_services" />
       <LayananKlinik tNs="vitamin" />
     </>
   );

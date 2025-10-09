@@ -1,11 +1,11 @@
-import InverstorHero from "@/components/InverstorHero";
+import HeroSectionClient from "@/components/HeroSectionClient";
 import InvestorCard from "@/components/InvestorCard";
 import React from "react";
 
 export default function HubunganInvestorPage() {
   return (
     <div>
-      <InverstorHero />
+      <HeroSectionClient pageKey="investor_relations" />
       <InvestorCard />
     </div>
   );

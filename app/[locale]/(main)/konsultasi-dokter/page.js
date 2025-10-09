@@ -3,13 +3,13 @@ import Benefit from "@/components/Benefit";
 import DNAandMe from "@/components/DNAandMe";
 import DnaFeatures from "@/components/DnaFeatures";
 import DoctorsSection from "@/components/DoctorSection";
-import KonsultasiHero from "@/components/KonsultasiHero";
+import HeroSectionClient from "@/components/HeroSectionClient";
 import React from "react";
 
 export default function KonsultasiDokterPage() {
   return (
     <>
-      <KonsultasiHero />
+      <HeroSectionClient pageKey="consultation" />
       <DoctorsSection />
       <DNAandMe />
       <DnaFeatures />

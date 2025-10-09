@@ -1,5 +1,5 @@
 import About from "@/components/About";
-import AboutHero from "@/components/AboutHero";
+import HeroSectionClient from "@/components/HeroSectionClient";
 import FounderProfile from "@/components/FounderProfile";
 import GaleriKomitmen from "@/components/GaleriKomitmen";
 import Sertifikat from "@/components/Sertifikat";
@@ -9,7 +9,7 @@ import React from "react";
 export default function TentangKamiPages() {
   return (
     <>
-      <AboutHero />
+      <HeroSectionClient pageKey="about" />
       <About />
       <FounderProfile />
       <Sertifikat />
