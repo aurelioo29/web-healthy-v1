@@ -72,8 +72,8 @@ export default function DoctorsSection() {
           id: d.id,
           name: d.nama_dokter || d.name || "Dokter",
           role: d.spesialisasi || d.specialization || "Dokter",
-          img: d.foto
-            ? `${IMAGE_BASE.replace(/\/$/, "")}/${String(d.foto).replace(
+          img: d.foto_dokter
+            ? `${IMAGE_BASE.replace(/\/$/, "")}/${String(d.foto_dokter).replace(
                 /^\//,
                 ""
               )}`
