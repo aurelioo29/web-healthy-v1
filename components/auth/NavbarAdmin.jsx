@@ -100,6 +100,8 @@ const NAV_ITEMS = [
     label: "Slideshow",
     items: [
       // { label: "Manage Testimoni", href: "/dashboard/testimoni" },
+      { label: "Manage Hero", href: "/dashboard/hero" },
+      { label: "Manage Produk & Layanan", href: "/dashboard/produk-layanan" },
       { label: "Manage Event & Promo", href: "/dashboard/event-promo" },
       { label: "Manage CSR", href: "/dashboard/csr" },
       { label: "Manage Layanan Klinik", href: "/dashboard/layanan-klinik" },
@@ -210,7 +212,7 @@ export default function NavbarAdmin() {
 
   useEffect(() => {
     const lsRole = String(localStorage.getItem("role") || "").toLowerCase();
-    if (lsRole) setRole(lsRole); 
+    if (lsRole) setRole(lsRole);
     const token = localStorage.getItem("token");
     if (!token) return;
     axios
