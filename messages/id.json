@@ -24,7 +24,7 @@
   },
   "produkLayanan": {
     "title": "Produk dan Layanan Kami",
-    "description": "Layanan diagnostik lengkap dengan teknologi canggih dan hasil akurat, mendukung keputusan kesehatan yang tepat.",
+    "description": "Layanan royal klinik lengkap dengan teknologi canggih dan hasil akurat, mendukung keputusan kesehatan yang tepat.",
     "card": {
       "card1": {
         "title": "Laboratorium Klinik",
@@ -167,8 +167,8 @@
     }
   },
   "layanan": {
-    "title": "Layanan Diagnos yang Paling dicari",
-    "description": "Layanan Diagnos paling dicari, memberikan solusi kesehatan cepat, akurat, dan terpercaya.",
+    "title": "Layanan Royal Klinik yang Paling dicari",
+    "description": "Layanan Royal Klinik paling dicari, memberikan solusi kesehatan cepat, akurat, dan terpercaya.",
     "card": {
       "card1": {
         "title": "Paket Kesehatan Ibu",
@@ -285,7 +285,7 @@
   },
   "aboutHero": {
     "title": "Tentang Kami",
-    "body": "Laboratorium Diagnos hadir untuk memenuhi kebutuhan masyarakat dengan visi dan misi yang jelas untuk mewujudkan Indonesia yang lebih sehat.",
+    "body": "Royal Klinik hadir untuk memenuhi kebutuhan masyarakat dengan visi dan misi yang jelas untuk mewujudkan Indonesia yang lebih sehat dengan layanan kesehatan Modern dan Inovatif",
     "cta": "Lihat Selengkapnya"
   },
   "komitmen": {
@@ -580,12 +580,12 @@
       },
       "card4": {
         "title": "Tenaga Medis Profesional",
-        "desc": "Ditangani oleh petugas terlatih dan berpengalaman, sesuai standar layanan Diagnos.",
+        "desc": "Ditangani oleh petugas terlatih dan berpengalaman, sesuai standar layanan Royal Klinik.",
         "icon": "/icons/homecare-pages/4.svg"
       },
       "card5": {
         "title": "Hasil Pemeriksaan Terpercaya",
-        "desc": "Sampel Anda diproses di laboratorium Diagnos dengan akurasi tinggi dan teknologi mutakhir",
+        "desc": "Sampel Anda diproses di laboratorium Royal Klinik dengan akurasi tinggi dan teknologi mutakhir",
         "icon": "/icons/homecare-pages/5.svg"
       }
     }
