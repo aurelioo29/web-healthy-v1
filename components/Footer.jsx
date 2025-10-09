@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { Link } from "@/lib/navigation";
 import { useTranslations } from "next-intl";
 import { Facebook, Instagram, Youtube, Whats } from "lucide-react";
+
+const APK_URL = "/apk/royal_klinik.apk";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -61,6 +62,15 @@ export default function Footer() {
 
               {/* deretan tombol WA (sebaris, wrap kalau sempit) */}
               <div className="mt-3 flex items-center gap-3 flex-wrap">
+                <SocialIcon href="https://wa.me/6281161617180" label="WhatsApp">
+                  <img
+                    src="/icons/sosmed/whatsApp.svg"
+                    alt=""
+                    className="h-7 w-7"
+                  />
+                  <span className="">0811-6161-7180</span>
+                </SocialIcon>
+
                 <SocialIcon href="https://wa.me/6281161617181" label="WhatsApp">
                   <img
                     src="/icons/sosmed/whatsApp.svg"
@@ -70,13 +80,13 @@ export default function Footer() {
                   <span className="">0811-6161-7181</span>
                 </SocialIcon>
 
-                <SocialIcon href="https://wa.me/6281161617180" label="WhatsApp">
+                <SocialIcon href="https://wa.me/6281161617182" label="WhatsApp">
                   <img
                     src="/icons/sosmed/whatsApp.svg"
                     alt=""
                     className="h-7 w-7"
                   />
-                  <span className="">0811-6161-7180</span>
+                  <span className="">0811-6161-7182</span>
                 </SocialIcon>
               </div>
             </div>
@@ -90,7 +100,11 @@ export default function Footer() {
             <div className="md:col-span-8">
               <p className="text-base font-semibold">{t("download.title")}</p>
               <div className="mt-4 flex flex-wrap items-center gap-3">
-                <a href="#" aria-label="Google Play">
+                <a
+                  href={APK_URL}
+                  download="royal_klinik.apk"
+                  aria-label="Download APK"
+                >
                   <img
                     src="/images/home-pages/badge-playstore.webp"
                     alt="Get it on Google Play"
