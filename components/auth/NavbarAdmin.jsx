@@ -100,6 +100,7 @@ const NAV_ITEMS = [
     label: "Slideshow",
     items: [
       // { label: "Manage Testimoni", href: "/dashboard/testimoni" },
+      { label: "Manage Home Card", href: "/dashboard/home-card" },
       { label: "Manage Hero", href: "/dashboard/hero" },
       { label: "Manage Produk & Layanan", href: "/dashboard/produk-layanan" },
       { label: "Manage Event & Promo", href: "/dashboard/event-promo" },
