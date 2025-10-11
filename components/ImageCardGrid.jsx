@@ -68,7 +68,12 @@ function PreviewModal({ open, item, onClose }) {
                 transition={{ type: "spring", stiffness: 200, damping: 25 }}
                 drag={zoomed}
                 dragMomentum={false}
-                dragConstraints={{ left: -120, right: 120, top: -80, bottom: 80 }}
+                dragConstraints={{
+                  left: -120,
+                  right: 120,
+                  top: -80,
+                  bottom: 80,
+                }}
                 onDoubleClick={() => setZoomed((z) => !z)}
                 whileTap={{ cursor: zoomed ? "grabbing" : "zoom-out" }}
               >
@@ -135,7 +140,12 @@ export default function ImageCardGrid({ items, limit = 4 }) {
       setLoading(true);
       try {
         const { data } = await api.get("/upload/home-card", {
-          params: { page: 1, size: limit, status: "published", sort: "-created_at" },
+          params: {
+            page: 1,
+            size: limit,
+            status: "published",
+            sort: "-created_at",
+          },
           headers: { "Cache-Control": "no-cache" },
         });
 
@@ -210,13 +220,13 @@ export default function ImageCardGrid({ items, limit = 4 }) {
                   fill
                   loader={passThroughLoader}
                   unoptimized
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                  className="object-contain transition-transform duration-500 group-hover:scale-[1.05]"
                   sizes="(max-width:1024px) 100vw, 25vw"
                 />
               </div>
 
               <div className="p-4">
-                <h3 className="text-base font-semibold text-slate-900 line-clamp-1">
+                <h3 className="text-base font-semibold text-slate-900 line-clamp-1 text-center">
                   {it.title || "Untitled"}
                 </h3>
               </div>

@@ -201,7 +201,7 @@ export default function EventPromo() {
                   alt={s.title || `Promo ${idx + 1}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 1200px"
-                  className="bg-white object-contain sm:object-cover object-[60%_40%] sm:object-center"
+                  className="bg-white object-contain sm:object-contain object-[60%_40%] sm:object-center"
                   priority={idx === 0}
                 />
 

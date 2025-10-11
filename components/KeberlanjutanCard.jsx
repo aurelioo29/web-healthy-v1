@@ -89,7 +89,7 @@ function CsrCard({ item, t }) {
             src={img}
             alt={title}
             loading="lazy"
-            className="h-56 w-full object-cover"
+            className="h-56 w-full object-contain"
           />
         ) : (
           <div className="h-56 w-full grid place-content-center bg-slate-100 text-slate-500 text-sm">
