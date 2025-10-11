@@ -20,7 +20,7 @@ export default function ActivityLogsPage() {
       .get("/auth/me", { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
         const user = res.data?.user;
-        if (!user || user.role !== "superadmin") {
+        if (!user || user.role !== "superadmin" && user.role !== "developer") {
           router.replace("/dashboard"); // tendang balik
           return;
         }

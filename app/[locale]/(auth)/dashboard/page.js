@@ -317,7 +317,7 @@ export default function DashboardPage() {
           >
             <Plus className="h-4 w-4" /> Add CSR
           </Link> */}
-          {me.role === "superadmin" && (
+          {(me.role === "superadmin" || me.role === "developer") && (
             <Link
               href="/dashboard/users"
               className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm ring-1 ring-slate-200 hover:bg-slate-50"
@@ -351,7 +351,7 @@ export default function DashboardPage() {
             <h2 className="text-base font-semibold text-slate-900">
               Recent Activity
             </h2>
-            {me.role === "superadmin" ? (
+            {me.role === "superadmin" || me.role === "developer" ? (
               <Link
                 href="/dashboard/activity-logs"
                 className="text-sm font-medium"
@@ -426,7 +426,7 @@ export default function DashboardPage() {
             >
               <Tag className="h-4 w-4" /> Manage Categories E-Catalog
             </Link>
-            {me.role === "superadmin" && (
+            {(me.role === "superadmin" || me.role === "developer") && (
               <>
                 <Link
                   href="/dashboard/users"
