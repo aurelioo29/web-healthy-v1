@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { X, Upload, Loader2 } from "lucide-react";
 import api from "@/lib/axios";
-import CsrEditor from "../csr/CsrEditor"; // ← sesuaikan path jika perlu
+import CsrEditor from "../csr/CsrEditor";
 
 /* =====================
    Constants
@@ -40,10 +40,11 @@ const PAGE_OPTIONS = [
   ["location", "Location"],
 ];
 
-// ✅ ini aman dipakai (value ENUM, label untuk UI)
+// ✅ termasuk "full"
 const POS_OPTIONS = [
   ["left", "Left (image kiri, text kanan)"],
   ["right", "Right (image kanan, text kiri)"],
+  ["full", "Full image (tanpa blok teks)"],
 ];
 
 /* =====================
@@ -63,7 +64,7 @@ function FieldError({ children }) {
   return <p className="mt-1 text-xs text-rose-600">{children}</p>;
 }
 
-/** Kirim i18n 3 gaya (keyed, array+locale, flat) biar kompatibel semua BE */
+/** Kirim i18n 3 gaya (keyed, array+locale, flat) */
 function appendI18nToFormData(fd, i18nObj) {
   const locales = Object.keys(i18nObj);
   locales.forEach((loc, idx) => {
@@ -141,7 +142,7 @@ function normalizeI18n(src, initialData) {
   return base;
 }
 
-// 🆕 bikin alt dari nama file biar rapi (contoh: hero-banner.webp -> "Hero Banner")
+// Generate alt dari nama file: hero-banner.webp -> "Hero Banner"
 const prettifyFilename = (name = "") => {
   const n = String(name).replace(/\.[^/.]+$/, "");
   const spaced = n.replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
@@ -151,8 +152,11 @@ const prettifyFilename = (name = "") => {
     .join(" ");
 };
 
-// 🆕 ambil label halaman dari PAGE_OPTIONS
 const pageLabel = (key) => PAGE_OPTIONS.find(([k]) => k === key)?.[1] || key;
+
+// util buat objek i18n kosong sesuai LOCALES
+const makeEmptyI18n = () =>
+  LOCALES.reduce((acc, l) => ({ ...acc, [l.code]: { ...EMPTY_LOCALE } }), {});
 
 /* =====================
    Component
@@ -173,12 +177,9 @@ export default function HeroSectionFormModal({
 
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
-  const [imageAlt, setImageAlt] = useState("");
+  const [imageAltInput, setImageAltInput] = useState(""); // ← alt bisa diisi manual
 
-  const [i18n, setI18n] = useState({
-    id: { ...EMPTY_LOCALE },
-    en: { ...EMPTY_LOCALE },
-  });
+  const [i18n, setI18n] = useState(makeEmptyI18n());
   const [activeLocale, setActiveLocale] = useState("id");
 
   const [saving, setSaving] = useState(false);
@@ -202,7 +203,7 @@ export default function HeroSectionFormModal({
 
       setImageFile(null);
       setImagePreview(initialData.imageUrl || buildImageUrl(initialData.image));
-      setImageAlt(initialData.image_alt || "");
+      setImageAltInput(initialData.image_alt || "");
 
       const src = initialData.i18n || initialData.translations || null;
       setI18n(normalizeI18n(src, initialData));
@@ -214,8 +215,8 @@ export default function HeroSectionFormModal({
       setIsActive(true);
       setImageFile(null);
       setImagePreview("");
-      setImageAlt("");
-      setI18n({ id: { ...EMPTY_LOCALE }, en: { ...EMPTY_LOCALE } });
+      setImageAltInput("");
+      setI18n(makeEmptyI18n());
       setActiveLocale("id");
     }
   }, [open, isEdit, initialData]);
@@ -225,9 +226,9 @@ export default function HeroSectionFormModal({
     const f = e.target.files?.[0];
     setImageFile(f || null);
     setImagePreview(f ? URL.createObjectURL(f) : "");
-    // 🆕 auto-isi alt dari nama file kalau belum ada
-    if (f && !imageAlt) {
-      setImageAlt(prettifyFilename(f.name));
+    // auto-isi alt dari nama file kalau input masih kosong
+    if (f && !imageAltInput) {
+      setImageAltInput(prettifyFilename(f.name));
     }
   };
 
@@ -247,12 +248,12 @@ export default function HeroSectionFormModal({
     setErrors({});
 
     try {
-      // 🆕 fallback alt otomatis kalau kosong:
+      // alt final: manual > title aktif locale > title id > title en > nama file > page label
       const fileNameAlt = imageFile?.name
         ? prettifyFilename(imageFile.name)
         : "";
       const computedAlt =
-        (imageAlt || "").trim() ||
+        (imageAltInput || "").trim() ||
         (i18n[activeLocale]?.title || "").trim() ||
         (i18n.id?.title || "").trim() ||
         (i18n.en?.title || "").trim() ||
@@ -260,24 +261,27 @@ export default function HeroSectionFormModal({
         pageLabel(pageKey) ||
         "Hero image";
 
+      // kalau full, kirim i18n kosong supaya FE gak render teks/CTA
+      const i18nToSend = position === "full" ? makeEmptyI18n() : i18n;
+
       const fd = new FormData();
       fd.append("page_key", pageKey);
       fd.append("position", position);
       fd.append("is_active", String(!!isActive));
-      fd.append("image_alt", computedAlt); // ← selalu kirim alt hasil komputasi
+      fd.append("image_alt", computedAlt);
       if (imageFile) fd.append("image", imageFile);
 
-      // kirim semua i18n (multi-format)
-      appendI18nToFormData(fd, i18n);
+      appendI18nToFormData(fd, i18nToSend);
 
       if (isEdit && initialData?.id) {
-        // opsional: BE kamu support update single-locale via ?locale=
+        // untuk kompatibilitas BE yang baca ?locale saat update
         const loc = activeLocale; // 'id' | 'en'
-        fd.append("title", i18n[loc]?.title || "");
-        fd.append("subtitle", i18n[loc]?.subtitle || "");
-        fd.append("body_html", i18n[loc]?.body_html || "");
-        fd.append("cta_text", i18n[loc]?.cta_text || "");
-        fd.append("cta_link", i18n[loc]?.cta_link || "");
+        const src = i18nToSend[loc] || EMPTY_LOCALE;
+        fd.append("title", src.title || "");
+        fd.append("subtitle", src.subtitle || "");
+        fd.append("body_html", src.body_html || "");
+        fd.append("cta_text", src.cta_text || "");
+        fd.append("cta_link", src.cta_link || "");
 
         await api.put(`${UPDATE_PATH}/${initialData.id}?locale=${loc}`, fd, {
           headers: { "Content-Type": "multipart/form-data" },
@@ -305,6 +309,8 @@ export default function HeroSectionFormModal({
   };
 
   if (!open) return null;
+
+  const isFull = position === "full";
 
   return (
     <div className="fixed inset-0 z-[999] grid place-items-center bg-black/40 p-4">
@@ -381,7 +387,14 @@ export default function HeroSectionFormModal({
             </div>
           </div>
 
-          {/* Image + alt (alt input dihilangkan, alt digenerate otomatis) */}
+          {/* Info bar untuk FULL */}
+          {isFull ? (
+            <div className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
+              Mode <b>Full image</b> aktif — blok teks dan CTA akan diabaikan.
+            </div>
+          ) : null}
+
+          {/* Image + ALT */}
           <div>
             <label className="text-sm text-slate-700">Image</label>
             <div className="mt-1 flex items-center gap-3">
@@ -396,7 +409,7 @@ export default function HeroSectionFormModal({
                 ref={fileRef}
                 type="file"
                 accept="image/*"
-                onChange={onPickFile} // <-- masih sama
+                onChange={onPickFile}
                 className="hidden"
               />
               {imagePreview ? (
@@ -411,12 +424,23 @@ export default function HeroSectionFormModal({
             </div>
             <FieldError>{errors.image}</FieldError>
 
-            {/* Field alt DIHAPUS, tapi error dari BE tetap bisa ditampilkan di sini */}
-            <FieldError>{errors.image_alt}</FieldError>
+            {/* Alt manual (opsional) */}
+            <div className="mt-3">
+              <label className="text-sm text-slate-700">
+                Image Alt (opsional, untuk SEO)
+              </label>
+              <input
+                value={imageAltInput}
+                onChange={(e) => setImageAltInput(e.target.value)}
+                className="mt-1 w-full rounded-lg ring-1 ring-slate-200 px-3 py-2 text-sm outline-none focus:ring-sky-400"
+                placeholder="Contoh: Gedung Royal Klinik"
+              />
+              <FieldError>{errors.image_alt}</FieldError>
+            </div>
           </div>
 
           {/* Tabs Locale */}
-          <div>
+          <div className={isFull ? "opacity-50 pointer-events-none" : ""}>
             <div className="flex items-center gap-2 border-b border-slate-200 px-2 pt-2">
               {LOCALES.map((loc) => (
                 <button
@@ -453,7 +477,8 @@ export default function HeroSectionFormModal({
                           updateLocaleField(code, "title", e.target.value)
                         }
                         className="mt-1 w-full rounded-lg ring-1 ring-slate-200 px-3 py-2 text-sm outline-none focus:ring-sky-400"
-                        required={code === "id"} // minimal isi satu locale
+                        required={code === "id" && !isFull}
+                        disabled={isFull}
                       />
                       <FieldError>{errors[`i18n.${code}.title`]}</FieldError>
                     </div>
@@ -469,6 +494,7 @@ export default function HeroSectionFormModal({
                         }
                         className="mt-1 w-full rounded-lg ring-1 ring-slate-200 px-3 py-2 text-sm outline-none focus:ring-sky-400"
                         maxLength={255}
+                        disabled={isFull}
                       />
                     </div>
                   </div>
@@ -489,6 +515,7 @@ export default function HeroSectionFormModal({
                         onChange={(val) =>
                           updateLocaleField(code, "body_html", val)
                         }
+                        disabled={isFull}
                       />
                     </div>
                     <FieldError>{errors[`i18n.${code}.body_html`]}</FieldError>
@@ -506,6 +533,7 @@ export default function HeroSectionFormModal({
                         }
                         className="mt-1 w-full rounded-lg ring-1 ring-slate-200 px-3 py-2 text-sm outline-none focus:ring-sky-400"
                         placeholder="Contoh: Lihat Selengkapnya"
+                        disabled={isFull}
                       />
                     </div>
                     <div>
@@ -519,6 +547,7 @@ export default function HeroSectionFormModal({
                         }
                         className="mt-1 w-full rounded-lg ring-1 ring-slate-200 px-3 py-2 text-sm outline-none focus:ring-sky-400"
                         placeholder="/tes-laboratorium atau https://..."
+                        disabled={isFull}
                       />
                     </div>
                   </div>

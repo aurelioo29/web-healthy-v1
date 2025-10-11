@@ -11,7 +11,7 @@ const isInternalPath = (s = "") =>
 const passThroughLoader = ({ src }) => src;
 
 export default function HeroSectionClient({ pageKey, locale: localeProp }) {
-  const currentLocale = useLocale?.() || "id";
+  const currentLocale = (typeof useLocale === "function" && useLocale()) || "id";
   const locale = localeProp || currentLocale;
 
   const [row, setRow] = React.useState(null);
@@ -55,7 +55,8 @@ export default function HeroSectionClient({ pageKey, locale: localeProp }) {
 
         setRow({
           page_key: first.page_key,
-          position: String(first.position || "left").toLowerCase(), // left | right
+          // support 'left' | 'right' | 'full'
+          position: String(first.position || "left").toLowerCase(),
           is_active: !!first.is_active,
           imageUrl: first.imageUrl || first.image_url || first.image || "",
           image_alt:
@@ -82,8 +83,8 @@ export default function HeroSectionClient({ pageKey, locale: localeProp }) {
   if (loading) return null;
   if (err || !row || !row.is_active) return null;
 
-  // left  = gambar kiri,  teks kanan
-  // right = gambar kanan, teks kiri
+  const isFull = row.position === "full";
+
   const imgOrderLg = row.position === "right" ? "lg:order-2" : "lg:order-1";
   const textOrderLg = row.position === "right" ? "lg:order-1" : "lg:order-2";
 
@@ -109,55 +110,77 @@ export default function HeroSectionClient({ pageKey, locale: localeProp }) {
   ) : null;
 
   return (
-    <section className="mx-auto max-w-7xl px-4 md:px-6 py-6 md:py-8">
-      <div className="relative overflow-hidden rounded-3xl md:rounded-2xl">
-        <div className="relative w-full bg-[#E9F3FF]">
-          {/* Grid 2 kolom, center, tinggi konsisten */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 lg:h-[520px] items-stretch">
-            {/* IMAGE – di mobile selalu di atas */}
-            <div className={`order-1 ${imgOrderLg} h-full`}>
-              <div className="relative h-[420px] lg:h-full w-full p-4 sm:p-6 lg:p-10">
-                {row.imageUrl ? (
-                  <Image
-                    src={row.imageUrl}
-                    alt={row.image_alt}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover lg:object-contain object-center"
-                    loader={passThroughLoader}
-                    unoptimized
-                  />
-                ) : null}
-              </div>
-            </div>
+    <>
+      {isFull ? (
+        /* ===== FULL (tanpa BG, full-bleed) ===== */
+        <section className="mx-auto max-w-7xl px-4 md:px-6 py-4 md:py-6">
+          <div className="relative h-[42vh] md:h-[56vh] lg:h-[64vh] rounded-3xl overflow-hidden">
+            {row.imageUrl ? (
+              <Image
+                src={row.imageUrl}
+                alt={row.image_alt}
+                fill
+                priority
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                className="object-cover"
+                loader={passThroughLoader}
+                unoptimized
+              />
+            ) : null}
+          </div>
+        </section>
+      ) : (
+        /* ===== SPLIT (2 kolom) seperti sebelumnya ===== */
+        <section className="mx-auto max-w-7xl px-4 md:px-6 py-6 md:py-8">
+          <div className="relative overflow-hidden rounded-3xl md:rounded-2xl">
+            <div className="relative w-full bg-[#E9F3FF]">
+              <div className="grid grid-cols-1 lg:grid-cols-2 lg:h-[520px] items-stretch">
+                {/* IMAGE */}
+                <div className={`order-1 ${imgOrderLg} h-full`}>
+                  <div className="relative h-[420px] lg:h-full w-full p-4 sm:p-6 lg:p-10">
+                    {row.imageUrl ? (
+                      <Image
+                        src={row.imageUrl}
+                        alt={row.image_alt}
+                        fill
+                        priority
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover lg:object-contain object-center"
+                        loader={passThroughLoader}
+                        unoptimized
+                      />
+                    ) : null}
+                  </div>
+                </div>
 
-            {/* TEXT */}
-            <div className={`order-2 ${textOrderLg} h-full`}>
-              <div className="h-full flex items-center">
-                <div className="px-6 py-8 md:px-10 lg:px-12 max-w-xl">
-                  {row.title && (
-                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-                      {row.title}
-                    </h2>
-                  )}
+                {/* TEXT */}
+                <div className={`order-2 ${textOrderLg} h-full`}>
+                  <div className="h-full flex items-center">
+                    <div className="px-6 py-8 md:px-10 lg:px-12 max-w-xl">
+                      {row.title ? (
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+                          {row.title}
+                        </h2>
+                      ) : null}
 
-                  {row.body_html && (
-                    <div
-                      className="mt-4 leading-relaxed text-slate-800 prose prose-slate max-w-none"
-                      dangerouslySetInnerHTML={{ __html: row.body_html }}
-                    />
-                  )}
+                      {row.body_html ? (
+                        <div
+                          className="mt-4 leading-relaxed text-slate-800 prose prose-slate max-w-none"
+                          dangerouslySetInnerHTML={{ __html: row.body_html }}
+                        />
+                      ) : null}
 
-                  {showCTA && (
-                    <div className="mt-6 flex flex-wrap gap-3">{CTA}</div>
-                  )}
+                      {showCTA ? (
+                        <div className="mt-6 flex flex-wrap gap-3">{CTA}</div>
+                      ) : null}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
+    </>
   );
 }
