@@ -194,12 +194,12 @@ export default function ImageCardGrid({ items, limit = 4 }) {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 max-w-7xl mx-auto px-6 md:px-0">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 max-w-7xl mx-auto px-6 md:px-6">
         {list.map((it, i) => (
           <motion.article
             key={it.id ?? i}
             layoutId={`card-${it.id ?? i}`}
-            className="group relative rounded-2xl overflow-hidden ring-1 ring-slate-200 bg-white"
+            className="group relative rounded-2xl overflow-hidden ring-1 ring-slate-200 bg-white border-[#17767C] border-[1px]"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
