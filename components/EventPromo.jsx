@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, A11y, Keyboard } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { useTranslations } from "next-intl";
 
 /* ==== ImagePreview persis seperti punyamu ==== */
 function ImagePreview({ open, src, alt, onClose }) {
@@ -146,6 +147,7 @@ async function fetchPromosPublished() {
 
 /* ==== Komponen utama ==== */
 export default function EventPromo() {
+  const t = useTranslations("eventPromo");
   const [slides, setSlides] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -170,8 +172,8 @@ export default function EventPromo() {
   return (
     <section className="mx-auto max-w-7xl px-4 py-10 md:py-6">
       <div className="mb-5 text-center">
-        <h2 className="text-2xl md:text-3xl font-semibold">Event & Promo</h2>
-        <p className="mt-1 md:text-lg">Promo terkini dari Royal Klinik</p>
+        <h2 className="text-2xl md:text-3xl font-semibold">{t("title")}</h2>
+        <p className="mt-1 md:text-lg">{t("subtitle")}</p>
       </div>
 
       {loading ? (

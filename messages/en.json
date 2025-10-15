@@ -24,7 +24,7 @@
   },
   "produkLayanan": {
     "title": "Our Products & Services",
-    "description": "Comprehensive diagnostic services with advanced technology and accurate results, supporting informed health decisions.",
+    "description": "Royal clinic's complete services with advanced technology and accurate results, support the right health decisions.",
     "card": {
       "card1": {
         "title": "Clinical Laboratory",
@@ -72,7 +72,7 @@
       "alt": "Diagnos Call Center 1500-358"
     },
     "download": {
-      "title": "Download aplikasi royal klinik di"
+      "title": "Download Our App at"
     },
     "social": {
       "title": "Stay Connected"
@@ -167,8 +167,8 @@
     }
   },
   "layanan": {
-    "title": "Diagnos’ Most Popular Services",
-    "description": "Diagnos’ most sought-after services, delivering fast, accurate, and reliable healthcare solutions.",
+    "title": "Royal Clinic's Most Sought After Services",
+    "description": "Royal Clinic's most sought-after services, providing fast, accurate, and reliable health solutions.",
     "card": {
       "card1": {
         "title": "Women’s Health Package",
@@ -752,5 +752,11 @@
   "genomikCard": {
     "title": "Genomic Testing at Diagnos Laboratory",
     "desc": "Genomic testing at Diagnos helps you understand your personal genetic risks, so you can take informed health actions early."
+  },
+  "testimoni": {
+    "title": "What Do They Say?"
+  },
+  "investor": {
+    "title": "Investor Relations"
   }
 }

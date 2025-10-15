@@ -721,5 +721,11 @@
   "genomikCard": {
     "title": "Pemeriksaan Genomik di Laboratorium Diagnos",
     "desc": "Pemeriksaan genomik di Diagnos membantu Anda memahami risiko genetik secara personal, agar dapat mengambil langkah kesehatan yang lebih tepat sejak dini."
+  },
+  "testimoni": {
+    "title": "Apa Kata Mereka?"
+  },
+  "investor": {
+    "title": "Hubungan Investor"
   }
 }

@@ -7,6 +7,7 @@ import { Pagination, A11y, Autoplay, Keyboard } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Quote } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 /* ===== Konstanta asset LAN ===== */
 const IMAGE_BASE = "https://admin.royal-klinik.cloud//storage/assets";
@@ -46,6 +47,7 @@ const fmtTitleLine = (job, age) => {
 
 /* ===== Komponen ===== */
 export default function TestimoniVideo() {
+  const t = useTranslations("testimoni");
   const [slides, setSlides] = React.useState([]);
   const [active, setActive] = React.useState(0);
   const [playing, setPlaying] = React.useState(false);
@@ -111,7 +113,7 @@ export default function TestimoniVideo() {
     return (
       <section className="mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
         <h2 className="text-2xl md:text-3xl font-bold mb-4">
-          Apa Kata Mereka?
+          {t("title")}
         </h2>
         <p className="text-slate-500">Belum ada testimoni.</p>
       </section>
@@ -123,7 +125,7 @@ export default function TestimoniVideo() {
       <div className="grid grid-cols-1 md:grid-cols-2 items-start md:items-center gap-8 md:gap-10">
         {/* Kiri: teks & slider quote */}
         <div className="order-1">
-          <h2 className="text-2xl md:text-3xl font-bold">Apa Kata Mereka?</h2>
+          <h2 className="text-2xl md:text-3xl font-bold">{t("title")}</h2>
 
           <Swiper
             modules={[Pagination, A11y, Autoplay, Keyboard]}

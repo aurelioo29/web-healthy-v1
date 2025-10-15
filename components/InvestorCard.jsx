@@ -2,6 +2,7 @@
 
 import React from "react";
 import api from "@/lib/axios";
+import { useTranslations } from "next-intl";
 
 /* ===== helpers ===== */
 const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
@@ -48,6 +49,7 @@ function CardSkeleton() {
 
 /* ===== main ===== */
 export default function InvestorCard() {
+  const t = useTranslations("investor");
   const [cats, setCats] = React.useState([]);
   const [activeCat, setActiveCat] = React.useState(null);
 
@@ -142,7 +144,7 @@ export default function InvestorCard() {
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="text-center">
           <h1 className="mt-1 text-3xl font-bold md:text-4xl">
-            HUBUNGAN INVESTOR
+            {t("title")}
           </h1>
         </div>
 
@@ -186,11 +188,11 @@ export default function InvestorCard() {
 
           {/* Konten kanan */}
           <main className="md:col-span-9">
-            {err ? (
+            {/* {err ? (
               <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
                 {err}
               </div>
-            ) : null}
+            ) : null} */}
 
             {loadingList ? (
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

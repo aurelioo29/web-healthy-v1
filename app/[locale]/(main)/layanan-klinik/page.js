@@ -1,4 +1,3 @@
-import LayananHero from "@/components/LayananHero";
 import React from "react";
 import LayananKlinik from "@/components/LayananKlinik";
 import HeroSectionClient from "@/components/HeroSectionClient";
