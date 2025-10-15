@@ -5,6 +5,7 @@ import api from "@/lib/axios";
 import Image from "next/image";
 import { Plus, Pencil, Trash2, Search } from "lucide-react";
 import HomeCardFormModal from "./HomeCardFormModal";
+import Swal from "sweetalert2";
 
 const ENDPOINT = "/upload/home-card";
 
@@ -214,13 +215,30 @@ export default function HomeCardTable() {
   };
 
   const onDelete = async (row) => {
-    if (!confirm(`Hapus card "${row.title}"?`)) return;
+    const { isConfirmed } = await Swal.fire({
+      icon: "warning",
+      title: "Konfirmasi",
+      text: `Apakah Anda yakin ingin menghapus item "${
+        row?.title ?? "(tanpa judul)"
+      }"?`,
+      showCancelButton: true,
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+      focusCancel: true,
+    });
+
+    if (!isConfirmed) return;
     try {
       await api.delete(`${ENDPOINT}/${row.id}`);
       await fetchList({ pageArg: 1, sizeArg: size, searchArg: "" });
       setPage(1);
     } catch (e) {
-      alert(e?.response?.data?.message || e.message || "Gagal menghapus");
+      await Swal.fire({
+        icon: "error",
+        title: "Gagal menghapus",
+        text: e?.response?.data?.message || e.message || "Gagal menghapus",
+      });
     }
   };
 

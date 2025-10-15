@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import api from "@/lib/axios";
+import Swal from "sweetalert2";
 
 const BRAND = "#4698E3";
 
@@ -56,7 +57,11 @@ export default function InvestorCategoryFormModal({
       onSuccess?.();
       onClose?.();
     } catch (err) {
-      alert(parseApiError(err));
+      await Swal.fire({
+        icon: "error",
+        title: "Submit failed",
+        text: parseApiError(err),
+      });
     } finally {
       setLoading(false);
     }

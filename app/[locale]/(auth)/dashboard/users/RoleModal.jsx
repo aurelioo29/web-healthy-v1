@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import api from "@/lib/axios";
+import Swal from "sweetalert2";
 
 const BRAND = "#4698E3";
 
@@ -34,7 +35,11 @@ export default function RoleModal({
 
     // hanya Developer yang boleh mengubah SET ke Developer
     if (String(myRole) !== "developer" && role === "Developer") {
-      alert("Hanya Developer yang boleh mengubah role menjadi Developer.");
+      await Swal.fire({
+        icon: "error",
+        title: "Oops",
+        text: "Hanya Developer yang boleh mengubah role menjadi Developer.",
+      });
       return;
     }
 
@@ -44,11 +49,11 @@ export default function RoleModal({
       onSaved?.();
       onClose?.();
     } catch (err) {
-      alert(
-        err?.response?.data?.message ||
-          err?.message ||
-          "Gagal menyimpan role user"
-      );
+      await Swal.fire({
+        icon: "error",
+        title: "Gagal menyimpan",
+        text: err?.response?.data?.message || err?.message || "Gagal menyimpan role user",
+      });
     } finally {
       setLoading(false);
     }

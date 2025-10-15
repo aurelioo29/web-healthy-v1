@@ -11,10 +11,10 @@ export default function KonsultasiDokterPage() {
     <>
       <HeroSectionClient pageKey="consultation" />
       <DoctorsSection />
-      <DNAandMe />
-      <DnaFeatures />
-      <Benefit />
-      <AppPromo />
+      {/* <DNAandMe /> */}
+      {/* <DnaFeatures /> */}
+      {/* <Benefit /> */}
+      {/* <AppPromo /> */}
     </>
   );
 }

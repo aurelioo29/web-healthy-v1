@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Plus, Pencil, Trash2, Search } from "lucide-react";
 import api from "@/lib/axios";
 import ArticleFormModal from "./ArticleFormModal";
+import Swal from "sweetalert2";
 
 const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
 const BRAND = "#4698E3";
@@ -181,6 +182,7 @@ function ArticleRow({ item, me, onEdit, onDelete, onPreview }) {
           <button
             type="button"
             title={"Edit"}
+            onClick={() => onEdit(item)}
             className={
               "grid h-8 w-8 place-content-center rounded-full ring-1 ring-slate-200 hover:bg-slate-50"
             }
@@ -300,14 +302,31 @@ export default function ArticlesTable() {
     setModalOpen(true);
   };
   const onDelete = async (item) => {
-    if (!confirm(`Delete article "${item.title}"? This cannot be undone.`))
-      return;
+    const { isConfirmed } = await Swal.fire({
+      icon: "warning",
+      title: "Konfirmasi",
+      text: `Apakah Anda yakin ingin menghapus item "${
+        item?.title ?? "(tanpa judul)"
+      }"?`,
+      showCancelButton: true,
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+      focusCancel: true,
+    });
+
+    if (!isConfirmed) return;
+
     try {
       await api.delete(`/upload/articles/${item.id}`);
       setPage(1);
       fetchList({ pageArg: 1, sizeArg: size, searchArg: search });
     } catch (e) {
-      alert(e?.response?.data?.message || e.message || "Delete failed");
+      await Swal.fire({
+        icon: "error",
+        title: "Delete failed",
+        text: e?.response?.data?.message || e.message || "Delete failed",
+      });
     }
   };
 

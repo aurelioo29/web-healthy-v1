@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Pencil, Trash2, Plus, Search } from "lucide-react";
 import api from "@/lib/axios";
 import CsrFormModal from "./CsrFormModal";
+import Swal from "sweetalert2";
 
 const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
 
@@ -204,12 +205,29 @@ export default function CsrTable() {
     setModalOpen(true);
   };
   const onDelete = async (item) => {
-    if (!confirm(`Delete CSR "${item.title}"? This cannot be undone.`)) return;
+    const { isConfirmed } = await Swal.fire({
+      icon: "warning",
+      title: "Konfirmasi",
+      text: `Apakah Anda yakin ingin menghapus item "${
+        item?.title ?? "(tanpa judul)"
+      }"?`,
+      showCancelButton: true,
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+      focusCancel: true,
+    });
+
+    if (!isConfirmed) return;
     try {
       await api.delete(`/csr/${item.id}`);
       fetchList({ pageArg: 1, sizeArg: size, searchArg: search });
     } catch (e) {
-      alert(e?.response?.data?.message || e.message || "Delete failed");
+      await Swal.fire({
+        icon: "error",
+        title: "Delete failed",
+        text: e?.response?.data?.message || e.message || "Delete failed",
+      });
     }
   };
 

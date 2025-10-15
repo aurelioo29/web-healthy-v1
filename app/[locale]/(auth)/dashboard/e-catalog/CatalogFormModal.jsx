@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import ImagePicker from "../lab-tests/categories/ImagePicker";
 import CsrEditor from "../csr/CsrEditor";
+import Swal from "sweetalert2";
 
 const BRAND = "#4698E3";
 
@@ -135,7 +136,11 @@ export default function CatalogFormModal({
       onSuccess?.();
       onClose?.();
     } catch (err) {
-      alert(parseApiError(err));
+      await Swal.fire({
+        icon: "error",
+        title: "Submit failed",
+        text: parseApiError(err),
+      });
     } finally {
       setLoading(false);
     }

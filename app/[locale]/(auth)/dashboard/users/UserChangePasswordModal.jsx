@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import api from "@/lib/axios";
+import Swal from "sweetalert2";
 
 const BRAND = "#4698E3";
 
@@ -42,11 +43,19 @@ export default function ChangePasswordModal({ open, onClose, user, onSaved }) {
   const submit = async (e) => {
     e.preventDefault();
     if (password.length < 8) {
-      alert("Password minimal 8 karakter.");
+      await Swal.fire({
+        icon: "error",
+        title: "Oops",
+        text: "Password minimal 8 karakter.",
+      });
       return;
     }
     if (password !== confirm) {
-      alert("Konfirmasi password tidak sama.");
+      await Swal.fire({
+        icon: "error",
+        title: "Oops",
+        text: "Konfirmasi password tidak sama.",
+      });
       return;
     }
 
@@ -69,7 +78,11 @@ export default function ChangePasswordModal({ open, onClose, user, onSaved }) {
       onSaved?.();
       onClose?.();
     } catch (err) {
-      alert(parseApiError(err));
+      await Swal.fire({
+        icon: "error",
+        title: "Gagal mengubah password",
+        text: parseApiError(err),
+      });
     } finally {
       setLoading(false);
     }

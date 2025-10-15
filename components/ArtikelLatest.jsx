@@ -81,8 +81,8 @@ function ArticleCard({ item, t }) {
         {/* tombol selalu di bawah */}
         <Link
           href={href}
-          className="mt-auto inline-flex items-center justify-center rounded-lg px-4 py-2 text-white text-sm font-semibold"
-          style={{ background: BRAND }}
+          className="mt-auto inline-flex items-center justify-center rounded-lg px-4 py-2 text-white text-sm font-semibold bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468]"
+          // style={{ background: BRAND }}
         >
           {t("readMore", { default: "Baca Selengkapnya" })}
         </Link>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import CsrEditor from "../csr/CsrEditor";
+import Swal from "sweetalert2";
 
 const BRAND = "#4698E3";
 
@@ -68,7 +69,11 @@ export default function LabTestFormModal({
       onSuccess?.();
       onClose?.();
     } catch (err) {
-      alert(err?.response?.data?.message || "Submit failed");
+      await Swal.fire({
+        icon: "error",
+        title: "Submit failed",
+        text: err?.response?.data?.message || "Submit failed",
+      });
     } finally {
       setLoading(false);
     }

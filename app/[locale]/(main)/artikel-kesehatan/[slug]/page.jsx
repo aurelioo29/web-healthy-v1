@@ -141,7 +141,7 @@ export default async function ArticleDetailPage({ params }) {
         <img
           src={img}
           alt={data.title}
-          className="w-full h-auto max-h-[520px] object-cover rounded-2xl shadow-md"
+          className="w-full h-auto max-h-[520px] object-contain rounded-2xl shadow-md"
         />
       ) : null}
 

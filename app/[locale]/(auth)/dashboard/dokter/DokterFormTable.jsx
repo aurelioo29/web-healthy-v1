@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Plus, Pencil, Trash2, Search } from "lucide-react";
 import api from "@/lib/axios";
 import DokterFormModal from "./DokterFormModal";
+import Swal from "sweetalert2";
 
 /* =========================
    Helpers & constants
@@ -319,8 +320,20 @@ export default function DokterTable() {
     setModalOpen(true);
   };
   const onDelete = async (item) => {
-    if (!confirm(`Delete Dokter "${item.title}"? This cannot be undone.`))
-      return;
+    const { isConfirmed } = await Swal.fire({
+      icon: "warning",
+      title: "Konfirmasi",
+      text: `Apakah Anda yakin ingin menghapus item "${
+        item?.title ?? "(tanpa judul)"
+      }"?`,
+      showCancelButton: true,
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+      focusCancel: true,
+    });
+
+    if (!isConfirmed) return;
     try {
       await api.delete(`${BASE_PATH}/${item.id}`);
       setPage(1);
@@ -330,7 +343,12 @@ export default function DokterTable() {
         searchArg: search,
       });
     } catch (e) {
-      alert(e?.response?.data?.message || e.message || "Delete failed");
+      await Swal.fire({
+        icon: "error",
+        title: "Delete failed",
+        text: e?.response?.data?.message || e.message || "Delete failed",
+      });
+      //
     }
   };
 

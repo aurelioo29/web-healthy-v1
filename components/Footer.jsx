@@ -101,8 +101,9 @@ export default function Footer() {
               <p className="text-base font-semibold">{t("download.title")}</p>
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <a
-                  href={APK_URL}
-                  download="royal_klinik.apk"
+                  href="https://drive.google.com/file/d/1Cryy7s_3Kpg0_53_XGSCeRwhihm0CLa9/view?usp=sharing"
+                  target="_blank"
+                  // download="royal_klinik.apk"
                   aria-label="Download APK"
                 >
                   <img

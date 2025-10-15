@@ -305,7 +305,7 @@ export default function DashboardPage() {
           <p className="text-sm text-slate-600">
             Login with role{" "}
             <span className="font-bold">
-              {me.role === "superadmin" ? "Superadmin" : "Admin"}
+              { me.role.charAt(0).toUpperCase() + me.role.slice(1)}
             </span>
           </p>
         </div>

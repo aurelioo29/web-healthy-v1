@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { MapPin, Phone, Mail, MessageCircle } from "lucide-react";
+import Swal from "sweetalert2";
 
 export default function ContactSection() {
   const t = useTranslations("kontak");
@@ -93,11 +94,16 @@ export default function ContactSection() {
 
             <form
               className="mt-6 space-y-4"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 const data = Object.fromEntries(new FormData(e.currentTarget));
                 console.log("Contact form:", data);
-                alert(t("form.thanks"));
+                await Swal.fire({
+                  icon: "success",
+                  title: t("form.thanks"),
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
               }}
             >
               {/* Nama */}

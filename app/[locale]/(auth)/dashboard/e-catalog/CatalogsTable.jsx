@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import CatalogFormModal from "./CatalogFormModal";
 import { Pencil, Trash2, Plus, Search } from "lucide-react";
+import Swal from "sweetalert2";
 
 const BRAND = "#4698E3";
 const ASSET_BASE = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
@@ -235,19 +236,36 @@ export default function CatalogsTable() {
     setModalOpen(true);
   };
   const onDelete = async (item) => {
-    if (!confirm(`Delete catalog "${item.title}"? This cannot be undone.`))
-      return;
+    const { isConfirmed } = await Swal.fire({
+      icon: "warning",
+      title: "Konfirmasi",
+      text: `Apakah Anda yakin ingin menghapus item "${
+        item?.title ?? "(tanpa judul)"
+      }"?`,
+      showCancelButton: true,
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+      focusCancel: true,
+    });
+
+    if (!isConfirmed) return;
     try {
       await api.delete(`/upload/catalogs/${item.id}`);
       setPage(1);
       fetchList(1, size);
     } catch (e) {
-      alert(e?.response?.data?.message || e.message || "Delete failed");
+      await Swal.fire({
+        icon: "error",
+        title: "Delete failed",
+        text: e?.response?.data?.message || e.message || "Delete failed",
+      });
     }
   };
 
   const openPreview = (src, alt = "") => setPreview({ open: true, src, alt });
   const closePreview = () => setPreview({ open: false, src: "", alt: "" });
+  ``;
 
   // lock scroll saat preview
   useEffect(() => {

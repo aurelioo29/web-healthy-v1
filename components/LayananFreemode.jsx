@@ -165,7 +165,7 @@ export default function LayananFreemode() {
 function Card({ title, desc, img, alt, href, price, disc, isFallback }) {
   return (
     <article className="h-full overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:shadow-lg flex flex-col">
-      {/* Gambar kotak 1:1 */}
+      {/* Gambar */}
       <div className="relative aspect-square w-full">
         <Image
           src={img || PLACEHOLDER}
@@ -174,39 +174,33 @@ function Card({ title, desc, img, alt, href, price, disc, isFallback }) {
           sizes="(max-width: 768px) 80vw, 25vw"
           className="object-cover"
           onError={(e) => {
-            // fallback ke placeholder bila gagal load
             e.currentTarget.src = PLACEHOLDER;
           }}
         />
       </div>
 
-      {/* Body fleksibel */}
+      {/* Body */}
       <div className="flex grow flex-col p-4">
-        {/* TITLE: clamp 2 baris + tinggi konstan */}
         <h3 className="text-base md:text-lg font-semibold text-center leading-6 line-clamp-2 min-h-[48px]">
           {title}
         </h3>
 
-        {/* DESC: clamp 3 baris + tinggi konstan (3*24px = 72px) */}
         <p className="my-2 text-sm text-[#667289] text-justify leading-6 line-clamp-3 min-h-[72px]">
           {desc}
         </p>
 
-        {/* PRICE AREA */}
-        <div className="my-5 flex items-baseline justify-center gap-2 min-h-[24px]">
-          {disc ? (
-            <span className="text-sm text-red-500 line-through">{disc}</span>
-          ) : (
-            <span className="invisible text-sm">placeholder</span>
+        {/* PRICE AREA: rata kiri, tanpa placeholder hantu */}
+        <div className="my-5 flex w-full items-baseline justify-start gap-2 min-h-[24px]">
+          {disc && (
+            <span className="text-sm text-red-500 line-through shrink-0">
+              {disc}
+            </span>
           )}
-          {price ? (
+          {price && (
             <span className="font-semibold text-slate-900">{price}</span>
-          ) : (
-            <span className="invisible font-semibold">placeholder</span>
           )}
         </div>
 
-        {/* CTA */}
         <Link
           href={href}
           className="mt-auto inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-br from-[#17767C] via-[#2B8C6D] to-[#349468] px-4 py-2 text-sm font-medium text-white transition hover:opacity-95"

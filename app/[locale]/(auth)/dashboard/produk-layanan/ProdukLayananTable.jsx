@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Pencil, Plus, Search, Trash2 } from "lucide-react";
 import ProdukLayananFormModal from "./ProdukLayananFormModal";
+import Swal from "sweetalert2";
 
 /* ========== Image Preview ========== */
 function ImagePreview({ open, src, alt, onClose }) {
@@ -228,13 +229,31 @@ export default function ProdukLayananTable() {
   };
 
   const onDelete = async (row) => {
-    if (!confirm(`Hapus item "${row.title}"?`)) return;
+    const { isConfirmed } = await Swal.fire({
+      icon: "warning",
+      title: "Konfirmasi",
+      text: `Apakah Anda yakin ingin menghapus item "${
+        row?.title ?? "(tanpa judul)"
+      }"?`,
+      showCancelButton: true,
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+      focusCancel: true,
+    });
+
+    if (!isConfirmed) return;
+
     try {
       await api.delete(`${ITEM_ENDPOINT}/${row.id}`);
       await fetchList({ pageArg: 1, sizeArg: size, searchArg: "" });
       setPage(1);
     } catch (e) {
-      alert(e?.response?.data?.message || e.message || "Gagal menghapus item");
+      await Swal.fire({
+        icon: "error",
+        title: "Delete failed",
+        text: e?.response?.data?.message || e.message || "Gagal menghapus item",
+      });
     }
   };
 

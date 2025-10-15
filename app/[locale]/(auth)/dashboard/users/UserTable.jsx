@@ -6,6 +6,7 @@ import api from "@/lib/axios";
 import CreateUserButton from "./CreateUserButton";
 import RoleModal from "./RoleModal";
 import ChangePasswordModal from "./UserChangePasswordModal";
+import Swal from "sweetalert2";
 
 const STATUS_STYLE = {
   active: {
@@ -84,25 +85,29 @@ export default function UserTable() {
   const [err, setErr] = useState("");
   const [passOpen, setPassOpen] = useState(false);
 
-  // role saya (yang login)
+  // role & id saya (yang login)
   const [myRole, setMyRole] = useState("");
+  const [myId, setMyId] = useState(null);
 
-  // ranking role: makin tinggi makin berkuasa
-  const RANK = { admin: 1, superadmin: 2, developer: 3 };
-  const cantActOn = (targetRoleRaw) =>
-    (RANK[myRole] || 0) <= (RANK[targetRoleRaw] || 0);
+  // ===== RULE: hanya developer yang bisa manage user =====
+  const canManageUsers = myRole === "developer";
 
-  // ambil role saya
+  // ambil role & id saya
   useEffect(() => {
     const token =
       typeof window !== "undefined" ? localStorage.getItem("token") : null;
     if (!token) return;
     api
       .get("/auth/me", { headers: { Authorization: `Bearer ${token}` } })
-      .then((res) =>
-        setMyRole(String(res?.data?.user?.role || "").toLowerCase())
-      )
-      .catch(() => setMyRole(""));
+      .then((res) => {
+        const user = res?.data?.user || {};
+        setMyRole(String(user.role || "").toLowerCase());
+        setMyId(user.id ?? null);
+      })
+      .catch(() => {
+        setMyRole("");
+        setMyId(null);
+      });
   }, []);
 
   async function fetchUsers({
@@ -137,7 +142,7 @@ export default function UserTable() {
               : roleRaw === "superadmin"
               ? "Superadmin"
               : "Admin",
-          roleRaw, // ← simpan mentah untuk guard
+          roleRaw,
           createdAt: u.created_at
             ? new Date(u.created_at).toLocaleDateString("en-GB")
             : "-",
@@ -181,28 +186,57 @@ export default function UserTable() {
   };
 
   const onDelete = async (user) => {
-    // server side harus tetap validasi; guard kecil di UI:
-    if (cantActOn(user.roleRaw)) {
-      alert("Anda tidak memiliki izin untuk menghapus user dengan role ini.");
+    if (!canManageUsers) {
+      await Swal.fire({
+        icon: "error",
+        title: "Oops",
+        text: "Hanya role Developer yang boleh menghapus user.",
+      });
       return;
     }
-    if (
-      !confirm(
-        `Hapus user "${user.username}"? Tindakan ini tidak bisa di-undo.`
-      )
-    )
+    if (myId && user.id === myId) {
+      await Swal.fire({
+        icon: "warning",
+        title: "Nggak bisa",
+        text: "Tidak boleh menghapus akun sendiri.",
+      });
       return;
+    }
+
+    const { isConfirmed } = await Swal.fire({
+      title: `Hapus ${user.username}?`,
+      text: "Tindakan ini tidak bisa di-undo.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Ya, hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+      focusCancel: true,
+    });
+
+    if (!isConfirmed) return;
+
     try {
       await api.delete(`/users/${user.id}`);
+      await Swal.fire({
+        icon: "success",
+        title: "Terhapus",
+        text: "User berhasil dihapus.",
+      });
       await fetchUsers({ pageArg: 1, sizeArg: size, searchArg: "" });
       setPage(1);
     } catch (e) {
-      alert(e?.response?.data?.message || e.message || "Gagal hapus user");
+      await Swal.fire({
+        icon: "error",
+        title: "Gagal hapus",
+        text: e?.response?.data?.message || e.message || "Gagal hapus user",
+      });
     }
   };
 
   useEffect(() => {
     fetchUsers({ pageArg: page, sizeArg: size, searchArg: search });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, size]);
 
   const empty = !loading && rows.length === 0;
@@ -253,14 +287,17 @@ export default function UserTable() {
             </button>
           )}
 
-          <div className="flex items-center gap-2">
-            <CreateUserButton
-              currentRole={myRole}
-              onSuccess={() =>
-                fetchUsers({ pageArg: 1, sizeArg: size, searchArg: "" })
-              }
-            />
-          </div>
+          {/* Create hanya untuk developer */}
+          {canManageUsers && (
+            <div className="flex items-center gap-2">
+              <CreateUserButton
+                currentRole={myRole}
+                onSuccess={() =>
+                  fetchUsers({ pageArg: 1, sizeArg: size, searchArg: "" })
+                }
+              />
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-2 text-sm">
@@ -319,7 +356,10 @@ export default function UserTable() {
 
             {!loading &&
               rows.map((u, idx) => {
-                const protectedRow = cantActOn(u.roleRaw);
+                // non-developer: semua tombol nonaktif
+                // developer: aktif; tambahkan guard hapus diri sendiri di handler
+                const protectedRow = !canManageUsers;
+
                 return (
                   <tr key={u.id} className="hover:bg-slate-50/60">
                     <td className="py-4 pl-6 pr-3 text-slate-700">
@@ -352,9 +392,7 @@ export default function UserTable() {
                         <button
                           type="button"
                           title={
-                            protectedRow
-                              ? "You cannot edit this role"
-                              : "Settings"
+                            protectedRow ? "You cannot edit users" : "Settings"
                           }
                           onClick={() => !protectedRow && onEdit(u)}
                           disabled={protectedRow}
@@ -371,7 +409,7 @@ export default function UserTable() {
                           type="button"
                           title={
                             protectedRow
-                              ? "You cannot change this password"
+                              ? "You cannot change password"
                               : "Change password"
                           }
                           onClick={() => !protectedRow && onChangePassword(u)}
@@ -388,9 +426,7 @@ export default function UserTable() {
                         <button
                           type="button"
                           title={
-                            protectedRow
-                              ? "You cannot delete this user"
-                              : "Delete"
+                            protectedRow ? "You cannot delete users" : "Delete"
                           }
                           onClick={() => !protectedRow && onDelete(u)}
                           disabled={protectedRow}
@@ -426,6 +462,7 @@ export default function UserTable() {
 
       {err && <div className="px-6 pb-4 text-sm text-rose-600">{err}</div>}
 
+      {/* Modals */}
       <RoleModal
         open={roleOpen}
         onClose={() => setRoleOpen(false)}
@@ -440,7 +477,7 @@ export default function UserTable() {
         open={passOpen}
         onClose={() => setPassOpen(false)}
         user={selected}
-        myRole={myRole} // kalau modal mau ikut guard internal
+        myRole={myRole}
         onSaved={() => {
           fetchUsers({ pageArg: page, sizeArg: size, searchArg: search });
         }}

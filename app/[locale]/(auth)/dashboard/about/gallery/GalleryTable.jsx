@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Plus, Pencil, Trash2, Search } from "lucide-react";
 import api from "@/lib/axios";
 import GalleryFormModal from "./GalleryFormModal";
+import Swal from "sweetalert2";
 
 /* ===== Endpoint: sesuaikan kalau beda ===== */
 const LIST_PATH = "/upload/about-us-gallery";
@@ -322,13 +323,31 @@ export default function GalleryTable() {
     setModalOpen(true);
   };
   const onDelete = async (item) => {
-    if (!confirm(`Delete "${item.title}"? This cannot be undone.`)) return;
+    const { isConfirmed } = await Swal.fire({
+      icon: "warning",
+      title: "Konfirmasi",
+      text: `Apakah Anda yakin ingin menghapus item "${
+        item?.title ?? "(tanpa judul)"
+      }"?`,
+      showCancelButton: true,
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+      focusCancel: true,
+    });
+
+    if (!isConfirmed) return;
+
     try {
       await api.delete(`${DELETE_PATH}/${item.id}`);
       setPage(1);
       fetchList({ pageArg: 1, sizeArg: size, searchArg: search });
     } catch (e) {
-      alert(e?.response?.data?.message || e.message || "Delete failed");
+      await Swal.fire({
+        icon: "error",
+        title: "Delete failed",
+        text: e?.response?.data?.message || e.message || "Delete failed",
+      });
     }
   };
 

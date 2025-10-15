@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import api from "@/lib/axios";
 import CategoryCatalogFormModal from "./CategoryCatalogModal";
 import { Pencil, Trash2, Plus, Search } from "lucide-react";
+import Swal from "sweetalert2";
 
 const BRAND = "#4698E3";
 
@@ -127,14 +128,30 @@ export default function CategoryCatalogsTable() {
     setModalOpen(true);
   };
   const onDelete = async (item) => {
-    if (!confirm(`Delete category "${item.name}"? This cannot be undone.`))
-      return;
+    const { isConfirmed } = await Swal.fire({
+      icon: "warning",
+      title: "Konfirmasi",
+      text: `Apakah Anda yakin ingin menghapus item "${
+        item?.name ?? "(tanpa judul)"
+      }"?`,
+      showCancelButton: true,
+      confirmButtonText: "Hapus",
+      cancelButtonText: "Batal",
+      reverseButtons: true,
+      focusCancel: true,
+    });
+
+    if (!isConfirmed) return;
     try {
       await api.delete(`/upload/category-catalogs/${item.id}`);
       setPage(1);
       fetchList(1, size, search);
     } catch (e) {
-      alert(e?.response?.data?.message || e.message || "Delete failed");
+      await Swal.fire({
+        icon: "error",
+        title: "Delete failed",
+        text: e?.response?.data?.message || e.message || "Delete failed",
+      });
     }
   };
 
