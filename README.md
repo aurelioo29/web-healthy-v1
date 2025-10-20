@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Healthy Web
 
-## Getting Started
+A modern frontend for the **Healthy** platform, built with **Next.js (App Router)**. Ships with i18n scaffolding, basic SEO, and a clean project structure for fast iteration.
 
-First, run the development server:
+## ✨ Features
+
+- App Router with SSR/ISR/SSG support
+- i18n-ready folder layout (messages & middleware friendly)
+- Typed API helper and clear data-fetching pattern
+- Basic SEO (meta/OG ready to extend)
+- Data Dynamic Full
+
+## 🧱 Tech Stack
+
+- Next.js (React)
+- Node.js 18+ runtime
+- (Optional) Tailwind CSS / PostCSS
+- Native Fetch API for backend integration
+
+## ✅ Requirements
+
+- **Node.js 18+** (LTS recommended)
+- **npm / yarn / pnpm**
+
+## 🚀 Quickstart
 
 ```bash
+# Clone
+git clone https://github.com/aurelioo29/web-healthy-v1 healthy-web
+cd healthy-web
+
+# Install
+npm install
+
+# Configure environment
+cp .env.example .env.local
+
+# (Edit .env.local)
+
+# Run dev
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Visit http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Scripts
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+npm run dev       # start dev server
+npm run build     # production build
+npm run start     # run compiled build
+npm run lint      # lint (if configured)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🗂️ Suggested Project Structure
 
-## Learn More
+```bash
+app/            # routes, layouts, metadata
+components/     # UI components
+i18n/           # i18n utilities/middleware (optional)
+lib/            # helpers (api client, constants, utils)
+messages/       # translations (e.g., en.json, id.json)
+public/         # static assets
+utils/          # utility button logic
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🤝 Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+PRs are welcome. Please keep commits scoped and ensure lint passes.
